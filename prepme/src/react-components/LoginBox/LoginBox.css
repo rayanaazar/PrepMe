@@ -1,0 +1,8 @@
+#loginBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiButton-root {
+    margin-top: 10px;
+}
