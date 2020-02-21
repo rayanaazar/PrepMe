@@ -1,0 +1,24 @@
+.event-card {
+  width: 700px;
+  height: 150px;
+  border-radius: 30px;
+  background-color: #D7E4FF;
+  padding: 12px;
+}
+
+.header {
+  display: inline-block;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #C4C4C4;
+  display: inline-block;
+}
+
+.title {
+  display: inline-block;
+  font-family: Raleway;
+}

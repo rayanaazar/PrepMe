@@ -4,7 +4,7 @@ import "./styles.css";
 import EventCard from "../EventCard/index";
 
 /* Component for the Login page */
-class LoginPage extends React.Component {
+class Home extends React.Component {
   render() {
     return (
       <div className="App">
@@ -14,4 +14,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+export default Home;

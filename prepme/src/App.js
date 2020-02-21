@@ -14,7 +14,7 @@ function App() {
             { /* Each Route below shows a different component depending on the exact path in the URL  */ }
             <Route exact path='/' render={() => 
                             (<LoginPage />)}/>
-            <Route exact path='/' render={() => 
+            <Route exact path='/home' render={() => 
                             (<Home />)}/>
           </Switch>
         </BrowserRouter>
