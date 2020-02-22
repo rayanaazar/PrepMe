@@ -3,6 +3,8 @@ import React from "react";
 import "./styles.css";
 import EventCard from "../EventCard/index";
 import LeftSideBar from "../LeftSideBar/index";
+import MainComponent from "../MainComponent/index";
+import RightSideBar from "../RightSideBar/index";
 
 /* Component for the Home page */
 class Home extends React.Component {
@@ -19,9 +21,8 @@ class Home extends React.Component {
           username={ username }
           isAdmin={ isAdmin } 
           onEventsPage={ this.state.onEventsPage } />
-        {/* <EventsList /> */}
-        {/* <EventCard title="CSC309" /> */}
-        {/* <RightSideBar /> */}
+        <MainComponent />
+        <RightSideBar />
       </div>
     );
   }

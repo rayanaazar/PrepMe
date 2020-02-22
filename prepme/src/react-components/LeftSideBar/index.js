@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 
 import NavBar from './NavBar/index';
 
-/* Component for the LeftSideBar page */
+/* Component for the left SideBar*/
 class LeftSideBar extends React.Component {
   render() {
     const { username, isAdmin, onEventsPage } = this.props
