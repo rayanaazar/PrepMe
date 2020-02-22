@@ -5,11 +5,12 @@ import icon from "./static/app-logo.ico";
 
 import { Button } from "@material-ui/core"; 
 
+import NavBar from './NavBar/index';
+
 /* Component for the LeftSideBar page */
 class LeftSideBar extends React.Component {
   render() {
-    // const { username } = this.props
-    const username = "@rayana.a"
+    const { username, isAdmin, onEventsPage } = this.props
     return (
       <div className="sidebar-div">
 
@@ -18,10 +19,14 @@ class LeftSideBar extends React.Component {
             <div className="app-logo">
               <img src={ icon } />
             </div>
-            <div className="app-name">PrepMe</div>
+            <div>
+              <div className="app-name">PrepMe</div>
+              <div className="username">@{ username }</div>
+            </div>
           </div>
 
-          <div className="username">{ username }</div>
+          {/* Display NavBar if current user is an admin */}
+          { isAdmin ? (<NavBar onEventsPage={ onEventsPage } />) : (< div />) }
         </div>
         
         <div className="logout-button-div">

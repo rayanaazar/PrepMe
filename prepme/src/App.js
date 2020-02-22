@@ -8,12 +8,13 @@ import Home from './react-components/Home';
 
 class App extends React.Component {
     state = {
+        username: "user",
         isAdmin: false,
         events: [
 
         ]
-    };
-
+    }
+    
     render() {
         return (
             <div>
