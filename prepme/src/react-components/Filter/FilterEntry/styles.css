@@ -1,0 +1,44 @@
+.filter-entry-div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.entry-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-title {
+  font-family: Raleway;
+  font-size: 18px;
+  width: 120px;
+}
+
+.entry-field {
+  width: 180px;
+}
+
+.add-entry-button {
+  padding-left: 12px;
+}
+
+.applied-filters {
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+}
+
+.applied-value {
+  width: 60px;
+  border-radius: 15px;
+  background-color: #9784FF;
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  margin-right: 5px;
+}

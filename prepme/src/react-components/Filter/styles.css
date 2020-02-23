@@ -1,0 +1,14 @@
+.filter-div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+.title {
+  font-family: Raleway-SemiBold;
+  font-size: 24px;
+}
+
+.filter-entries{
+  margin-top: 32px;
+}

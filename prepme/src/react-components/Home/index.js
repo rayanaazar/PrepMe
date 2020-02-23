@@ -9,7 +9,7 @@ import RightSideBar from "../RightSideBar/index";
 /* Component for the Home page */
 class Home extends React.Component {
   state = {
-    onEventsPage: false
+    onEventsPage: true
   }
 
   render() {
@@ -20,9 +20,12 @@ class Home extends React.Component {
         <LeftSideBar 
           username={ username }
           isAdmin={ isAdmin } 
-          onEventsPage={ this.state.onEventsPage } />
+          onEventsPage={ this.state.onEventsPage } 
+        />
         <MainComponent />
-        <RightSideBar />
+        <RightSideBar 
+          onEventsPage={ this.state.onEventsPage }
+        />
       </div>
     );
   }
