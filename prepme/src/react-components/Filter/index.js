@@ -43,7 +43,7 @@ class Filter extends React.Component {
     // Find the filter entry that matches the title
     // and add value to the applied list
     for (let i=0; i < entries.length; i++) {
-      if (entries[i].title == title && entries[i].applied.includes(value)) {
+      if (entries[i].title == title && !entries[i].applied.includes(value)) {
         entries[i].applied.push(value)
       }
     }
