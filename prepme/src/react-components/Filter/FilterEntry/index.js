@@ -60,7 +60,6 @@ class FilterEntry extends React.Component {
             value={this.state.value}
             />
           )}
-          
 
           <IconButton 
             className="add-entry-button" 
@@ -71,9 +70,9 @@ class FilterEntry extends React.Component {
         </div>
 
         <div className="applied-filters">
-            {applied.map(value => (
-              <span key={ uid(value) } className="applied-value">{ value }</span>
-            ))}
+          {applied.map(value => (
+            <span key={ uid(value) } className="applied-value">{ value }</span>
+          ))}
         </div>
       </div>
     );
