@@ -14,6 +14,8 @@ class RightSideBar extends React.Component {
         isDropdown    whether or not it's a dropdown filter
         options       options that are available to filter on (used in dropdown)
         applied       filters that have been applied already
+
+      NOTE: No event or user entries can have the same title
     */
     eventEntries:  [
       {
@@ -87,10 +89,12 @@ class RightSideBar extends React.Component {
   render() {
     const { isAdmin } = this.props
     
-    this.state.onEventsPage = false
+    // Based on routing path, we can determine if we're on an events page
     const path = this.props.location.pathname
     if (path == "/home" || path == "/home/events") {
       this.state.onEventsPage = true
+    } else {
+      this.state.onEventsPage = false
     }
     
     return (

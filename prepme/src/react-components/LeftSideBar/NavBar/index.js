@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './styles.css';
+import "../../../App.css";
 
 import { withRouter, Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'; 
@@ -13,6 +14,7 @@ class NavBar extends React.Component {
     render() {
       const { isAdmin } = this.props
 
+      // Determine values of second nav link
       const secondLink = {
         link: '/home/profile',
         name: 'Profile'
@@ -22,6 +24,7 @@ class NavBar extends React.Component {
         secondLink.name = 'Users'
       }
 
+      // Depending on the routing path we can determine if we're on an events page
       let onEventsPage = false
       const path = this.props.location.pathname
       if (path == "/home" || path == "/home/events") {

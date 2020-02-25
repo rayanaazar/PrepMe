@@ -8,11 +8,16 @@ import Home from './react-components/Home';
 
 class App extends React.Component {
     state = {
+        isLoggedIn: false,
         username: "user",
         isAdmin: false,
         events: [
 
         ]
+    }
+
+    doLogout = () => {
+        this.setState({isLoggedIn: false})
     }
     
     render() {
@@ -27,7 +32,7 @@ class App extends React.Component {
                         <Route exact path='/login' render={() =>
                             (<LoginPage state={this.state}/>)}/>
                         <Route path='/home' render={() =>
-                            (<Home state={this.state}/>)}>
+                            (<Home state={this.state} doLogout={ this.doLogout }/>)}>
                         </Route>
                     </Switch>
                 </BrowserRouter>

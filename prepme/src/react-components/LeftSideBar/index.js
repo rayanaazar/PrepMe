@@ -1,8 +1,10 @@
 import React from "react";
 
 import "./styles.css";
+import "../../App.css";
 import icon from "./static/app-logo.ico";
 
+import { Link } from 'react-router-dom';
 import { Button } from "@material-ui/core"; 
 
 import NavBar from './NavBar/index';
@@ -10,7 +12,7 @@ import NavBar from './NavBar/index';
 /* Component for the left SideBar*/
 class LeftSideBar extends React.Component {
   render() {
-    const { username, isAdmin} = this.props
+    const { username, isAdmin, doLogout } = this.props
     return (
       <div id="sidebar-div">
 
@@ -29,12 +31,14 @@ class LeftSideBar extends React.Component {
         </div>
         
         <div>
-          <Button
-            variant="contained"
-            color="primary"
-          >
-            Logout
-          </Button>
+          <Link className="unstyled-link" to="/login" onClick={ doLogout }>
+            <Button
+              variant="contained"
+              color="primary"
+            >
+              Logout
+            </Button>
+          </Link>
         </div>
       </div>
     );

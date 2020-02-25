@@ -1,5 +1,10 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: Raleway, Helvetica, sans-serif;
+}
+
+.unstyled-link {
+  text-decoration: none;
+  color: black;
 }
 
 .App {
