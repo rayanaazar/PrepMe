@@ -16,8 +16,8 @@ class Home extends React.Component {
       <div className="home-div">
         {/* Redirect to login page if not LoggedIn 
         Commented out for now so we can test other pages */}
-        { !isLoggedIn ? (<Redirect to='/login' />) : (<div />)}
-        
+        {/* { !isLoggedIn ? (<Redirect to='/login' />) : (<div />)} */}
+
         <LeftSideBar 
           username={ username }
           isAdmin={ isAdmin } 
