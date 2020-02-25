@@ -1,13 +1,18 @@
 import React from "react";
 
 import "./styles.css";
+import { withRouter} from 'react-router-dom';
 
 import Filter from '../Filter/index';
 
 /* Component for the right SideBar page */
 class RightSideBar extends React.Component {
   render() {
-    const { onEventsPage } = this.props;
+    let onEventsPage = false
+    const path = this.props.location.pathname
+    if (path == "/home" || path == "/home/events") {
+      onEventsPage = true
+    }
     
     return (
       <div className="sidebar-div">
@@ -17,4 +22,4 @@ class RightSideBar extends React.Component {
   }
 }
 
-export default RightSideBar;
+export default withRouter(RightSideBar);

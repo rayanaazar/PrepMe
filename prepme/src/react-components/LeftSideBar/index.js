@@ -10,7 +10,7 @@ import NavBar from './NavBar/index';
 /* Component for the left SideBar*/
 class LeftSideBar extends React.Component {
   render() {
-    const { username, isAdmin, onEventsPage } = this.props
+    const { username, isAdmin} = this.props
     return (
       <div className="sidebar-div">
 
@@ -26,7 +26,7 @@ class LeftSideBar extends React.Component {
           </div>
 
           {/* Display NavBar if current user is an admin */}
-          { isAdmin ? (<NavBar onEventsPage={ onEventsPage } />) : (< div />) }
+          { isAdmin ? (<NavBar />) : (< div />) }
         </div>
         
         <div className="logout-button-div">
