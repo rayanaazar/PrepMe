@@ -11,10 +11,21 @@ import PeopleIcon from '@material-ui/icons/People';
 class NavBar extends React.Component {
 
     render() {
-      let onEventsPage = true
+      const { isAdmin } = this.props
+
+      const secondLink = {
+        link: '/home/profile',
+        name: 'Profile'
+      }
+      if (isAdmin) {
+        secondLink.link = '/home/users'
+        secondLink.name = 'Users'
+      }
+
+      let onEventsPage = false
       const path = this.props.location.pathname
-      if (path == "/home/users") {
-        onEventsPage = false
+      if (path == "/home" || path == "/home/events") {
+        onEventsPage = true
       }
 
       return (
@@ -31,14 +42,14 @@ class NavBar extends React.Component {
                 <ListItemText primary={"Events"} />
               </ListItem>
             </Link>
-            <Link class="unstyled-link" to="/home/users">
+            <Link class="unstyled-link" to={ secondLink.link }>
               <ListItem 
                 button={ true } 
                 selected={ !onEventsPage }
                 key={"Users"}
               >
                 <ListItemIcon>{<PeopleIcon color="primary" />}</ListItemIcon>
-                <ListItemText primary={"Users"} />
+                <ListItemText primary={ secondLink.name } />
               </ListItem>
             </Link>
             

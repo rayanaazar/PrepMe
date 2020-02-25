@@ -16,7 +16,7 @@ class RightSideBar extends React.Component {
     
     return (
       <div className="sidebar-div">
-        { onEventsPage ? (<Filter />) : (<div />)}
+        { onEventsPage ? (<Filter />) : (<div />) }
       </div>
     );
   }

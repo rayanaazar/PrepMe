@@ -54,7 +54,7 @@ class Filter extends React.Component {
    
     return (
       <div className="filter-div">
-        <div className="title">Filters</div>
+        <div id="filter-title">Filters</div>
         <div className="filter-entries">
           {this.state.entries.map(entry => (
               <FilterEntry

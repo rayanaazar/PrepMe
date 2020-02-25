@@ -9,7 +9,7 @@ import Home from './react-components/Home';
 class App extends React.Component {
     state = {
         username: "user",
-        isAdmin: true,
+        isAdmin: false,
         events: [
 
         ]

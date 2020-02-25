@@ -12,26 +12,24 @@ class LeftSideBar extends React.Component {
   render() {
     const { username, isAdmin} = this.props
     return (
-      <div className="sidebar-div">
+      <div id="sidebar-div">
 
-        <div className="header">
-          <div className="app-info">
+        <div>
+          <div id="app-info">
             <div className="app-logo">
               <img src={ icon } />
             </div>
             <div>
-              <div className="app-name">PrepMe</div>
-              <div className="username">@{ username }</div>
+              <div id="app-name">PrepMe</div>
+              <div id="username">@{ username }</div>
             </div>
           </div>
 
-          {/* Display NavBar if current user is an admin */}
-          { isAdmin ? (<NavBar />) : (< div />) }
+          <NavBar />
         </div>
         
-        <div className="logout-button-div">
+        <div>
           <Button
-            className="logout-button"
             variant="contained"
             color="primary"
           >
