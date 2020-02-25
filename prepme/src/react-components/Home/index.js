@@ -19,7 +19,7 @@ class Home extends React.Component {
           isAdmin={ isAdmin } 
         />
         <MainComponent />
-        <RightSideBar />
+        <RightSideBar isAdmin={ isAdmin }/>
       </div>
     );
   }
