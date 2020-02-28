@@ -21,9 +21,12 @@
 }
 
 .event-list {
+  display: flex;
+  flex-direction: column;
   margin-top: 24px;
   overflow-y: scroll;
-  height: 100%;
+  height: 95%;
+  align-items: center;
 }
 
 .event-list::-webkit-scrollbar {

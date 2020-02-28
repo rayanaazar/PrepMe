@@ -8,7 +8,7 @@ import EventIcon from '@material-ui/icons/Event';
 /* Component for the main center component */
 class MainComponent extends React.Component {
   render() {
-    const { title, username, discription, icon} = this.props
+    const { title, username, description, icon} = this.props
     return (
       <div className="main-component-div">
         <div className="section-header" >
@@ -16,27 +16,21 @@ class MainComponent extends React.Component {
             Events
           </div>
           <div id='create-event'>
-            <Button variant="outlined" color="primary" size="medium" href="#outlined-buttons">
+            <Button variant="outlined" color="primary" size="medium">
               Create Event
             </Button>
           </div>
         </div>
         <div className="event-list">
-          <div className="event">
-            <EventCard    
-            title={title}
-            username={username} 
-            discription={discription}/>
-          </div>
-          <div className="event">
+      
+            <EventCard/>   
+        
             <EventCard/>
-          </div>
-          <div className="event">
+      
             <EventCard/>
-          </div>
-          <div className="event">
+  
             <EventCard/>
-          </div>
+    
         </div>
       </div>
     );
