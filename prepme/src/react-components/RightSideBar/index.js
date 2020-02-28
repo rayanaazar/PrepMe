@@ -5,11 +5,13 @@ import { withRouter} from 'react-router-dom';
 
 import Filter from '../Filter/index';
 import ChangePassword from '../ChangePassword/index';
+import CancelAndSaveEvent from '../CancelAndSaveEvent/index';
 
 /* Component for the right SideBar page */
 class RightSideBar extends React.Component {
   state = {
-    onEventsPage: true,
+    onEventsPage: true, // whether we're on a page with events so we can add a filter, may move to a higher component
+    editingEvent: false, // whether we're currently editing an event, will probably move to a higher component
     /* Entry Info
         title         the title of the filter entry, used as a label 
         isDropdown    whether or not it's a dropdown filter
@@ -90,6 +92,9 @@ class RightSideBar extends React.Component {
     this.setState({entries})
   }
 
+  // TODO: implemented this in a higher level component and pass it down
+  doChangePassword = () => {}
+
   render() {
     const { isAdmin } = this.props
     
@@ -100,9 +105,36 @@ class RightSideBar extends React.Component {
     } else {
       this.state.onEventsPage = false
     }
+
+    let elem = this.state.onEventsPage 
+      ? (<Filter 
+            entries={ this.state.eventEntries } 
+            addSelection={ this.addSelection } 
+            clearSelections={ this.clearSelections }
+        />) 
+      : (isAdmin ? (
+          <Filter 
+            entries={ this.state.userEntries } 
+            addSelection={ this.addSelection }
+            clearSelections={ this.clearSelections }
+        />) : (
+          <ChangePassword doChangePassword={ this.doChangePassword }/>
+        )
+      )
+
+    if (this.state.editingEvent) {
+      elem = <CancelAndSaveEvent />
+    }
     
     return (
       <div className="sidebar-div">
+        { elem }
+        {/* { this.state.editingEvent 
+          ? (
+
+          )
+          :
+        }
         { this.state.onEventsPage 
           ? (<Filter 
                 entries={ this.state.eventEntries } 
@@ -115,9 +147,9 @@ class RightSideBar extends React.Component {
                 addSelection={ this.addSelection }
                 clearSelections={ this.clearSelections }
             />) : (
-              <ChangePassword />
+              <ChangePassword doChangePassword={ this.doChangePassword }/>
             ))
-        }
+        } */}
       </div>
     );
   }

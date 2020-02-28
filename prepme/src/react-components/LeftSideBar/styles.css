@@ -9,6 +9,9 @@
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid #A5A5A5;
+  position: fixed;
+  left: 0;
+  height: 100vh;
 }
 
 #app-info {
@@ -40,4 +43,8 @@
   font-family: Raleway-SemiBold;
   font-size: 24px;
   color: #FF8C19;
+}
+
+#logout-button {
+  margin-bottom: 48px;
 }

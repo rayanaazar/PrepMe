@@ -31,7 +31,7 @@ class LeftSideBar extends React.Component {
           <NavBar />
         </div>
         
-        <div>
+        <div id="logout-button">
           <Link className="unstyled-link" to="/login" onClick={ doLogout }>
             <Button
               variant="contained"
