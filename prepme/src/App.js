@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import './App.css';
 
-import LoginPage from './react-components/LoginPage';
+import LoginBox from './react-components/LoginBox';
 import Home from './react-components/Home';
 
 class App extends React.Component {
@@ -14,18 +14,27 @@ class App extends React.Component {
         events: [
 
         ]
-    }
+    };
 
     doLogout = () => {
-        this.setState({isLoggedIn: false})
-    }
+        this.setState({isLoggedIn: false});
+    };
+
+    doLogin = (isAdmin) => {
+        this.setState({isLoggedIn: true});
+        if (isAdmin) {
+            this.setState({isAdmin: true});
+        }
+    };
 
     routing() {
         if (!this.state.isLoggedIn) {
             return(
                 <Switch>
                     <Route exact path='/login' render={() =>
-                        (<LoginPage state={this.state}/>)}>
+                        (<div>
+                            <LoginBox doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn}/>
+                        </div>)}>
                     </Route>
                     <Route path='/'>
                         <Redirect to='/login'/>
@@ -47,6 +56,7 @@ class App extends React.Component {
     }
     
     render() {
+        {console.log(this.state.isLoggedIn)}
         return (
             <div>
                 <BrowserRouter>

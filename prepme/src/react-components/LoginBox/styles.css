@@ -3,6 +3,6 @@
     flex-direction: column;
 }
 
-.MuiButton-root {
-    margin-top: 10px;
+#invalidText {
+    color: crimson;
 }
