@@ -11,7 +11,8 @@ class Home extends React.Component {
   state = {}
 
   render() {
-    const { isLoggedIn, username, isAdmin, events, doLogout } = this.props.state
+    const { state, doLogout } = this.props
+    const { isLoggedIn, username, isAdmin, events } = state
     if (!isLoggedIn) return <Redirect to='/login' />
 
     return (
