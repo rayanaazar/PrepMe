@@ -19,22 +19,48 @@ class App extends React.Component {
     doLogout = () => {
         this.setState({isLoggedIn: false})
     }
+
+    routing() {
+        if (!this.state.isLoggedIn) {
+            return(
+                <Switch>
+                    <Route exact path='/login' render={() =>
+                        (<LoginPage state={this.state}/>)}>
+                    </Route>
+                    <Route path='/'>
+                        <Redirect to='/login'/>
+                    </Route>
+                </Switch>
+            )
+        } else {
+            return(
+                <Switch>
+                    <Route path='/home' render={() =>
+                        (<Home state={this.state} doLogout={ this.doLogout }/>)}>
+                    </Route>
+                    <Route path='/'>
+                        <Redirect to='/home'/>
+                    </Route>
+                </Switch>
+            )
+        }
+    }
     
     render() {
         return (
             <div>
                 <BrowserRouter>
-                    <Switch> { /* Similar to a switch statement - shows the component depending on the URL path */ }
-                        { /* Each Route below shows a different component depending on the exact path in the URL  */ }
-                        <Route exact path='/'>
-                            <Redirect to='/login' />
-                        </Route>
-                        <Route exact path='/login' render={() =>
-                            (<LoginPage state={this.state}/>)}/>
-                        <Route path='/home' render={() =>
-                            (<Home state={this.state} doLogout={ this.doLogout }/>)}>
-                        </Route>
-                    </Switch>
+                    {/*<Switch> */}
+                    {/*    <Route exact path='/'>*/}
+                    {/*        <Redirect to='/login' />*/}
+                    {/*    </Route>*/}
+                    {/*    <Route exact path='/login' render={() =>*/}
+                    {/*        (<LoginPage state={this.state}/>)}/>*/}
+                    {/*    <Route path='/home' render={() =>*/}
+                    {/*        (<Home state={this.state} doLogout={ this.doLogout }/>)}>*/}
+                    {/*    </Route>*/}
+                    {/*</Switch>*/}
+                    {this.routing()}
                 </BrowserRouter>
             </div>
         );
