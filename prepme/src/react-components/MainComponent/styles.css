@@ -1,3 +1,9 @@
 .main-component-div {
   flex: 1;
+  padding: 24px;
+}
+
+.section-name {
+  font-family: Raleway-SemiBold;
+  font-size: 24px;
 }

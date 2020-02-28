@@ -23,7 +23,7 @@ class Home extends React.Component {
           isAdmin={ isAdmin } 
           doLogout={ doLogout }
         />
-        <MainComponent />
+        <MainComponent/>
         <RightSideBar isAdmin={ isAdmin }/>
       </div>
     );
