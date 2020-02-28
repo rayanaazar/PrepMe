@@ -12,6 +12,8 @@ class Home extends React.Component {
 
   render() {
     const { isLoggedIn, username, isAdmin, events, doLogout } = this.props.state
+    if (!isLoggedIn) return <Redirect to='/login' />
+
     return (
       <div className="home-div">
         {/* Redirect to login page if not LoggedIn 
