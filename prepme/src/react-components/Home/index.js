@@ -17,14 +17,19 @@ class Home extends React.Component {
         {/* Redirect to login page if not LoggedIn 
         Commented out for now so we can test other pages */}
         {/* { !isLoggedIn ? (<Redirect to='/login' />) : (<div />)} */}
-
+        <div className="left">
         <LeftSideBar 
           username={ username }
           isAdmin={ isAdmin } 
           doLogout={ doLogout }
         />
+        </div>
+      
         <MainComponent/>
-        <RightSideBar isAdmin={ isAdmin }/>
+        <div className="right">
+          <RightSideBar isAdmin={ isAdmin }/>
+        </div>
+       
       </div>
     );
   }

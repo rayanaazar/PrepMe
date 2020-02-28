@@ -9,7 +9,7 @@ import EventIcon from '@material-ui/icons/Event';
 /* Component for the Home page */
 class EventCard extends React.Component {
   render() {
-    const { title, discription, username} = this.props
+    const { title, username, discription, icon} = this.props
 
     return (
       <div className="event-card">
