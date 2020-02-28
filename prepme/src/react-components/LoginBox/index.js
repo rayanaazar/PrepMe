@@ -22,10 +22,10 @@ class LoginBox extends React.Component {
 
     processCredentials = event => {
         if (this.state.username === 'admin' && this.state.password === 'admin') {
-            this.props.doLogin(true);
+            this.props.doLogin(true, 'admin');
             console.log('admin');
         } else if (this.state.username === 'user' && this.state.password === 'user') {
-            this.props.doLogin(false);
+            this.props.doLogin(false, 'user');
             console.log('user');
         } else {
             this.setState({

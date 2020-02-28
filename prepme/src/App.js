@@ -20,11 +20,12 @@ class App extends React.Component {
         this.setState({isLoggedIn: false});
     };
 
-    doLogin = (isAdmin) => {
-        this.setState({isLoggedIn: true});
-        if (isAdmin) {
-            this.setState({isAdmin: true});
-        }
+    doLogin = (isAdmin, username) => {
+        this.setState({
+            username: username,
+            isLoggedIn: true,
+            isAdmin: isAdmin
+        })
     };
 
     routing() {
