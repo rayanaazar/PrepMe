@@ -36,7 +36,7 @@ class NavBar extends React.Component {
       return (
         <div className="nav-bar">
           <List>
-            <Link class="unstyled-link" to={ linkInfo[0].link }>
+            <Link className="unstyled-link" to={ linkInfo[0].link }>
               <ListItem 
                 button={ true }
                 divider={ true }
@@ -47,7 +47,7 @@ class NavBar extends React.Component {
                 <ListItemText primary={ linkInfo[0].name } />
               </ListItem>
             </Link>
-            <Link class="unstyled-link" to={ linkInfo[1].link }>
+            <Link className="unstyled-link" to={ linkInfo[1].link }>
               <ListItem 
                 button={ true } 
                 selected={ !onEventsPage }

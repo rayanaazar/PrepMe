@@ -28,7 +28,7 @@ class LeftSideBar extends React.Component {
             </div>
           </div>
 
-          <NavBar />
+          <NavBar isAdmin={ isAdmin } />
         </div>
         
         <div id="logout-button">

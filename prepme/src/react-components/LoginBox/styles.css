@@ -1,0 +1,8 @@
+#loginBox {
+    display: flex;
+    flex-direction: column;
+}
+
+#invalidText {
+    color: crimson;
+}
