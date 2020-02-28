@@ -1,0 +1,8 @@
+#cancel-save-buttons-div {
+  display: flex;
+  flex-direction: column;
+}
+
+#cancel-button {
+  margin-bottom: 12px;
+}
