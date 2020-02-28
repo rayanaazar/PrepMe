@@ -13,7 +13,7 @@ body {
   font-family: 'Raleway-SemiBold';
   src: local('Raleway'), url(./fonts/Raleway/Raleway-SemiBold.ttf) format('ttf');
   font-family: 'Raleway-Bold';
-  src: local('Raleway'), url(./fonts/Raleway/Raleway-Bold.ttf) format('ttf');
+  src: local('Raleway-Bold'), url(./fonts/Raleway/Raleway-Bold.ttf) format('ttf');
 }
 
 code {
