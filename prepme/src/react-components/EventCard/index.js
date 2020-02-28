@@ -9,7 +9,7 @@ import EventIcon from '@material-ui/icons/Event';
 /* Component for the Home page */
 class EventCard extends React.Component {
   render() {
-    const { title, username, description, icon} = this.props
+    const { title, username, description, purpose} = this.props
 
     return (
       <div className="event-card">
@@ -20,19 +20,19 @@ class EventCard extends React.Component {
             </div>
             <div>
             <div className="title" >
-              Title
+              {title}
             </div>
             <div className="event-purpose">
-              Midterm
+              {purpose}
             </div>
             </div>
           </div>
           <div className="username" >
-             @rayanaazar 
+             {username}
           </div>
         </div>
         <div className='event_description'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+            {description}
         </div>
         <div className="actions">
           <div className="action-button" id='view-button'>

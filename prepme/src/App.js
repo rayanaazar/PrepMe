@@ -11,8 +11,10 @@ class App extends React.Component {
         isLoggedIn: false,
         username: "user",
         isAdmin: false,
-        events: [
-
+        events: [{title:"CSC309", purpose:"Midterm", username:"@rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street"},
+        {title:"CSC321", purpose:"Final Exam", username:"@manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"young street"},
+        {title:"CSC263", purpose:"Assignment 2", username:"@lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"young street"},
+        {title:"CSC343", purpose:"Midterm", username:"@juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"bahen building"}  
         ]
     }
 

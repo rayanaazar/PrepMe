@@ -25,7 +25,8 @@ class Home extends React.Component {
         />
         </div>
       
-        <MainComponent/>
+        <MainComponent
+        events={events}/>
         <div className="right">
           <RightSideBar isAdmin={ isAdmin }/>
         </div>
