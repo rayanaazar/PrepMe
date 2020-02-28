@@ -1,7 +1,6 @@
 .filter-div {
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
 }
 
 #filter-header {
@@ -14,11 +13,6 @@
 #filter-title {
   font-family: Raleway-SemiBold;
   font-size: 24px;
-}
-
-#filter-clear-button {
-  font-family: Raleway-SemiBold;
-  font-size: 16px;
 }
 
 .filter-entries{

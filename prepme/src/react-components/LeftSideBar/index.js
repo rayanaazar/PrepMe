@@ -6,6 +6,7 @@ import icon from "./static/app-logo.ico";
 
 import { Link } from 'react-router-dom';
 import { Button } from "@material-ui/core"; 
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import NavBar from './NavBar/index';
 
@@ -35,6 +36,7 @@ class LeftSideBar extends React.Component {
             <Button
               variant="contained"
               color="primary"
+              endIcon={<ExitToAppIcon />}
             >
               Logout
             </Button>

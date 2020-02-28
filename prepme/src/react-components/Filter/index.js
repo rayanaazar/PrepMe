@@ -18,7 +18,6 @@ class Filter extends React.Component {
         <div id="filter-header">
           <div id="filter-title">Filters</div>
           <Button
-            // id="filter-clear-button"
             variant="contained"
             color="secondary"
             size="small"

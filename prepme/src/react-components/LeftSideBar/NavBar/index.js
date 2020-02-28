@@ -7,6 +7,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'; 
 import EventIcon from '@material-ui/icons/Event';
 import PeopleIcon from '@material-ui/icons/People';
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 /* React Component to represent NavBar that's displayed on admin page */
 class NavBar extends React.Component {
@@ -14,14 +16,14 @@ class NavBar extends React.Component {
     render() {
       const { isAdmin } = this.props
 
-      // Determine values of second nav link
-      const secondLink = {
-        link: '/home/profile',
-        name: 'Profile'
-      }
+      // Determine values of each link
+      const linkInfo = [
+        { link: '/home/events', name: 'Home', icon: <HomeIcon color="primary"/> },
+        { link: '/home/profile', name: 'Profile', icon: <AccountCircleIcon color="primary"/> }
+      ]
       if (isAdmin) {
-        secondLink.link = '/home/users'
-        secondLink.name = 'Users'
+        linkInfo[0] = { link: '/home/events', name: 'Events', icon: <EventIcon color="primary"/> }
+        linkInfo[1] = { link: '/home/users', name: 'Users', icon: <PeopleIcon color="primary"/> }
       }
 
       // Depending on the routing path we can determine if we're on an events page
@@ -34,25 +36,25 @@ class NavBar extends React.Component {
       return (
         <div className="nav-bar">
           <List>
-            <Link class="unstyled-link" to="/home/events">
+            <Link class="unstyled-link" to={ linkInfo[0].link }>
               <ListItem 
                 button={ true }
                 divider={ true }
                 selected={ onEventsPage }
                 key={"Events"}
               >
-                <ListItemIcon>{<EventIcon color="primary" />}</ListItemIcon>
-                <ListItemText primary={"Events"} />
+                <ListItemIcon>{ linkInfo[0].icon }</ListItemIcon>
+                <ListItemText primary={ linkInfo[0].name } />
               </ListItem>
             </Link>
-            <Link class="unstyled-link" to={ secondLink.link }>
+            <Link class="unstyled-link" to={ linkInfo[1].link }>
               <ListItem 
                 button={ true } 
                 selected={ !onEventsPage }
                 key={"Users"}
               >
-                <ListItemIcon>{<PeopleIcon color="primary" />}</ListItemIcon>
-                <ListItemText primary={ secondLink.name } />
+                <ListItemIcon>{ linkInfo[1].icon }</ListItemIcon>
+                <ListItemText primary={ linkInfo[1].name } />
               </ListItem>
             </Link>
             

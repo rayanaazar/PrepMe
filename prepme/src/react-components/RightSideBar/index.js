@@ -4,6 +4,7 @@ import "./styles.css";
 import { withRouter} from 'react-router-dom';
 
 import Filter from '../Filter/index';
+import ChangePassword from '../ChangePassword/index';
 
 /* Component for the right SideBar page */
 class RightSideBar extends React.Component {
@@ -54,6 +55,9 @@ class RightSideBar extends React.Component {
   }
 
   addSelection = (title, value) => {
+    if (value == "") {
+      return 
+    }
     // Assume event and user entries don't have the same title
     let entries = this.state.userEntries
     if (this.state.onEventsPage) {
@@ -110,7 +114,9 @@ class RightSideBar extends React.Component {
                 entries={ this.state.userEntries } 
                 addSelection={ this.addSelection }
                 clearSelections={ this.clearSelections }
-              />) : (<div />))
+            />) : (
+              <ChangePassword />
+            ))
         }
       </div>
     );

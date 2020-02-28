@@ -3,14 +3,14 @@ import { uid } from "react-uid";
 
 import "./styles.css";
 
-import { TextField, MenuItem, IconButton, FormControl, InputLabel, Select } from '@material-ui/core';
+import { TextField, MenuItem, IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 /* Component for the Filter in the RightSideBar */
 class FilterEntry extends React.Component {
 
   state = {
-    value: "",
+    value: ""
   }
 
   // Update state.value when TextFields are changed
@@ -53,17 +53,18 @@ class FilterEntry extends React.Component {
             </div>
           ) : (
             <TextField 
-            label="Enter"
-            variant="outlined"
-            size="small" 
-            onChange={this.onChange}
-            value={this.state.value}
+              label="Enter"
+              variant="outlined"
+              size="small" 
+              onChange={this.onChange}
+              value={this.state.value}
             />
           )}
 
           <IconButton 
             className="add-entry-button" 
             size="medium"
+            edge="end"
             onClick={() => (addSelection(title, this.state.value))}>
             <AddCircleIcon color="primary"/>
           </IconButton>
