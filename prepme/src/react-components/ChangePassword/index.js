@@ -9,8 +9,10 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
+/* Component to change password on user Profile page */
 class ChangePassword extends React.Component {
 
+  // Keep track of values in input fields and whether or not to show password
   state = {
     changingPassword: false,
     currentPassword: "",
@@ -46,6 +48,7 @@ class ChangePassword extends React.Component {
   toggleShowNewPsw = () => { this.setState({ newShowPsw: !this.state.newShowPsw }) }
   toggleShowConfPsw= () => { this.setState({ confShowPsw: !this.state.confShowPsw })}
 
+  // Called when Save is clicked to reset fields and display dialog
   clearEntries = () => {
     this.setState({
       changingPassword: false,
@@ -65,7 +68,7 @@ class ChangePassword extends React.Component {
   }
 
   render() {
-    // const { doPasswordChange } = this.props
+    const { doChangePassword } = this.props
 
     return ( 
       <div>
@@ -136,8 +139,7 @@ class ChangePassword extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                // onClick={ () => { doPasswordChange(); this.clearEntries(); } }
-                onClick={ () => { this.clearEntries(); } }
+                onClick={ () => { doChangePassword(); this.clearEntries(); } }
                 startIcon={ <SaveIcon /> }
               >
                 Save
@@ -156,6 +158,7 @@ class ChangePassword extends React.Component {
           </Button>
         )}
 
+        {/* Dialog to say password saved successfully, could move into a higher level component that actually saves password */}
         <Dialog
           open={ this.state.showDialog }
           onRequestClose={ this.closeDialog }
