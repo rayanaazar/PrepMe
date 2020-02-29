@@ -4,11 +4,29 @@ import "./styles.css";
 import EventCard from "../EventCard/index";
 import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
 import EventIcon from '@material-ui/icons/Event';
+import Event from "../Event";
 
 /* Component for the main center component */
 class MainComponent extends React.Component {
+
+  state = {
+    viewing: false,
+    creating: false,
+
+  }
+
+  create = () => {
+    this.setState({ creating: true })
+    }
+
   render() {
     const { title, username, description, icon, events} = this.props
+
+    if (this.state.creating) {
+      return (<Event/>)
+    }
+
+    else {
     return (
       <div className="main-component-div">
         <div className="section-header" >
@@ -16,24 +34,22 @@ class MainComponent extends React.Component {
             Home
           </div>
           <div id='create-event'>
-            <Button variant="outlined" color="primary" size="medium">
+            <Button onClick={ () => { this.create()}} variant="outlined" color="primary" size="medium">
               Create Event
             </Button>
           </div>
         </div>
         <div className="upcomming-events">
-        Upcomming Events</div>
+        Upcomming Events
+        </div>
         <div className="event-list">
           {events.map(event => (
             <EventCard 
-            title={event.title}
-            username={event.username}
-            description={event.description} 
-            purpose={event.purpose}/> 
+            event={event}/> 
           ))}
         </div>
       </div>
-    );
+    );}
   }
 }
 
