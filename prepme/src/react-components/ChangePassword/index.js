@@ -1,20 +1,20 @@
 import React from 'react';
 
 import './styles.css';
-import { Button, TextField, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
+import { Button, Dialog, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import LockIcon from '@material-ui/icons/Lock';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
+import PasswordEntry from './PasswordEntry/index';
 
 /* Component to change password on user Profile page */
 class ChangePassword extends React.Component {
 
-  // Keep track of values in input fields and whether or not to show password
+  
   state = {
-    changingPassword: false,
+    changingPassword: false, // whether or not to show password fields
+
+    // Keep track of values in input fields
     currentPassword: "",
     newPassword: "",
     newPasswordConfirm: "",
@@ -22,7 +22,7 @@ class ChangePassword extends React.Component {
     newShowPsw: false,
     confShowPsw: false,
 
-    showDialog: false
+    showDialog: false // show 'password saved' dialog
   }
 
   openPasswordChange = () => {
@@ -75,66 +75,27 @@ class ChangePassword extends React.Component {
         { this.state.changingPassword ? (
           <div>
             <div id="title">Change Password</div>
-            <div className="field">
-              <TextField 
-                label="Current Password"
-                variant="outlined"
-                type={ this.state.currShowPsw ? "text" : "password" }
-                fullWidth={ true }
-                onChange={ this.onCurrPswChange }
-                value={ this.state.currentPassword }
-                InputProps={{ endAdornment: 
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={ this.toggleShowCurrPsw }
-                      edge="end"
-                    >
-                      {this.state.currShowPsw ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment> 
-                }}
-              />
-            </div>
-            <div className="field">
-              <TextField 
-                label="New Password"
-                variant="outlined"
-                type={ this.state.newShowPsw ? "text" : "password" }
-                fullWidth={ true }
-                onChange={ this.onNewPswChange }
-                value={ this.state.newPassword }
-                InputProps={{ endAdornment: 
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={ this.toggleShowNewPsw }
-                      edge="end"
-                    >
-                      {this.state.newShowPsw ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment> 
-                }}
-              />
-            </div>
-            <div className="field">
-              <TextField 
-                label="Re-enter New Password"
-                variant="outlined"
-                type={ this.state.confShowPsw ? "text" : "password" }
-                fullWidth={ true }
-                onChange={ this.onConfirmPswChange }
-                value={ this.state.newPasswordConfirm }
-                InputProps={{ endAdornment: 
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={ this.toggleShowConfPsw }
-                      edge="end"
-                    >
-                      {this.state.confShowPsw ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment> 
-                }}
-              />
-            </div>
+            <PasswordEntry 
+              label="Current Password"
+              value={ this.state.currentPassword }
+              showPsw={ this.state.currShowPsw }
+              toggleShowPsw={ this.toggleShowCurrPsw }
+              onChange={ this.onCurrPswChange }
+            />
+            <PasswordEntry 
+              label="New Password"
+              value={ this.state.newPassword }
+              showPsw={ this.state.newShowPsw }
+              toggleShowPsw={ this.toggleShowNewPsw }
+              onChange={ this.onNewPswChange }
+            />
+            <PasswordEntry 
+              label="Re-enter Password"
+              value={ this.state.newPasswordConfirm }
+              showPsw={ this.state.confShowPsw }
+              toggleShowPsw={ this.toggleShowConfPsw }
+              onChange={ this.onConfirmPswChange }
+            />
             <div id="save-button">
               <Button
                 variant="contained"
@@ -180,4 +141,3 @@ class ChangePassword extends React.Component {
 }
 
 export default ChangePassword;
-

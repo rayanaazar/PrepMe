@@ -8,7 +8,14 @@ import RightSideBar from "../RightSideBar/index";
 
 /* Component for the Home page */
 class Home extends React.Component {
-  state = {}
+  state = {
+    onEventsPage: true,
+    editingEvent: false
+  }
+
+  setOnEventsPage = (newValue) => {
+    this.setState({ onEventsPage: newValue })
+  }
 
   render() {
     const { state, doLogout } = this.props
@@ -17,23 +24,23 @@ class Home extends React.Component {
 
     return (
       <div className="home-div">
-        {/* Redirect to login page if not LoggedIn 
-        Commented out for now so we can test other pages */}
-        {/* { !isLoggedIn ? (<Redirect to='/login' />) : (<div />)} */}
-        <div className="left">
         <LeftSideBar 
           username={ username }
           isAdmin={ isAdmin } 
           doLogout={ doLogout }
+          onEventsPage={ this.state.onEventsPage }
+          setOnEventsPage={ this.setOnEventsPage }
         />
-        </div>
       
         <MainComponent
-        events={events}/>
-        <div className="right">
-          <RightSideBar isAdmin={ isAdmin }/>
-        </div>
-       
+          events={events}
+        />
+
+        <RightSideBar 
+          isAdmin={ isAdmin } 
+          onEventsPage={ this.state.onEventsPage }
+          editingEvent={ this.state.editingEvent }
+        />
       </div>
     );
   }

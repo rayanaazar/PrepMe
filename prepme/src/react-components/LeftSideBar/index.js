@@ -10,10 +10,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import NavBar from './NavBar/index';
 
-/* Component for the left SideBar*/
+/* Component for the left SideBar */
 class LeftSideBar extends React.Component {
   render() {
-    const { username, isAdmin, doLogout } = this.props
+    const { username, isAdmin, doLogout, onEventsPage, setOnEventsPage } = this.props
     return (
       <div id="sidebar-div">
 
@@ -28,7 +28,11 @@ class LeftSideBar extends React.Component {
             </div>
           </div>
 
-          <NavBar isAdmin={ isAdmin } />
+          <NavBar 
+            isAdmin={ isAdmin } 
+            onEventsPage={ onEventsPage } 
+            setOnEventsPage={ setOnEventsPage } 
+          />
         </div>
         
         <div id="logout-button">

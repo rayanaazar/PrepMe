@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./styles.css";
-import { withRouter} from 'react-router-dom';
 
 import Filter from '../Filter/index';
 import ChangePassword from '../ChangePassword/index';
@@ -10,8 +9,6 @@ import CancelAndSaveEvent from '../CancelAndSaveEvent/index';
 /* Component for the right SideBar page */
 class RightSideBar extends React.Component {
   state = {
-    onEventsPage: true, // whether we're on a page with events so we can add a filter, may move to a higher component
-    editingEvent: false, // whether we're currently editing an event, will probably move to a higher component
     /* Entry Info
         title         the title of the filter entry, used as a label 
         isDropdown    whether or not it's a dropdown filter
@@ -56,13 +53,13 @@ class RightSideBar extends React.Component {
     ]
   }
 
-  addSelection = (title, value) => {
+  addSelection = (onEventsPage, title, value) => {
     if (value == "") {
       return 
     }
     // Assume event and user entries don't have the same title
     let entries = this.state.userEntries
-    if (this.state.onEventsPage) {
+    if (onEventsPage) {
       entries = this.state.eventEntries
     }
     
@@ -77,14 +74,14 @@ class RightSideBar extends React.Component {
     this.setState({entries})
   }
 
-  clearSelections = () => {
+  clearSelections = (onEventsPage) => {
     // Assume event and user entries don't have the same title
     let entries = this.state.userEntries
-    if (this.state.onEventsPage) {
+    if (onEventsPage) {
       entries = this.state.eventEntries
     }
 
-    // Empty alll applied lists in filter entries
+    // Empty all applied lists in filter entries
     for (let i=0; i < entries.length; i++) {
       entries[i].applied = []
     }
@@ -92,67 +89,43 @@ class RightSideBar extends React.Component {
     this.setState({entries})
   }
 
-  // TODO: implemented this in a higher level component and pass it down
+  // TODO: implement this in a higher level component and pass it down
   doChangePassword = () => {}
 
   render() {
-    const { isAdmin } = this.props
-    
-    // Based on routing path, we can determine if we're on an events page
-    const path = this.props.location.pathname
-    if (path == "/home" || path == "/home/events") {
-      this.state.onEventsPage = true
+    const { isAdmin, onEventsPage, editingEvent } = this.props
+
+    let mainElement;
+
+    // Determine which element to display depending on current state of props
+    if (editingEvent) {
+      mainElement =  <CancelAndSaveEvent />
     } else {
-      this.state.onEventsPage = false
-    }
-
-    let elem = this.state.onEventsPage 
-      ? (<Filter 
+      if (onEventsPage) {
+        mainElement =  <Filter 
             entries={ this.state.eventEntries } 
-            addSelection={ this.addSelection } 
-            clearSelections={ this.clearSelections }
-        />) 
-      : (isAdmin ? (
-          <Filter 
-            entries={ this.state.userEntries } 
-            addSelection={ this.addSelection }
-            clearSelections={ this.clearSelections }
-        />) : (
-          <ChangePassword doChangePassword={ this.doChangePassword }/>
-        )
-      )
-
-    if (this.state.editingEvent) {
-      elem = <CancelAndSaveEvent />
+            addSelection={ () => this.addSelection(onEventsPage) } 
+            clearSelections={ () => this.clearSelections(onEventsPage) }
+        />
+      } else {
+        if (isAdmin) {
+          mainElement =  <Filter 
+              entries={ this.state.userEntries } 
+              addSelection={ () => this.addSelection(onEventsPage) }
+              clearSelections={ this.clearSelections(onEventsPage) }
+          />
+        } else {
+          mainElement =  <ChangePassword doChangePassword={ this.doChangePassword }/>
+        }
+      }
     }
-    
+
     return (
       <div className="sidebar-div">
-        { elem }
-        {/* { this.state.editingEvent 
-          ? (
-
-          )
-          :
-        }
-        { this.state.onEventsPage 
-          ? (<Filter 
-                entries={ this.state.eventEntries } 
-                addSelection={ this.addSelection } 
-                clearSelections={ this.clearSelections }
-            />) 
-          : (isAdmin ? (
-              <Filter 
-                entries={ this.state.userEntries } 
-                addSelection={ this.addSelection }
-                clearSelections={ this.clearSelections }
-            />) : (
-              <ChangePassword doChangePassword={ this.doChangePassword }/>
-            ))
-        } */}
+        { mainElement }
       </div>
     );
   }
 }
 
-export default withRouter(RightSideBar);
+export default RightSideBar;

@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css';
 import "../../../App.css";
 
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'; 
 import EventIcon from '@material-ui/icons/Event';
 import PeopleIcon from '@material-ui/icons/People';
@@ -14,7 +14,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 class NavBar extends React.Component {
 
     render() {
-      const { isAdmin } = this.props
+      const { isAdmin, onEventsPage, setOnEventsPage } = this.props
 
       // Determine values of each link
       const linkInfo = [
@@ -26,17 +26,10 @@ class NavBar extends React.Component {
         linkInfo[1] = { link: '/home/users', name: 'Users', icon: <PeopleIcon color="primary"/> }
       }
 
-      // Depending on the routing path we can determine if we're on an events page
-      let onEventsPage = false
-      const path = this.props.location.pathname
-      if (path == "/home" || path == "/home/events") {
-        onEventsPage = true
-      }
-
       return (
         <div className="nav-bar">
           <List>
-            <Link className="unstyled-link" to={ linkInfo[0].link }>
+            <Link className="unstyled-link" to={ linkInfo[0].link } onClick={ () => setOnEventsPage(true) }>
               <ListItem 
                 button={ true }
                 divider={ true }
@@ -47,7 +40,7 @@ class NavBar extends React.Component {
                 <ListItemText primary={ linkInfo[0].name } />
               </ListItem>
             </Link>
-            <Link className="unstyled-link" to={ linkInfo[1].link }>
+            <Link className="unstyled-link" to={ linkInfo[1].link } onClick={ () => setOnEventsPage(false) }>
               <ListItem 
                 button={ true } 
                 selected={ !onEventsPage }
@@ -64,4 +57,4 @@ class NavBar extends React.Component {
     }
 }
 
-export default withRouter(NavBar);
+export default NavBar;
