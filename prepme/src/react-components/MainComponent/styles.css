@@ -14,7 +14,11 @@
 
 }
 
-
+.upcomming-events {
+  font-family: Raleway-Bold;
+  margin-top: 24px;
+  font-size: 18px;
+}
 .section-name {
   font-family: Raleway-SemiBold;
   font-size: 24px;

@@ -13,7 +13,7 @@ class MainComponent extends React.Component {
       <div className="main-component-div">
         <div className="section-header" >
           <div className="section-name">
-            Events
+            Home
           </div>
           <div id='create-event'>
             <Button variant="outlined" color="primary" size="medium">
@@ -21,8 +21,9 @@ class MainComponent extends React.Component {
             </Button>
           </div>
         </div>
+        <div className="upcomming-events">
+        Upcomming Events</div>
         <div className="event-list">
-
           {events.map(event => (
             <EventCard 
             title={event.title}

@@ -8,8 +8,22 @@ import EventIcon from '@material-ui/icons/Event';
 
 /* Component for the Home page */
 class EventCard extends React.Component {
+  
+  state = {
+    text: "Join"
+  }
+  changeText = (t) => {
+    const join = "Join";
+    if (this.state.text === "Joined"){
+      this.setState( {text:join });
+    }
+    else {
+      this.setState({ text:t }); 
+    } 
+  }
+  
   render() {
-    const { title, username, description, purpose} = this.props
+    const { title, username, description, purpose} = this.props 
 
     return (
       <div className="event-card">
@@ -41,8 +55,8 @@ class EventCard extends React.Component {
             </Button>
           </div>
           <div className="action-button" id='join-button'>
-            <Button variant="outlined" color="primary" size="small">
-              Join
+            <Button onClick={ () => { this.changeText("Joined")}  } variant="outlined" color="primary" size="small">
+              {this.state.text}
             </Button>
           </div>
         </div>
