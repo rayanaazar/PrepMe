@@ -22,8 +22,9 @@ class EventCard extends React.Component {
     } 
   }
   
+
   render() {
-    const {event} = this.props 
+    const {onViewing, event} = this.props 
 
     return (
       <div className="event-card">
@@ -33,11 +34,11 @@ class EventCard extends React.Component {
               <img/>
             </div>
             <div>
-            <div className="title" >
-              {event.title}
+            <div className="course" >
+              {event.course}
             </div>
-            <div className="event-purpose">
-              {event.purpose}
+            <div className="event-subject">
+              {event.subject}
             </div>
             </div>
           </div>
@@ -50,7 +51,7 @@ class EventCard extends React.Component {
         </div>
         <div className="actions">
           <div className="action-button" id='view-button'>
-            <Button variant="outlined" color="primary" size="small">
+            <Button onClick={() => onViewing(event)}  variant="outlined" color="primary" size="small">
               View
             </Button>
           </div>

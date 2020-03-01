@@ -12,6 +12,7 @@ class MainComponent extends React.Component {
   state = {
     viewing: false,
     creating: false,
+    event: {}
   };
 
   createEvent = () => {
@@ -25,11 +26,23 @@ class MainComponent extends React.Component {
       })
   };
 
+  onViewing = (event) => {
+    this.setState({
+      viewing: true,
+      creating: false,
+      event: event
+    })
+  }
+
   render() {
     const { username, events, setEvents} = this.props
 
     if (this.state.creating) {
       return (<Event events={events} userName={username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
+    }
+
+    else if (this.state.viewing){
+      return (<Event viewing={true} event={this.state.event} events={events} userName={username} viewEvents={this.viewEvents}/>)
     }
 
     else {
@@ -51,6 +64,7 @@ class MainComponent extends React.Component {
         <div className="event-list">
           {events.map(event => (
             <EventCard 
+            onViewing={this.onViewing}
             event={event}/> 
           ))}
         </div>

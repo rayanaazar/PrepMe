@@ -3,7 +3,7 @@ export default function addEvent(eventForm, events, username, setEvents, viewEve
     const newEvent = {
         title: eventForm.state.course,
         purpose: eventForm.state.purpose,
-        username: username,
+        username: '@'+username,
         description: eventForm.state.description,
         location: eventForm.state.location
     };
