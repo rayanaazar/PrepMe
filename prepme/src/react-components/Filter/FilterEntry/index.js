@@ -27,7 +27,7 @@ class FilterEntry extends React.Component {
     return (
       <div className="filter-entry-div">
         <div className="entry-details">
-          <div className="entry-title">{ title }</div>
+          <div className="entry-title">{ title + ":"}</div>
           {/* Depending on if the entry-type is dropdown or not, render a different element */}
           { isDropdown ? (
             <div className="entry-field">

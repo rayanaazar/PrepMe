@@ -54,7 +54,7 @@ class RightSideBar extends React.Component {
   }
 
   addSelection = (onEventsPage, title, value) => {
-    console.log("addSelection: ", onEventsPage, title, value)
+    console.log("addSelection:", onEventsPage, title, value)
     if (value == "") {
       return 
     }
@@ -71,7 +71,8 @@ class RightSideBar extends React.Component {
         entries[i].applied.push(value)
       }
     }
-    
+  
+    this.props.addFilter(title, value)  
     this.setState({entries})
   }
 
@@ -87,6 +88,7 @@ class RightSideBar extends React.Component {
       entries[i].applied = []
     }
     
+    this.props.resetFilters()
     this.setState({entries})
   }
 
