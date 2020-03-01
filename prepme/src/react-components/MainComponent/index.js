@@ -12,18 +12,24 @@ class MainComponent extends React.Component {
   state = {
     viewing: false,
     creating: false,
+  };
 
-  }
-
-  create = () => {
+  createEvent = () => {
     this.setState({ creating: true })
-    }
+  };
+
+  viewEvents = () => {
+      this.setState({
+          viewing: false,
+          creating: false
+      })
+  };
 
   render() {
-    const { title, username, description, icon, events} = this.props
+    const { username, events, setEvents} = this.props
 
     if (this.state.creating) {
-      return (<Event/>)
+      return (<Event events={events} userName={username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
     }
 
     else {
@@ -34,13 +40,13 @@ class MainComponent extends React.Component {
             Home
           </div>
           <div id='create-event'>
-            <Button onClick={ () => { this.create()}} variant="outlined" color="primary" size="medium">
+            <Button onClick={ () => { this.createEvent()}} variant="outlined" color="primary" size="medium">
               Create Event
             </Button>
           </div>
         </div>
-        <div className="upcomming-events">
-        Upcomming Events
+        <div className="upcoming-events">
+        Upcoming Events
         </div>
         <div className="event-list">
           {events.map(event => (

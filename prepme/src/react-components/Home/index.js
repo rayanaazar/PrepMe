@@ -33,7 +33,9 @@ class Home extends React.Component {
         />
       
         <MainComponent
+            username={username}
           events={events}
+          setEvents = {this.props.setEvents}
         />
 
         <RightSideBar 

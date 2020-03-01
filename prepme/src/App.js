@@ -18,6 +18,12 @@ class App extends React.Component {
         ]
     };
 
+    setEvents = (events) => {
+        this.setState({
+            events: events
+        })
+    };
+
     doLogout = () => {
         this.setState({isLoggedIn: false});
     };
@@ -48,7 +54,7 @@ class App extends React.Component {
             return(
                 <Switch>
                     <Route path='/home' render={() =>
-                        (<Home state={this.state} doLogout={ this.doLogout }/>)}>
+                        (<Home state={this.state} doLogout={ this.doLogout } setEvents={this.setEvents} />)}>
                     </Route>
                     <Route path='/'>
                         <Redirect to='/home'/>

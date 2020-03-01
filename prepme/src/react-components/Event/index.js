@@ -2,6 +2,7 @@ import React from "react";
 
 import "./styles.css";
 import {TextField, Button} from '@material-ui/core';
+import addEvent from "../../actions/events";
 
 
 /* Component for the main center component */
@@ -32,7 +33,7 @@ class Event extends React.Component {
     };
     
     render() {
-      const {event} = this.props;
+      const {event, events, userName, setEvents, viewEvents} = this.props;
       return (
         <div className="event-div">
             <div className="page-name">
@@ -127,7 +128,7 @@ class Event extends React.Component {
                         Upload File:
                     </div>
                 </div>
-                <Button variant='outlined'>
+                <Button variant='outlined' onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
                     Create Event
                 </Button>
             </div>
