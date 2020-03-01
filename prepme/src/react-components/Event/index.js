@@ -1,17 +1,7 @@
 import React from "react";
 
 import "./styles.css";
-import EventCard from "../EventCard/index";
-import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
-import EventIcon from '@material-ui/icons/Event';
-import { file } from "@babel/types";
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import {TextField, Button} from '@material-ui/core';
 
 
 /* Component for the main center component */
@@ -20,23 +10,29 @@ class Event extends React.Component {
     state = {
         
         isView:false,
-        isEdit:false ,
+        isEdit:false,
         isCreate:true,
 
-        info: {
-            title:"",
-            purpose:"",
-            user:"",
-            discription:"",
-            location:"",
-            date:"",
-            time:"",
-            file: ""
-        }
-    }
+        course:"",
+        purpose:"",
+        username:"",
+        description:"",
+        location:"",
+        date:"",
+        time:"",
+        file: ""
+    };
+
+    handleInputChange = event => {
+        const {name, value} = event.target;
+
+        this.setState({
+            [name]: value
+        });
+    };
     
     render() {
-      const {event} = this.props
+      const {event} = this.props;
       return (
         <div className="event-div">
             <div className="page-name">
@@ -49,22 +45,28 @@ class Event extends React.Component {
                     </div>
                     <div className="course">
                     <TextField 
-                    id="outlined-search" 
-                    label="Course" 
-                    type="search" 
-                    variant="outlined"/>
+                        id="outlined-search"
+                        value={this.state.course}
+                        label="Course"
+                        name='course'
+                        type="search"
+                        variant="outlined"
+                        onChange={this.handleInputChange}/>
                     </div>
                 </div>
                 <div className="section">
                     <div className="section-name">
                         Subject:
                     </div>
-                    <div className="subject">
+                    <div className="purpose">
                         <TextField 
-                        id="outlined-search" 
-                        label="Subject" 
-                        type="search" 
-                        variant="outlined"/>
+                            id="outlined-search"
+                            value={this.state.purpose}
+                            label="Purpose"
+                            name='purpose'
+                            type="search"
+                            variant="outlined"
+                            onChange={this.handleInputChange}/>
                     </div>
                 </div>
                 <div className="section">
@@ -72,14 +74,16 @@ class Event extends React.Component {
                         Location:
                     </div>
                     <div className="location">
-                        <TextField 
-                        id="outlined-search" 
-                        style={{ margin: 8 }}
-                        id="outlined-full-width"
-                        fullWidth
-                        label="Loaction" 
-                        type="search" 
-                        variant="outlined"/>   
+                        <TextField
+                            id="outlined-full-width"
+                            value={this.state.location}
+                            // style={{ margin: 8 }}
+                            fullWidth
+                            label="Location"
+                            name='location'
+                            type="search"
+                            variant="outlined"
+                            onChange={this.handleInputChange}/>
                     </div>
        
                 </div>
@@ -107,12 +111,25 @@ class Event extends React.Component {
                     <div className="section-name">
                         Description:
                     </div>
+                    <TextField
+                        value={this.state.description}
+                        label="Description"
+                        name='description'
+                        fullWidth
+                        multiline
+                        type='text'
+                        variant="outlined"
+                        onChange={this.handleInputChange}
+                    />
                 </div>
                 <div className="section">
                     <div className="section-name">
                         Upload File:
                     </div>
                 </div>
+                <Button variant='outlined'>
+                    Create Event
+                </Button>
             </div>
         </div>
       );
