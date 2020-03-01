@@ -11,7 +11,7 @@ import FilterEntry from './FilterEntry/index';
 class Filter extends React.Component { 
 
   render() {
-    const { entries, addSelection, clearSelections } = this.props
+    const { entries, addSelection, clearSelections, onEventsPage } = this.props
 
     return (
       <div className="filter-div">
@@ -21,7 +21,7 @@ class Filter extends React.Component {
             variant="contained"
             color="secondary"
             size="small"
-            onClick={ clearSelections }
+            onClick={ () => clearSelections(onEventsPage) }
             startIcon={<DeleteIcon />}
           >
             Clear Filters
@@ -33,6 +33,7 @@ class Filter extends React.Component {
               <FilterEntry
                 key={ uid(entry) }
                 entry={ entry }
+                onEventsPage={ onEventsPage }
                 addSelection={ addSelection }/>
             ))}
         </div>

@@ -10,7 +10,6 @@ import PasswordEntry from './PasswordEntry/index';
 /* Component to change password on user Profile page */
 class ChangePassword extends React.Component {
 
-  
   state = {
     changingPassword: false, // whether or not to show password fields
 
@@ -21,6 +20,8 @@ class ChangePassword extends React.Component {
     currShowPsw: false,
     newShowPsw: false,
     confShowPsw: false,
+
+    isValidInputs: true,
 
     showDialog: false // show 'password saved' dialog
   }
@@ -63,6 +64,16 @@ class ChangePassword extends React.Component {
     })
   }
 
+  checkValid = () => {
+    if (this.state.newPassword == this.state.newPasswordConfirm) {
+      this.setState({ isValidInputs: true })
+      return true
+    } else {
+      this.setState({ isValidInputs: false })
+      return false
+    }
+  }
+
   closeDialog = () => {
     this.setState({ showDialog: false })
   }
@@ -100,12 +111,18 @@ class ChangePassword extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={ () => { doChangePassword(); this.clearEntries(); } }
+                onClick={ () => { 
+                  if (this.checkValid()) {
+                    doChangePassword(this.state.currentPassword, this.state.newPassword, this.state.newPasswordConfirm); 
+                    this.clearEntries(); 
+                  }
+                }}
                 startIcon={ <SaveIcon /> }
               >
                 Save
               </Button>
             </div>
+            <p id="invalid-text">{this.state.isValidInputs ? '' : 'Invalid Credentials'}</p>
           </div>
         ) : (
           <Button
@@ -122,7 +139,6 @@ class ChangePassword extends React.Component {
         {/* Dialog to say password saved successfully, could move into a higher level component that actually saves password */}
         <Dialog
           open={ this.state.showDialog }
-          onRequestClose={ this.closeDialog }
         >
           <DialogContent>
             <DialogContentText id="alert-dialog-description">

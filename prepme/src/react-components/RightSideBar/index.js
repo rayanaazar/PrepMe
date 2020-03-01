@@ -54,6 +54,7 @@ class RightSideBar extends React.Component {
   }
 
   addSelection = (onEventsPage, title, value) => {
+    console.log("addSelection: ", onEventsPage, title, value)
     if (value == "") {
       return 
     }
@@ -89,11 +90,8 @@ class RightSideBar extends React.Component {
     this.setState({entries})
   }
 
-  // TODO: implement this in a higher level component and pass it down
-  doChangePassword = () => {}
-
   render() {
-    const { isAdmin, onEventsPage, editingEvent } = this.props
+    const { isAdmin, onEventsPage, editingEvent, doChangePassword } = this.props
 
     let mainElement;
 
@@ -104,18 +102,20 @@ class RightSideBar extends React.Component {
       if (onEventsPage) {
         mainElement =  <Filter 
             entries={ this.state.eventEntries } 
-            addSelection={ () => this.addSelection(onEventsPage) } 
-            clearSelections={ () => this.clearSelections(onEventsPage) }
+            onEventsPage={ onEventsPage }
+            addSelection={ this.addSelection } 
+            clearSelections={ this.clearSelections }
         />
       } else {
         if (isAdmin) {
           mainElement =  <Filter 
               entries={ this.state.userEntries } 
-              addSelection={ () => this.addSelection(onEventsPage) }
-              clearSelections={ this.clearSelections(onEventsPage) }
+              onEventsPage={ onEventsPage }
+              addSelection={ this.addSelection }
+              clearSelections={ this.clearSelections }
           />
         } else {
-          mainElement =  <ChangePassword doChangePassword={ this.doChangePassword }/>
+          mainElement =  <ChangePassword doChangePassword={ doChangePassword }/>
         }
       }
     }

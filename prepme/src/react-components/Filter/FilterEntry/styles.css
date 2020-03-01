@@ -34,7 +34,7 @@
 }
 
 .applied-value {
-  width: 60px;
+  min-width: 60px;
   border-radius: 15px;
   background-color: #9784FF;
   font-family: Raleway-SemiBold;

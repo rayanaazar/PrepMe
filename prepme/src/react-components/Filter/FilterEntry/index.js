@@ -8,7 +8,6 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 /* Component for the Filter in the RightSideBar */
 class FilterEntry extends React.Component {
-
   state = {
     value: ""
   }
@@ -22,7 +21,7 @@ class FilterEntry extends React.Component {
   };
 
   render() {
-    const { entry, addSelection } = this.props
+    const { entry, addSelection, onEventsPage } = this.props
     const { title, isDropdown, options, applied } = entry;
     
     return (
@@ -65,7 +64,7 @@ class FilterEntry extends React.Component {
             className="add-entry-button" 
             size="medium"
             edge="end"
-            onClick={() => (addSelection(title, this.state.value))}>
+            onClick={() => (addSelection(onEventsPage, title, this.state.value))}>
             <AddCircleIcon color="primary"/>
           </IconButton>
         </div>

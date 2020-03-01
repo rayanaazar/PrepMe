@@ -11,10 +11,15 @@ class App extends React.Component {
         isLoggedIn: false,
         username: "user",
         isAdmin: false,
-        events: [{title:"CSC309", purpose:"Midterm", username:"@rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street"},
-        {title:"CSC321", purpose:"Final Exam", username:"@manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"young street"},
-        {title:"CSC263", purpose:"Assignment 2", username:"@lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"young street"},
-        {title:"CSC343", purpose:"Midterm", username:"@juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"bahen building"}  
+        events: [
+            {title:"CSC309", purpose:"Midterm", username:"@rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street"},
+            {title:"CSC321", purpose:"Final Exam", username:"@manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"yonge street"},
+            {title:"CSC263", purpose:"Assignment 2", username:"@lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"yonge street"},
+            {title:"CSC343", purpose:"Midterm", username:"@juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"bahen building"}  
+        ],
+        users: [
+            {username: "user", password: "user", isAdmin: false},
+            {username: "admin", password: "admin", isAdmin: true}
         ]
     };
 
@@ -23,6 +28,21 @@ class App extends React.Component {
             events: events
         })
     };
+
+    doChangePassword = (currPsw, newPsw, newPswConfirm) => {
+        const users = this.state.users
+
+        if (newPsw == newPswConfirm) {
+            for (let i=0; i < this.state.users.length; i++) {
+                if (this.state.username == users[i].username && currPsw == users[i].password) {
+                    users[i].password = newPsw
+                    console.log("Changed Password of", users[i].username, "to", newPsw)
+                }
+            }
+        }
+
+        this.setState({ users: users })
+    }
 
     doLogout = () => {
         this.setState({isLoggedIn: false});
@@ -42,7 +62,7 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path='/login' render={() =>
                         (<div>
-                            <LoginBox doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn}/>
+                            <LoginBox users={this.state.users} doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn}/>
                         </div>)}>
                     </Route>
                     <Route path='/'>
@@ -54,7 +74,12 @@ class App extends React.Component {
             return(
                 <Switch>
                     <Route path='/home' render={() =>
-                        (<Home state={this.state} doLogout={ this.doLogout } setEvents={this.setEvents} />)}>
+                        (<Home 
+                            state={this.state} 
+                            doLogout={ this.doLogout } 
+                            setEvents={this.setEvents} 
+                            doChangePassword={this.doChangePassword} 
+                        />)}>
                     </Route>
                     <Route path='/'>
                         <Redirect to='/home'/>
