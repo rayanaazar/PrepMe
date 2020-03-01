@@ -62,7 +62,7 @@ class App extends React.Component {
                 <Switch>
                     <Route exact path='/login' render={() =>
                         (<div>
-                            <LoginBox doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn}/>
+                            <LoginBox doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn} users={this.state.users}/>
                         </div>)}>
                     </Route>
                     <Route path='/'>
