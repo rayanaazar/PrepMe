@@ -3,6 +3,9 @@ import React from "react";
 import "./styles.css";
 import {TextField, Button} from '@material-ui/core';
 import addEvent from "../../actions/events";
+import MenuItem from '@material-ui/core/MenuItem';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Icon from '@material-ui/core/Icon';
 
 
 /* Component for the main center component */
@@ -14,14 +17,20 @@ class Event extends React.Component {
         isEdit:false,
         isCreate:true,
 
+        
         course:"",
-        purpose:"",
+        subject:"",
         username:"",
         description:"",
         location:"",
         date:"",
         time:"",
-        file: ""
+        file: "",
+        size:"",
+        members:[],
+        
+
+        sizes: ["1-5","6-10", "11-15","16-20"]
     };
 
     handleInputChange = event => {
@@ -31,6 +40,14 @@ class Event extends React.Component {
             [name]: value
         });
     };
+
+    onChange = e => {
+        const { value } = e.target;
+        this.setState({
+          value: value
+        })
+    };
+
     
     render() {
       const {event, events, userName, setEvents, viewEvents} = this.props;
@@ -63,8 +80,8 @@ class Event extends React.Component {
                         <TextField 
                             id="outlined-search"
                             value={this.state.purpose}
-                            label="Purpose"
-                            name='purpose'
+                            label="Subject"
+                            name='subject'
                             type="search"
                             variant="outlined"
                             onChange={this.handleInputChange}/>
@@ -78,7 +95,6 @@ class Event extends React.Component {
                         <TextField
                             id="outlined-full-width"
                             value={this.state.location}
-                            // style={{ margin: 8 }}
                             fullWidth
                             label="Location"
                             name='location'
@@ -86,13 +102,28 @@ class Event extends React.Component {
                             variant="outlined"
                             onChange={this.handleInputChange}/>
                     </div>
-       
                 </div>
                 <div  className="section">
                     <div className="section-name">
                         Group Size:
                     </div>
                     <div className="group-size">
+                    <TextField
+                        id="outlined-select-currency"
+                        select
+                        label="Select"
+                        name='size'
+                        value={this.state.size}
+                        onChange={this.handleInputChange}
+                        helperText="Please select your group size"
+                        variant="outlined"
+                        >
+                        {this.state.sizes.map(option => (
+                            <MenuItem key={option} value={option}>
+                            {option}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                     </div>
                 </div>
                 <div className="section">
@@ -100,38 +131,64 @@ class Event extends React.Component {
                         Date:
                     </div>
                     <div className="date">
-                    
+                        <TextField
+                            id="date"
+                            id="outlined"
+                            label="Date"
+                            type="date"
+                            name="date"
+                            defaultValue="2020-01-01"
+                        />
                     </div>
                 </div>
                 <div className="section">
                     <div className="section-name">
                         Time:
                     </div>
+                    <div className="time">
+                        <TextField
+                            id="time"
+                            label="Alarm clock"
+                            type="time"
+                            defaultValue="06:00"
+                            name="time"
+                        />
+                    </div>
                 </div>
-                <div  className="section">
+                <div className="section">
                     <div className="section-name">
                         Description:
                     </div>
-                    <TextField
-                        value={this.state.description}
-                        label="Description"
-                        name='description'
-                        fullWidth
-                        multiline
-                        type='text'
-                        variant="outlined"
-                        onChange={this.handleInputChange}
-                    />
+                    <div className="description">
+                        <TextField
+                                rows="3"
+                                id="outlined-full-width"
+                                multiline
+                                value={this.state.description}
+                                fullWidth
+                                label="Description"
+                                name='description'
+                                variant="outlined"
+                                onChange={this.handleInputChange}/>
+                    </div>
                 </div>
                 <div className="section">
                     <div className="section-name">
                         Upload File:
                     </div>
+                    <div className="file">
+                        <Button
+                            variant="outlined"
+                            color="default"
+                            startIcon={<CloudUploadIcon />}>
+                        Upload
+                        </Button>
+                    </div>
                 </div>
-                <Button variant='outlined' onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
-                    Create Event
-                </Button>
             </div>
+            <Button variant='outlined' onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
+                    Create Event
+            </Button>
         </div>
       );
     }
