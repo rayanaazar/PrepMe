@@ -21,17 +21,29 @@ class LoginBox extends React.Component {
     };
 
     processCredentials = users => {
-        for (let i=0; i < users.length; i++) {
-            if (this.state.username === users[i].username && this.state.password === users[i].password) {
-                this.props.doLogin(users[i].isAdmin, this.state.username)
-                console.log(this.state.username)
-                return;
-            }
-        }
-        this.setState({
-            invalidCredentials: true
-        });
+        // for (let i=0; i < users.length; i++) {
+        //     if (this.state.username === users[i].username && this.state.password === users[i].password) {
+        //         this.props.doLogin(users[i].isAdmin, this.state.username)
+        //         console.log(this.state.username)
+        //         return;
+        //     }
+        // }
+        // this.setState({
+        //     invalidCredentials: true
+        // });
         console.log('invalid');
+        if (this.state.username === 'admin' && this.state.password === 'admin') {
+            this.props.doLogin(true, 'admin');
+            console.log('admin');
+        } else if (this.state.username === 'user' && this.state.password === 'user') {
+            this.props.doLogin(false, 'user');
+            console.log('user');
+        } else {
+            this.setState({
+                invalidCredentials: true
+            });
+            console.log('invalid');
+        }
     };
 
     render() {
