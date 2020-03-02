@@ -7,6 +7,7 @@ import EventIcon from '@material-ui/icons/Event';
 import Event from "../Event";
 import { throwStatement } from "@babel/types";
 import UserList from "../UserList";
+import UserProfile from "../UserProfile";
 
 /* Component for the main center component */
 class MainComponent extends React.Component {
@@ -57,11 +58,17 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, events, setEvents, users, isAdmin, onEventsPage, setEventAction} = this.props
+    const { username, user, events, setEvents, users, isAdmin, onEventsPage, setEventAction} = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
         <UserList users={users} />
+      </div>
+    }
+
+    if (!isAdmin && !onEventsPage) {
+      return <div className="main-component-div">
+        <UserProfile user={user} events={events}/>
       </div>
     }
 
