@@ -82,7 +82,7 @@ class MainComponent extends React.Component {
     return (
       <div className="main-component-div">
         <div className="section-header" >
-          <div className="section-name">
+          <div className="page-name">
             Home
           </div>
           <div id='create-event'>
