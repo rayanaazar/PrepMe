@@ -50,6 +50,9 @@ class UserProfile extends React.Component {
             stars.push(<StarRateIcon fontSize='large'/>)
         }
 
+        console.log(user);
+        console.log(events);
+
         return (
             <div id='user-profile'>
                 <div id='user-info'>

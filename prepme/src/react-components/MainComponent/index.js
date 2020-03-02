@@ -58,7 +58,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
+    const { user, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
@@ -68,14 +68,14 @@ class MainComponent extends React.Component {
 
     if (!isAdmin && !onEventsPage) {
       return <div className="main-component-div">
-        <UserProfile user={users} events={events}/>
+        <UserProfile user={user} events={events}/>
       </div>
     }
 
     if (this.state.creating) {
-      return (<Event events={events} userName={username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
+      return (<Event events={events} userName={user.username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
     } else if (this.state.viewing || this.state.editing){
-      return (<Event editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={username} viewEvents={this.viewEvents}/>)
+      return (<Event editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={user.username} viewEvents={this.viewEvents}/>)
     }
 
     else {
@@ -97,7 +97,7 @@ class MainComponent extends React.Component {
         <div className="event-list">
           {events.map(event => (
             <EventCard 
-            username={username}
+            username={user.username}
             onEditing={this.onEditing}
             onViewing={this.onViewing}
             event={event}/> 
