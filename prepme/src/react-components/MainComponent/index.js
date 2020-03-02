@@ -6,6 +6,7 @@ import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/
 import EventIcon from '@material-ui/icons/Event';
 import Event from "../Event";
 import { throwStatement } from "@babel/types";
+import UserList from "../UserList";
 
 /* Component for the main center component */
 class MainComponent extends React.Component {
@@ -24,8 +25,7 @@ class MainComponent extends React.Component {
   viewEvents = () => {
       this.setState({
           viewing: false,
-          creating: false,
-          editing: false
+          creating: false
       })
   };
 
@@ -47,7 +47,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, events, setEvents} = this.props
+    const { username, events, setEvents, users} = this.props
 
     if (this.state.creating) {
       return (<Event events={events} userName={username} setEvents={setEvents} viewEvents={this.viewEvents}/>)

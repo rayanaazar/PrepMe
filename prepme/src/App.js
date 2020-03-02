@@ -18,7 +18,9 @@ class App extends React.Component {
             {course:"CSC343", subject:"Midterm", username:"@juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"6-10"}  
         ],
         users: [
-            {username: "user", password: "user", isAdmin: false},
+            {username: "user", password: "user", rating: 4, isAdmin: false},
+            {username: "rayanaazar", password: "password", rating: 4, isAdmin: false},
+            {username: "manveerbasra", password: "password", rating: 3, isAdmin: false},
             {username: "admin", password: "admin", isAdmin: true}
         ]
     };

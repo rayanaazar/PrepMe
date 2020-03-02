@@ -6,21 +6,21 @@ import LeftSideBar from "../LeftSideBar/index";
 import MainComponent from "../MainComponent/index";
 import RightSideBar from "../RightSideBar/index";
 import eventHelpers from "../../actions/events";
-const { filterEvents } = eventHelpers
+const { filterEvents, filterUsers } = eventHelpers
 
 
 /* Component for the Home page */
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    const { events } = this.props.state
+    const { events, users } = this.props.state
     this.state.filteredEvents = events
-    this.state.fullEvents = events
+    this.state.filteredUsers = users
   }
   
   state = {
     onEventsPage: true,
-    editingEvent: false,
+    eventAction: false, // whether or not we're doing an action on an event; so creating, editing, viewing
     /*
     appliedFilters is list of objects with a name and list of values
       - names are taken from eventEntries and userEntries in RightSideBar Component
@@ -30,8 +30,12 @@ class Home extends React.Component {
     ]
     */
     appliedFilters: [],
-    fullEvents: [],
-    filteredEvents: []
+    filteredEvents: [],
+    filteredUsers: []
+  }
+
+  setEventAction = (state) => {
+    this.setState({ eventAction: state })
   }
 
   // Add a new applied filter to state.appliedFilters
@@ -56,9 +60,14 @@ class Home extends React.Component {
       filters.push(newNameFilter)
     }
 
-    const filtered = filterEvents(filters, this.props.state.events)
-
-    this.setState({ filteredEvents: filtered })
+    if (!this.state.onEventsPage) {
+      console.log(this.props.state.users)
+      const filtered = filterUsers(filters, this.props.state.users)
+      this.setState({ filteredUsers: filtered })
+    } else {
+      const filtered = filterEvents(filters, this.props.state.events)
+      this.setState({ filteredEvents: filtered })
+    }
     this.setState({ appliedFilters: filters })
   }
 
@@ -66,7 +75,8 @@ class Home extends React.Component {
   resetFilters = () => {
     this.setState({
       appliedFilters: [],
-      filteredEvents: this.props.state.events
+      filteredEvents: this.props.state.events,
+      filteredUsers: this.props.state.users
     })
   }
 
@@ -76,7 +86,7 @@ class Home extends React.Component {
 
   render() {
     const { state, doLogout, doChangePassword } = this.props
-    const { isLoggedIn, username, isAdmin, events } = state
+    const { isLoggedIn, username, isAdmin, users } = state
     if (!isLoggedIn) return <Redirect to='/login' />
 
     return (
@@ -93,12 +103,13 @@ class Home extends React.Component {
           username={username}
           events={this.state.filteredEvents}
           setEvents = {this.props.setEvents}
+          users={ this.state.filteredUsers }
         />
 
         <RightSideBar 
           isAdmin={ isAdmin } 
           onEventsPage={ this.state.onEventsPage }
-          editingEvent={ this.state.editingEvent }
+          eventAction={ this.state.eventAction }
           doChangePassword={ doChangePassword }
           addFilter={ this.addFilter }
           resetFilters={ this.resetFilters }

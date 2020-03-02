@@ -68,8 +68,41 @@ function filterEvents(filters, events) {
     }, [])
 }
 
+function userMatchesFilters(filters, user) {
+    // Loop through all filters
+    for (let i=0; i < filters.length; i++) {
+        if (filters[i].name == "Username") {
+            // Iterate through all filtered usernames
+            for (let j=0; j < filters[i].values.length; j++) {
+                if (user.username == filters[i].values[j]) {
+                    return true
+                }
+            }
+        } else if (filters[i].name == "Rating") {
+            // Iterate through all filtered Rating
+            for (let j=0; j < filters[i].values.length; j++) {
+                if (user.rating == filters[i].values[j]) {
+                    return true
+                }
+            }
+        }
+    }
+
+    return false
+}
+
+function filterUsers(filters, users) {
+    return users.reduce((filteredUsers, user) => {
+        if (userMatchesFilters(filters, user)) {
+            filteredUsers.push(user)
+        }
+        return filteredUsers
+    }, [])
+}
+
 export default {
     addEvent: addEvent, 
     filterEvents: filterEvents,
+    filterUsers: filterUsers,
     editEvent: editEvent
 }

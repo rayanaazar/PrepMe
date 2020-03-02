@@ -21,7 +21,7 @@ class FilterEntry extends React.Component {
   };
 
   render() {
-    const { entry, addSelection, onEventsPage } = this.props
+    const { entry, addSelection, onEventsPage, eventAction } = this.props
     const { title, isDropdown, options, applied } = entry;
     
     return (
@@ -37,6 +37,7 @@ class FilterEntry extends React.Component {
               label="Select"
               variant="outlined"
               size="small" 
+              disabled={ eventAction }
               value={this.state.value}
               onChange={this.onChange}
               SelectProps={{
@@ -55,6 +56,7 @@ class FilterEntry extends React.Component {
               label="Enter"
               variant="outlined"
               size="small" 
+              disabled={ eventAction }
               onChange={this.onChange}
               value={this.state.value}
             />
@@ -64,6 +66,7 @@ class FilterEntry extends React.Component {
             className="add-entry-button" 
             size="medium"
             edge="end"
+            disabled={ eventAction }
             onClick={() => (addSelection(onEventsPage, title, this.state.value))}>
             <AddCircleIcon color="primary"/>
           </IconButton>

@@ -4,7 +4,6 @@ import "./styles.css";
 
 import Filter from '../Filter/index';
 import ChangePassword from '../ChangePassword/index';
-import CancelAndSaveEvent from '../CancelAndSaveEvent/index';
 
 /* Component for the right SideBar page */
 class RightSideBar extends React.Component {
@@ -93,32 +92,29 @@ class RightSideBar extends React.Component {
   }
 
   render() {
-    const { isAdmin, onEventsPage, editingEvent, doChangePassword } = this.props
+    const { isAdmin, onEventsPage, eventAction, doChangePassword } = this.props
 
     let mainElement;
 
     // Determine which element to display depending on current state of props
-    if (editingEvent) {
-      mainElement =  <CancelAndSaveEvent />
+    if (onEventsPage) {
+      mainElement =  <Filter 
+          entries={ this.state.eventEntries } 
+          onEventsPage={ onEventsPage }
+          addSelection={ this.addSelection } 
+          clearSelections={ this.clearSelections }
+          eventAction={ eventAction }
+      />
     } else {
-      if (onEventsPage) {
+      if (isAdmin) {
         mainElement =  <Filter 
-            entries={ this.state.eventEntries } 
+            entries={ this.state.userEntries } 
             onEventsPage={ onEventsPage }
-            addSelection={ this.addSelection } 
+            addSelection={ this.addSelection }
             clearSelections={ this.clearSelections }
         />
       } else {
-        if (isAdmin) {
-          mainElement =  <Filter 
-              entries={ this.state.userEntries } 
-              onEventsPage={ onEventsPage }
-              addSelection={ this.addSelection }
-              clearSelections={ this.clearSelections }
-          />
-        } else {
-          mainElement =  <ChangePassword doChangePassword={ doChangePassword }/>
-        }
+        mainElement =  <ChangePassword doChangePassword={ doChangePassword }/>
       }
     }
 
