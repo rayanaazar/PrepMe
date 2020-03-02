@@ -58,17 +58,17 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, user, events, setEvents, users, isAdmin, onEventsPage, setEventAction} = this.props
+    const { username, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
-        <UserList users={users} />
+        <UserList users={users} adminChangePassword={adminChangePassword}/>
       </div>
     }
 
     if (!isAdmin && !onEventsPage) {
       return <div className="main-component-div">
-        <UserProfile user={user} events={events}/>
+        <UserProfile user={users} events={events}/>
       </div>
     }
 
