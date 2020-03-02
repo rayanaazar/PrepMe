@@ -11,6 +11,12 @@
 }
 
 .username {
+  width: 200px;
   font-family: Raleway-SemiBold;
   color: #9784FF;
+  text-align: left;
+}
+
+.star-rating {
+  width: 200px;
 }

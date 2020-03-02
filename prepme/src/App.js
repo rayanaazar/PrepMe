@@ -31,11 +31,22 @@ class App extends React.Component {
         })
     };
 
+    adminChangePassword = (username, newPsw) => {
+        const users = this.state.users
+        
+        for (let i=0; i < this.state.users.length; i++) {
+            if (username === users[i].username) {
+                users[i].password = newPsw
+                console.log("Changed Password of", users[i].username, "to", newPsw)
+            }
+        }
+    }
+
     doChangePassword = (currPsw, newPsw, newPswConfirm) => {
         const users = this.state.users
 
         if (newPsw == newPswConfirm) {
-            for (let i=0; i < this.state.users.length; i++) {
+            for (let i=0; i < users.length; i++) {
                 if (this.state.username == users[i].username && currPsw == users[i].password) {
                     users[i].password = newPsw
                     console.log("Changed Password of", users[i].username, "to", newPsw)
@@ -81,6 +92,7 @@ class App extends React.Component {
                             doLogout={ this.doLogout } 
                             setEvents={this.setEvents} 
                             doChangePassword={this.doChangePassword} 
+                            adminChangePassword={this.adminChangePassword}
                         />)}>
                     </Route>
                     <Route path='/'>

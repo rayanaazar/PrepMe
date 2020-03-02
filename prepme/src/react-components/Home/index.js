@@ -84,7 +84,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { state, doLogout, doChangePassword } = this.props
+    const { state, doLogout, doChangePassword, adminChangePassword } = this.props
     const { isLoggedIn, username, isAdmin, users } = state
     if (!isLoggedIn) return <Redirect to='/login' />
 
@@ -107,6 +107,7 @@ class Home extends React.Component {
           isAdmin={ isAdmin }
           onEventsPage={ this.state.onEventsPage }
           setEventAction={this.setEventAction}
+          adminChangePassword={adminChangePassword}
         />
 
         <RightSideBar 

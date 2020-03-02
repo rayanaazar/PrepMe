@@ -6,7 +6,7 @@ import UserCard from '../UserCard/index';
 
 class UserList extends React.Component {
   render() {
-    const { users } = this.props
+    const { users, adminChangePassword } = this.props
     const nonAdmins = users.filter(user => !user.isAdmin)
     return (<div>
       <div className="section-header" >
@@ -16,7 +16,7 @@ class UserList extends React.Component {
       </div>
       <div className="user-list">
         {nonAdmins.map(user => (
-          <UserCard username={ user.username } rating={ user.rating }/>
+          <UserCard username={ user.username } rating={ user.rating } adminChangePassword={adminChangePassword}/>
         ))}
       </div>
     </div>
