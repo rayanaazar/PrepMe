@@ -12,10 +12,10 @@ class App extends React.Component {
         username: "user",
         isAdmin: false,
         events: [
-            {course:"CSC309", subject:"Midterm", username:"@rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00", size:"1-5", members:[]},
-            {course:"CSC321", subject:"Final Exam", username:"@manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
-            {course:"CSC263", subject:"Assignment 2", username:"@lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
-            {course:"CSC343", subject:"Midterm", username:"@juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"6-10", members:[]}  
+            {course:"CSC309", subject:"Midterm", username:"rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00", size:"1-5", members:[]},
+            {course:"CSC321", subject:"Final Exam", username:"manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
+            {course:"CSC263", subject:"Assignment 2", username:"lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
+            {course:"CSC343", subject:"Midterm", username:"juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"6-10", members:[]}
         ],
         users: [
             {username: "user", password: "user", rating: 4, isAdmin: false},

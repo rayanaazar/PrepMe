@@ -52,7 +52,7 @@ class EventCard extends React.Component {
             </div>
           </div>
           <div className="username" >
-             {event.username}
+             {'@' + event.username}
           </div>
         </div>
         <div className='event_description'>
