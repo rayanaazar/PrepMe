@@ -24,6 +24,20 @@ function eventMatchesFilters(filters, event) {
                     return true
                 }
             }
+        } else if (filters[i].name == "Username") {
+            // Iterate through all filtered usernames
+            for (let j=0; j < filters[i].values.length; j++) {
+                if (event.username.substr(1) == filters[i].values[j]) {
+                    return true
+                }
+            }
+        } else if (filters[i].name == "Group Size") {
+            // Iterate through all filtered Group Sizes
+            for (let j=0; j < filters[i].values.length; j++) {
+                if (event.size == filters[i].values[j]) {
+                    return true
+                }
+            }
         }
     }
 

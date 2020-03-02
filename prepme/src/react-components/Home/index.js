@@ -56,7 +56,6 @@ class Home extends React.Component {
       filters.push(newNameFilter)
     }
 
-    console.log(filterEvents)
     const filtered = filterEvents(filters, this.props.state.events)
 
     this.setState({ filteredEvents: filtered })

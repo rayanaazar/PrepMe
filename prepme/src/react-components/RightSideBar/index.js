@@ -25,9 +25,9 @@ class RightSideBar extends React.Component {
         applied: []
       },
       {
-        title: "Semester",
-        isDropdown: true,
-        options: ["fall", "winter"],
+        title: "Username",
+        isDropdown: false,
+        options: [], 
         applied: []
       },
       {
