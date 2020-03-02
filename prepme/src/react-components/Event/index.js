@@ -2,11 +2,12 @@ import React from "react";
 
 import "./styles.css";
 import {TextField, Button} from '@material-ui/core';
-import addEvent from "../../actions/events";
 import MenuItem from '@material-ui/core/MenuItem';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Icon from '@material-ui/core/Icon';
 import { throwStatement } from "@babel/types";
+import eventHelpers from "../../actions/events";
+const { addEvent } = eventHelpers;
 
 
 /* Component for the main center component */
