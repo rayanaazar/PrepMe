@@ -27,7 +27,8 @@ class MainComponent extends React.Component {
       this.props.setEventAction(false)
       this.setState({
           viewing: false,
-          creating: false
+          creating: false,
+          editing: false
       })
   };
 
@@ -49,6 +50,10 @@ class MainComponent extends React.Component {
       editing: true,
       event: event
     })
+  }
+
+  joined = (event) => {
+
   }
 
   render() {
@@ -85,6 +90,7 @@ class MainComponent extends React.Component {
         <div className="event-list">
           {events.map(event => (
             <EventCard 
+            username={username}
             onEditing={this.onEditing}
             onViewing={this.onViewing}
             event={event}/> 

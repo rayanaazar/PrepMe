@@ -71,6 +71,14 @@ class Event extends React.Component {
       const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
         console.log(viewEvents)
         let lastButton; 
+
+        let join_value = "Join"
+        let to_add = true
+        if (event.members.includes(userName)) {
+          join_value = "Joined"
+          to_add = false
+        }
+
         if (editing) {
             lastButton = (<div className="last_button">
                 <Button fullWidth variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
@@ -80,8 +88,16 @@ class Event extends React.Component {
         }
         else if (viewing) {
             lastButton =  (<div className="last_button">
-                <Button fullWidth variant="outlined" color="primary" onClick={viewEvents}>
-                    Join
+                <Button fullWidth variant="outlined" color="primary" onClick={() => {
+                        if (to_add){event.members.push(userName);viewEvents()}
+                        else {
+                            const indx = event.members.indexOf(this.props.username);
+                            event.members.splice(indx,1)
+                            viewEvents()
+                        }
+                        }}>
+                    {join_value}
+                
                 </Button>
             </div>)
         }

@@ -10,21 +10,30 @@ import EventIcon from '@material-ui/icons/Event';
 class EventCard extends React.Component {
   
   state = {
-    isJoined: "Join"
+    isJoined: false
   }
-  changeText = (t) => {
-    const join = "Join";
-    if (this.state.isJoined === "Joined"){
-      this.setState( {isJoined:join });
+  addMember = (event) => {
+    if(event.members.includes(this.props.username)){
+      const indx = event.members.indexOf(this.props.username);
+      event.members.splice(indx,1)
+      console.log(event.members)
+      this.setState({ isJoined:true }); 
     }
     else {
-      this.setState({ isJoined:t }); 
-    } 
+      this.setState({ isJoined:false}); 
+      event.members.push(this.props.username)
+      console.log(event.members)
+    }
   }
-  
 
   render() {
-    const {onEditing ,onViewing, event} = this.props 
+  
+    const {username, onEditing ,onViewing, event} = this.props 
+    
+    let join_value = "Join"
+    if (event.members.includes(username)) {
+      join_value = "Joined"
+    }
 
     return (
       <div className="event-card">
@@ -61,8 +70,8 @@ class EventCard extends React.Component {
             </Button>
           </div>
           <div className="action-button" id='join-button'>
-            <Button onClick={ () => { this.changeText("Joined")}  } variant="outlined" color="primary" size="small">
-              {this.state.isJoined}
+            <Button onClick={ () => { this.addMember(event)}} variant="outlined" color="primary" size="small">
+              {join_value}
             </Button>
           </div>
         </div>
