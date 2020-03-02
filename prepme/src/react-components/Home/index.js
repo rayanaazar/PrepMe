@@ -34,8 +34,8 @@ class Home extends React.Component {
     filteredUsers: []
   }
 
-  setEventAction = (state) => {
-    this.setState({ eventAction: state })
+  setEventAction = (b) => {
+    this.setState({ eventAction: b})
   }
 
   // Add a new applied filter to state.appliedFilters
@@ -106,6 +106,7 @@ class Home extends React.Component {
           users={ this.state.filteredUsers }
           isAdmin={ isAdmin }
           onEventsPage={ this.state.onEventsPage }
+          setEventAction={this.setEventAction}
         />
 
         <RightSideBar 

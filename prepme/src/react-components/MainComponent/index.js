@@ -19,10 +19,12 @@ class MainComponent extends React.Component {
   };
 
   createEvent = () => {
+    this.props.setEventAction(true)
     this.setState({ creating: true })
   };
 
   viewEvents = () => {
+      this.props.setEventAction(false)
       this.setState({
           viewing: false,
           creating: false
@@ -30,6 +32,7 @@ class MainComponent extends React.Component {
   };
 
   onViewing = (event) => {
+    this.props.setEventAction(true)
     this.setState({
       viewing: true,
       creating: false,
@@ -38,6 +41,8 @@ class MainComponent extends React.Component {
   }
 
   onEditing = (event) => {
+
+    this.props.setEventAction(true)
     this.setState({
       viewing: false,
       creating: false,
@@ -47,7 +52,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, events, setEvents, users, isAdmin, onEventsPage} = this.props
+    const { username, events, setEvents, users, isAdmin, onEventsPage, setEventAction} = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">

@@ -66,9 +66,10 @@ class FilterEntry extends React.Component {
             className="add-entry-button" 
             size="medium"
             edge="end"
+            color="primary"
             disabled={ eventAction }
             onClick={() => (addSelection(onEventsPage, title, this.state.value))}>
-            <AddCircleIcon color="primary"/>
+            <AddCircleIcon/>
           </IconButton>
         </div>
 

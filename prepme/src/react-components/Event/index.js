@@ -66,7 +66,6 @@ class Event extends React.Component {
         })
     };
 
-    
 
     render() {
       const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
@@ -74,30 +73,38 @@ class Event extends React.Component {
         let lastButton; 
         if (editing) {
             lastButton = (<div className="last_button">
-            <Button fullWidth variant='outlined' onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
-                   Save
-            </Button>
-        </div>)
+                <Button fullWidth variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
+                    Save
+                </Button>
+                </div>)
         }
         else if (viewing) {
-            lastButton = (<div className="last_button">
-            <Button fullWidth variant='outlined' onClick={viewEvents}>
-                   Cancel
-            </Button>
-        </div>)
+            lastButton =  (<div className="last_button">
+                <Button fullWidth variant="outlined" color="primary" onClick={viewEvents}>
+                    Join
+                </Button>
+            </div>)
         }
         else {
             lastButton = (<div className="last_button">
-                            <Button fullWidth variant='outlined' onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
-                                   Create Event
-                            </Button>
-                        </div>)
+            <Button fullWidth variant="outlined" color="primary" onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
+                Create Event
+            </Button>
+        </div>)
         }
         return (
             <div className="event-div">
-                <div className="page-name">
-                    Event
+                <div className="header_page">
+                    <div className="page-name">
+                        Event
+                    </div>
+                    <div>
+                        <Button variant="outlined" color="primary" onClick={viewEvents}>
+                            Cancel
+                        </Button>
+                    </div>
                 </div>
+                   
                 <div className="form-components">
                     <div className="section">
                         <div className="section-name">
