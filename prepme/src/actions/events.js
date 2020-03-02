@@ -5,7 +5,8 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
         subject: eventForm.state.subject,
         username: '@'+username,
         description: eventForm.state.description,
-        location: eventForm.state.location
+        location: eventForm.state.location,
+        members: []
     };
 
     eventsList.push(newEvent);
