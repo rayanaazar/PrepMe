@@ -24,7 +24,8 @@ class MainComponent extends React.Component {
   viewEvents = () => {
       this.setState({
           viewing: false,
-          creating: false
+          creating: false,
+          editing: false
       })
   };
 

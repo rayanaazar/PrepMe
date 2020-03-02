@@ -14,6 +14,21 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
     viewEvents();
 }
 
+function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
+    const eventsList = events;
+    console.log(eventsList)
+    
+    const indx = eventsList.indexOf(event)
+    const edited_event = eventsList[indx]
+    
+    edited_event.course = eventForm.state.course
+    edited_event.subject = eventForm.state.subject
+    edited_event.description = eventForm.state.description
+    edited_event.location = eventForm.state.location
+
+    viewEvents();
+}
+
 function eventMatchesFilters(filters, event) {
     // Loop through all filters
     for (let i=0; i < filters.length; i++) {
@@ -55,5 +70,6 @@ function filterEvents(filters, events) {
 
 export default {
     addEvent: addEvent, 
-    filterEvents: filterEvents
+    filterEvents: filterEvents,
+    editEvent: editEvent
 }
