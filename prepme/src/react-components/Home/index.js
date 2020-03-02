@@ -104,6 +104,8 @@ class Home extends React.Component {
           events={this.state.filteredEvents}
           setEvents = {this.props.setEvents}
           users={ this.state.filteredUsers }
+          isAdmin={ isAdmin }
+          onEventsPage={ this.state.onEventsPage }
         />
 
         <RightSideBar 

@@ -47,13 +47,17 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { username, events, setEvents, users} = this.props
+    const { username, events, setEvents, users, isAdmin, onEventsPage} = this.props
+
+    if (isAdmin && !onEventsPage) {
+      return <div className="main-component-div">
+        <UserList users={users} />
+      </div>
+    }
 
     if (this.state.creating) {
       return (<Event events={events} userName={username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
-    }
-
-    else if (this.state.viewing || this.state.editing){
+    } else if (this.state.viewing || this.state.editing){
       return (<Event editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={username} viewEvents={this.viewEvents}/>)
     }
 
