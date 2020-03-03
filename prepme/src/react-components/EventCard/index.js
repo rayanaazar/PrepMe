@@ -28,7 +28,7 @@ class EventCard extends React.Component {
 
   render() {
   
-    const {username, onEditing ,onViewing, event} = this.props 
+    const {username, isAdmin,onEditing ,onViewing, event} = this.props 
     
     let join_value = "Join"
     if (event.members.includes(username)) {
@@ -59,11 +59,13 @@ class EventCard extends React.Component {
             {event.description}
         </div>
         <div className="actions">
-          <div className="action-button" id='edit-button'>
-            <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
-              Edit
-            </Button>
-          </div>
+          { isAdmin || username === event.username ? (
+            <div className="action-button" id='edit-button'>
+              <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
+                Edit
+              </Button>
+            </div>
+          ) : ( <div /> )}
           <div className="action-button" id='view-button'>
             <Button onClick={() => onViewing(event)}  variant="outlined" color="primary" size="small">
               View

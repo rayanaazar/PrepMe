@@ -98,6 +98,7 @@ class MainComponent extends React.Component {
           {events.map(event => (
             <EventCard 
             username={user.username}
+            isAdmin={isAdmin} 
             onEditing={this.onEditing}
             onViewing={this.onViewing}
             event={event}/> 
