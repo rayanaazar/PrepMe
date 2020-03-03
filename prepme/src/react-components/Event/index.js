@@ -236,7 +236,7 @@ class Event extends React.Component {
                         <div className="time">
                             <TextField
                                 id="time"
-                                label="Alarm clock"
+                                label="Time"
                                 type="time"
                                 defaultValue="06:00"
                                 name="time"
