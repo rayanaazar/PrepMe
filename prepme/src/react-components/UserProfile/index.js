@@ -18,15 +18,15 @@ class UserProfile extends React.Component {
     };
 
     eventType() {
-        const {user, events} = this.props;
+        const {user, events, onEditing, onViewing} = this.props;
 
         if (this.state.tab === 0) {
             return (
                 events.filter(event => event.username === user.username).map(event => (
                     <EventCard
                         username={user.username}
-                        onEditing={this.onEditing}
-                        onViewing={this.onViewing}
+                        onEditing={onEditing}
+                        onViewing={onViewing}
                         event={event}/>
                 ))
             )
@@ -35,8 +35,8 @@ class UserProfile extends React.Component {
                 events.filter(event => event.members.includes(user.username)).map(event => (
                     <EventCard
                         username={user.username}
-                        onEditing={this.onEditing}
-                        onViewing={this.onViewing}
+                        onEditing={onEditing}
+                        onViewing={onViewing}
                         event={event}/>
                 ))
             )
