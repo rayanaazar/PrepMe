@@ -58,7 +58,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { user, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
+    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
@@ -95,7 +95,7 @@ class MainComponent extends React.Component {
         Upcoming Events
         </div>
         <div className="event-list">
-          {events.map(event => (
+          {filteredEvents.map(event => (
             <EventCard 
             username={user.username}
             isAdmin={isAdmin} 
