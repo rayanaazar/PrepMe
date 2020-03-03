@@ -3,7 +3,7 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
     const newEvent = {
         course: eventForm.state.course,
         subject: eventForm.state.subject,
-        username: '@'+username,
+        username: username,
         description: eventForm.state.description,
         location: eventForm.state.location,
         members: []
