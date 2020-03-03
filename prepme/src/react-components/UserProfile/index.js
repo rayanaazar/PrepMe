@@ -21,25 +21,37 @@ class UserProfile extends React.Component {
         const {user, events, onEditing, onViewing} = this.props;
 
         if (this.state.tab === 0) {
-            return (
-                events.filter(event => event.username === user.username).map(event => (
-                    <EventCard
-                        username={user.username}
-                        onEditing={onEditing}
-                        onViewing={onViewing}
-                        event={event}/>
-                ))
-            )
+            const filteredEvents = events.filter(event => event.username === user.username)
+            if (filteredEvents.length != 0) {
+                return (
+                    filteredEvents.map(event => (
+                        <EventCard
+                            username={user.username}
+                            onEditing={onEditing}
+                            onViewing={onViewing}
+                            event={event}/>
+                    ))
+                )
+            } else {
+                return <div className="empty-list-text">You have not created any events.</div>
+            }
+            
         } else {
-            return(
-                events.filter(event => event.members.includes(user.username)).map(event => (
-                    <EventCard
-                        username={user.username}
-                        onEditing={onEditing}
-                        onViewing={onViewing}
-                        event={event}/>
-                ))
-            )
+            const filteredEvents = events.filter(event => event.members.includes(user.username))
+            if (filteredEvents != 0) {
+                return(
+                    filteredEvents.map(event => (
+                        <EventCard
+                            username={user.username}
+                            onEditing={onEditing}
+                            onViewing={onViewing}
+                            event={event}/>
+                    ))
+                )
+            } else {
+                return <div className="empty-list-text">You have not joined any events.</div>
+            }
+            
         }
     }
 

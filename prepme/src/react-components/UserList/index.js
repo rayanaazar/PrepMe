@@ -15,9 +15,13 @@ class UserList extends React.Component {
         </div>
       </div>
       <div className="user-list">
-        {nonAdmins.map(user => (
-          <UserCard username={ user.username } rating={ user.rating } adminChangePassword={adminChangePassword}/>
-        ))}
+        {nonAdmins.length == 0 ? (
+            <div className="empty-list-text">No users match the filter(s).</div>
+          ) : (
+            nonAdmins.map(user => (
+              <UserCard username={ user.username } rating={ user.rating } adminChangePassword={adminChangePassword}/>
+            ))
+          )}
       </div>
     </div>
       

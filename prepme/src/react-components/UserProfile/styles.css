@@ -11,6 +11,11 @@
     margin-bottom: 20px;
 }
 
+.empty-list-text {
+    font-size: 18px;
+    margin-top: 24px;
+}
+
 .event-list {
     display: flex;
     flex-direction: column;

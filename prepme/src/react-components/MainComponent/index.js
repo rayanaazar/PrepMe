@@ -95,14 +95,18 @@ class MainComponent extends React.Component {
         Upcoming Events
         </div>
         <div className="event-list">
-          {filteredEvents.map(event => (
-            <EventCard 
-            username={user.username}
-            isAdmin={isAdmin} 
-            onEditing={this.onEditing}
-            onViewing={this.onViewing}
-            event={event}/> 
-          ))}
+          {filteredEvents.length == 0 ? (
+            <div className="empty-list-text">No events match the filter(s).</div>
+          ) : (
+            filteredEvents.map(event => (
+              <EventCard 
+              username={user.username}
+              isAdmin={isAdmin} 
+              onEditing={this.onEditing}
+              onViewing={this.onViewing}
+              event={event}/> 
+            ))
+          )}
         </div>
       </div>
     );}
