@@ -1,5 +1,5 @@
 :root {
-  --app-logo-size: 80px;
+  --app-logo-size: 84px;
 }
 
 #sidebar-div {
@@ -15,19 +15,17 @@
 #app-info {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
+  
 }
 
 #app-logo {
   width: var(--app-logo-size);
-  height: var(--app-logo-size);
-  border-radius: 50%;
   overflow: hidden;
 }
 
 #app-logo img {
   width: var(--app-logo-size);
-  height: var(--app-logo-size);
 }
 
 #app-name {

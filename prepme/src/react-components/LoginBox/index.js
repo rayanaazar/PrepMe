@@ -41,8 +41,9 @@ class LoginBox extends React.Component {
 
         return (
             <Container id="loginBox" maxWidth={"xs"}>
-                <form onSubmit={() => this.processCredentials(this.props.users)}>
-                    <img src={logo} alt="PrepMe logo"/>
+                <form id="login-form" onSubmit={() => this.processCredentials(this.props.users)}>
+                    <img src={logo} id="prepme-logo" alt="PrepMe logo"/>
+                    <div id="app-name-text">PrepMe</div>
                     <TextField
                         name="username"
                         label="Username"

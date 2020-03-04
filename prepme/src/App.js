@@ -108,16 +108,6 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    {/*<Switch> */}
-                    {/*    <Route exact path='/'>*/}
-                    {/*        <Redirect to='/login' />*/}
-                    {/*    </Route>*/}
-                    {/*    <Route exact path='/login' render={() =>*/}
-                    {/*        (<LoginPage state={this.state}/>)}/>*/}
-                    {/*    <Route path='/home' render={() =>*/}
-                    {/*        (<Home state={this.state} doLogout={ this.doLogout }/>)}>*/}
-                    {/*    </Route>*/}
-                    {/*</Switch>*/}
                     {this.routing()}
                 </BrowserRouter>
             </div>
