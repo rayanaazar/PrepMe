@@ -100,7 +100,8 @@ class Home extends React.Component {
       
         <MainComponent
           user={users.filter(user => user.username === username)[0]}
-          events={this.state.filteredEvents}
+          filteredEvents={this.state.filteredEvents}
+          events={this.props.state.events}
           setEvents = {this.props.setEvents}
           users={ this.state.filteredUsers }
           isAdmin={ isAdmin }

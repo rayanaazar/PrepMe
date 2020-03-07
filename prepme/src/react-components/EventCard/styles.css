@@ -1,6 +1,6 @@
 .event-card {
   width: 80%;
-  min-height: 160px;
+  height: 165px;
   border-radius: 30px;
   background-color: #D7E4FF;
   padding: 20px;
@@ -17,7 +17,8 @@
 }
 
 .event_description {
-  height: 45%;
+  height: 48%;
+  overflow: hidden;
 }
 
 .username {

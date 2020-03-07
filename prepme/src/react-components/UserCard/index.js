@@ -34,7 +34,7 @@ class UserCard extends React.Component {
 
     return (
       <div className="user-card">
-        <div className="username">@{username}</div>
+        <div className="card-username">@{username}</div>
         <div className="star-rating">{ stars }</div>
         <Button
           variant="contained"

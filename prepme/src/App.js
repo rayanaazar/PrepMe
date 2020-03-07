@@ -12,10 +12,10 @@ class App extends React.Component {
         username: "user",
         isAdmin: false,
         events: [
-            {course:"CSC309", subject:"Midterm", username:"rayanaazar", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00", size:"1-5", members:[]},
-            {course:"CSC321", subject:"Final Exam", username:"manveerbasra", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
-            {course:"CSC263", subject:"Assignment 2", username:"lucasfenau", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"1-5", members:[]},
-            {course:"CSC343", subject:"Midterm", username:"juliequinn", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", location:"college street", date:"2020-01-01", time:"06:00",size:"6-10", members:[]}
+            {course:"CSC309", subject:"Midterm", username:"rayanaazar", description:"We will be reviewing all of the midterm material from Week 1 to Week 6. We will then go over the important tutorial problems and finally cover past midterm questions that were posted. ", location:"BA3200", date:"2020-02-26", time:"14:00", size:"1-5", members:[]},
+            {course:"CSC321", subject:"Final Exam", username:"manveerbasra", description:"In preparation for the final exam, we will be reviewing all of the lecture material in this session excluding Linear and Logistic Regression. Following sessions will focus on tutorial and assignment questions, and the practice finals. ", location:"MP102", date:"2020-03-20", time:"12:00",size:"6-10", members:[]},
+            {course:"CSC263", subject:"Assignment 2", username:"lucasfenau", description:"The second assignment is meant to be done in groups of 3-5 so we will get started on the questions in this session. If parts of the assignment are not completed by the end of this session, we will assign the remaining work amongst the team", location:"BA2270", date:"2020-02-18", time:"16:00",size:"1-5", members:[]},
+            {course:"CSC343", subject:"Midterm", username:"juliequinn", description:"Databases has a history of having difficult and obscure questions on midterms, so we will attempt to cover some of these questions from previous midterms in this session. ", location:"Robarts 11th Floor Harbord 3", date:"2020-03-02", time:"15:00",size:"6-10", members:[]}
         ],
         users: [
             {username: "user", password: "user", rating: 4, isAdmin: false},
@@ -108,16 +108,6 @@ class App extends React.Component {
         return (
             <div>
                 <BrowserRouter>
-                    {/*<Switch> */}
-                    {/*    <Route exact path='/'>*/}
-                    {/*        <Redirect to='/login' />*/}
-                    {/*    </Route>*/}
-                    {/*    <Route exact path='/login' render={() =>*/}
-                    {/*        (<LoginPage state={this.state}/>)}/>*/}
-                    {/*    <Route path='/home' render={() =>*/}
-                    {/*        (<Home state={this.state} doLogout={ this.doLogout }/>)}>*/}
-                    {/*    </Route>*/}
-                    {/*</Switch>*/}
                     {this.routing()}
                 </BrowserRouter>
             </div>

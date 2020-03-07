@@ -58,7 +58,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { user, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
+    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
@@ -66,16 +66,16 @@ class MainComponent extends React.Component {
       </div>
     }
 
-    if (!isAdmin && !onEventsPage) {
-      return <div className="main-component-div">
-        <UserProfile user={user} events={events}/>
-      </div>
-    }
-
     if (this.state.creating) {
       return (<Event events={events} userName={user.username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
     } else if (this.state.viewing || this.state.editing){
       return (<Event editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={user.username} viewEvents={this.viewEvents}/>)
+    }
+
+    if (!isAdmin && !onEventsPage) {
+      return <div className="main-component-div">
+        <UserProfile user={user} events={events} onEditing={this.onEditing} onViewing={this.onViewing}/>
+      </div>
     }
 
     else {
@@ -95,13 +95,18 @@ class MainComponent extends React.Component {
         Upcoming Events
         </div>
         <div className="event-list">
-          {events.map(event => (
-            <EventCard 
-            username={user.username}
-            onEditing={this.onEditing}
-            onViewing={this.onViewing}
-            event={event}/> 
-          ))}
+          {filteredEvents.length == 0 ? (
+            <div className="empty-list-text">No events match the filter(s).</div>
+          ) : (
+            filteredEvents.map(event => (
+              <EventCard 
+              username={user.username}
+              isAdmin={isAdmin} 
+              onEditing={this.onEditing}
+              onViewing={this.onViewing}
+              event={event}/> 
+            ))
+          )}
         </div>
       </div>
     );}
