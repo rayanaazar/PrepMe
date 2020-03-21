@@ -4,6 +4,25 @@
 `npm install`\
 `npm start`
 
+## Database Setup
+Make sure you have installed mongodb community edition prior to this.
+1. `cd prepme`
+2. `mkdir mongo-data`\
+This folder can be called whatever you want, 
+however `mongo-data` is currently added to the `.gitignore`, so no extra step is required.
+However if you would like to call this something else, then please add it to the folder
+to the `.gitignore`.\
+3.  If on Windows:
+
+    `"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="./mongo-data"`
+    
+    If on MacOS or Linux:
+    
+    `mongod --dbath mongo-data`
+    
+    If you called your folder something else in Step 2, substitute that for `mongo-data` in either
+    of the above commands.
+
 ## User Interactions
 First, login using the following credentials:\
 username: user\
