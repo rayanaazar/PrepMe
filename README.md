@@ -6,13 +6,13 @@
 
 ## Database Setup
 Make sure you have installed mongodb community edition prior to this.
-1. `cd prepme`
-2. `mkdir mongo-data`\
+1. Make sure you're in the root folder of the repo, i.e. `team38`
+1. `mkdir mongo-data`\
 This folder can be called whatever you want, 
 however `mongo-data` is currently added to the `.gitignore`, so no extra step is required.
 However if you would like to call this something else, then please add it to the folder
 to the `.gitignore`.\
-3.  If on Windows:
+2.  If on Windows:
 
     `"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="./mongo-data"`
     
