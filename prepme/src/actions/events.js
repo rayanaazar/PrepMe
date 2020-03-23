@@ -43,7 +43,7 @@ function eventMatchesFilters(filters, event) {
         } else if (filters[i].name == "Username") {
             // Iterate through all filtered usernames
             for (let j=0; j < filters[i].values.length; j++) {
-                if (event.username.substr(1) == filters[i].values[j]) {
+                if (event.username == filters[i].values[j]) {
                     return true
                 }
             }
