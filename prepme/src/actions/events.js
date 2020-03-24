@@ -1,17 +1,75 @@
+function getEvents(home, main) {
+    const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/events' // Switch to this line for actual build
+
+    // Since this is a GET request, simply call fetch on the URL
+    fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                // return a promise that resolves with the JSON body
+                return res.json();
+            } else {
+                alert("Could not get events");
+            }
+        })
+        .then(json => {
+            // the resolved promise with the JSON body
+            home.setState({
+                events: json,
+                filteredEvents: (home.state.appliedFilters.length !== 0) ? filterEvents(home.state.appliedFilters, json) : json
+            }, () => main.render());
+        })
+        .catch(error => {
+            console.log(error);
+            home.setState({
+                events: [],
+                filteredEvents: []
+            }, () => main.render());
+        });
+}
+
 function addEvent(eventForm, events, username, setEvents, viewEvents) {
-    const eventsList = events;
+    const {course, subject, description, location, date, time, size} = eventForm.state;
+
     const newEvent = {
-        course: eventForm.state.course,
-        subject: eventForm.state.subject,
-        username: username,
-        description: eventForm.state.description,
-        location: eventForm.state.location,
+        course,
+        subject,
+        username,
+        description,
+        location,
+        date,
+        time,
+        size,
         members: []
     };
 
-    eventsList.push(newEvent);
+    const url = 'localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/events' // Switch to this line for actual build
 
-    setEvents(eventsList);
+    const request = new Request(url, {
+        method: "post",
+        body: JSON.stringify(newEvent),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            if (res.status === 200) {
+                // If event was added successfully, go back to events page
+                viewEvents();
+            } else {
+                // TODO: handle what happens if event wasn't added successfully.
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
     viewEvents();
 }
 
@@ -102,8 +160,9 @@ function filterUsers(filters, users) {
 }
 
 export default {
-    addEvent: addEvent, 
-    filterEvents: filterEvents,
-    filterUsers: filterUsers,
-    editEvent: editEvent
+    getEvents,
+    addEvent,
+    filterEvents,
+    filterUsers,
+    editEvent
 }

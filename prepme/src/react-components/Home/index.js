@@ -6,16 +6,15 @@ import LeftSideBar from "../LeftSideBar/index";
 import MainComponent from "../MainComponent/index";
 import RightSideBar from "../RightSideBar/index";
 import eventHelpers from "../../actions/events";
-const { filterEvents, filterUsers } = eventHelpers
+const { filterEvents, filterUsers, getEvents } = eventHelpers;
 
 
 /* Component for the Home page */
 class Home extends React.Component {
   constructor(props) {
-    super(props)
-    const { events, users } = this.props.state
-    this.state.filteredEvents = events
-    this.state.filteredUsers = users
+    super(props);
+    const {  users } = this.props.state;
+    this.state.filteredUsers = users;
   }
   
   state = {
@@ -29,6 +28,7 @@ class Home extends React.Component {
       {"Semester": ["fall"]}
     ]
     */
+    events: [],
     appliedFilters: [],
     filteredEvents: [],
     filteredUsers: []
@@ -64,7 +64,7 @@ class Home extends React.Component {
       const filtered = filterUsers(filters, this.props.state.users)
       this.setState({ filteredUsers: filtered })
     } else {
-      const filtered = filterEvents(filters, this.props.state.events)
+      const filtered = filterEvents(filters, this.state.events)
       this.setState({ filteredEvents: filtered })
     }
     this.setState({ appliedFilters: filters })
@@ -74,10 +74,14 @@ class Home extends React.Component {
   resetFilters = () => {
     this.setState({
       appliedFilters: [],
-      filteredEvents: this.props.state.events,
+      filteredEvents: this.state.events,
       filteredUsers: this.props.state.users
     })
   }
+
+  refreshEvents = (main) => {
+    getEvents(this, main);
+  };
 
   setOnEventsPage = (newValue) => {
     this.setState({ onEventsPage: newValue })
@@ -101,7 +105,8 @@ class Home extends React.Component {
         <MainComponent
           user={users.filter(user => user.username === username)[0]}
           filteredEvents={this.state.filteredEvents}
-          events={this.props.state.events}
+          events={this.state.events}
+          refreshEvents={this.refreshEvents}
           setEvents = {this.props.setEvents}
           users={ this.state.filteredUsers }
           isAdmin={ isAdmin }

@@ -12,6 +12,10 @@ import UserProfile from "../UserProfile";
 /* Component for the main center component */
 class MainComponent extends React.Component {
 
+  componentDidMount() {
+    this.props.refreshEvents(this);
+  }
+
   state = {
     viewing: false,
     creating: false,
@@ -30,7 +34,9 @@ class MainComponent extends React.Component {
           viewing: false,
           creating: false,
           editing: false
-      })
+      });
+
+    this.props.refreshEvents(this);
   };
 
   onViewing = (event) => {
@@ -58,7 +64,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props
+    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props;
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">

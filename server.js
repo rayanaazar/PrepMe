@@ -15,6 +15,9 @@ const { Event } = require('./models/event');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+const cors = require('cors');
+app.use(cors());
+
 app.get('/events', (req, res) => {
     Event.find().then((events) => {
         res.send(events) // can wrap in object if want to add more properties
