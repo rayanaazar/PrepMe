@@ -9,7 +9,7 @@ class LoginBox extends React.Component {
     state = {
         username: '',
         password: '',
-        invalidCredentials: false
+        invalidCredentials: false,
     };
 
     handleInputChange = event => {
@@ -41,7 +41,6 @@ class LoginBox extends React.Component {
 
         return (
             <Container id="loginBox" maxWidth={"xs"}>
-                <form id="login-form" onSubmit={() => this.processCredentials(this.props.users)}>
                     <img src={logo} id="prepme-logo" alt="PrepMe logo"/>
                     <div id="app-name-text">PrepMe</div>
                     <TextField
@@ -68,11 +67,21 @@ class LoginBox extends React.Component {
                         variant="contained"
                         color="primary"
                         fullWidth
+                        onClick={() => this.processCredentials(this.props.users)}
                     >
                         Login
                     </Button>
+                    <div id="sign-up-button">
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            fullWidth
+                            onClick={ this.props.switchToSignUp }
+                        >
+                            Sign Up
+                        </Button>
+                    </div>
                     <h3 id="invalidText">{this.state.invalidCredentials ? 'Invalid Credentials' : ''}</h3>
-                </form>
             </Container>
         );
     }

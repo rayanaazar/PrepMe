@@ -3,7 +3,8 @@ import React from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import './App.css';
 
-import LoginBox from './react-components/LoginBox';
+// import LoginBox from './react-components/LoginBox';
+import Login from './react-components/Login';
 import Home from './react-components/Home';
 
 class App extends React.Component {
@@ -69,13 +70,32 @@ class App extends React.Component {
         })
     };
 
+    doSignUp = (username, password) => {
+        const users = this.state.users
+
+        const newUser = {
+            username: username,
+            password: password,
+            isAdmin: false
+        }
+
+        users.push(newUser)
+
+        this.setState({ users: users })
+    }
+
     routing() {
         if (!this.state.isLoggedIn) {
             return(
                 <Switch>
                     <Route exact path='/login' render={() =>
                         (<div>
-                            <LoginBox doLogin={this.doLogin} isLoggedIn={this.state.isLoggedIn} users={this.state.users}/>
+                            <Login 
+                                doLogin={this.doLogin}
+                                doSignUp={this.doSignUp}
+                                isLoggedIn={this.state.isLoggedIn}
+                                users={this.state.users} 
+                            />
                         </div>)}>
                     </Route>
                     <Route path='/'>
