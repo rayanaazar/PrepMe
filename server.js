@@ -12,6 +12,7 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 const { Event } = require('./models/event');
 const { User } = require("./models/user");
 
+const session = require("express-session");
 
 /*** Session handling **************************************/
 // Create a session cookie
