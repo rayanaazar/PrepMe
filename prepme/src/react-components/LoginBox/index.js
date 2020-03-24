@@ -4,6 +4,8 @@ import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
 import Redirect from "react-router-dom/es/Redirect";
 
+import { login } from "../../actions/users";
+
 class LoginBox extends React.Component {
 
     state = {
@@ -35,9 +37,7 @@ class LoginBox extends React.Component {
     };
 
     render() {
-        if (this.props.isLoggedIn) {
-            return <Redirect to='/home'/>
-        }
+        const {isLoggedIn, switchToSignUp, app } = this.props
 
         return (
             <Container id="loginBox" maxWidth={"xs"}>
@@ -67,7 +67,8 @@ class LoginBox extends React.Component {
                         variant="contained"
                         color="primary"
                         fullWidth
-                        onClick={() => this.processCredentials(this.props.users)}
+                        // onClick={() => this.processCredentials(this.props.users)}
+                        onClick={() => login(this, app)}
                     >
                         Login
                     </Button>
@@ -76,7 +77,7 @@ class LoginBox extends React.Component {
                             variant="outlined"
                             color="primary"
                             fullWidth
-                            onClick={ this.props.switchToSignUp }
+                            onClick={ switchToSignUp }
                         >
                             Sign Up
                         </Button>

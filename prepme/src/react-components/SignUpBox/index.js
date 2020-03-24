@@ -4,6 +4,8 @@ import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
 import Redirect from "react-router-dom/es/Redirect";
 
+import { signUp } from "../../actions/users";
+
 class SignUpBox extends React.Component {
 
     state = {
@@ -22,13 +24,14 @@ class SignUpBox extends React.Component {
     };
 
     processSignUp= users => {
-      if (this.state.username !== "" && this.state.password === this.state.reenterPassword) {
-        this.setState({ invalidCredentials: false })
-        this.props.switchToLogin()
-        this.props.doSignUp(this.state.username, this.state.password)
-      } else {
-        this.setState({ invalidCredentials: true })
-      }
+        
+        if (this.state.username !== "" && this.state.password === this.state.reenterPassword) {
+            this.setState({ invalidCredentials: false })
+            signUp(this, this.props.app)
+            this.props.switchToLogin()
+        } else {
+            this.setState({ invalidCredentials: true })
+        }
     };
 
     render() {

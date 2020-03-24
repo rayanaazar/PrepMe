@@ -10,10 +10,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import NavBar from './NavBar/index';
 
+import { logout } from "../../actions/users";
+
 /* Component for the left SideBar */
 class LeftSideBar extends React.Component {
   render() {
-    const { username, isAdmin, doLogout, onEventsPage, setOnEventsPage } = this.props
+    const { app, username, isAdmin, doLogout, onEventsPage, setOnEventsPage } = this.props
     return (
       <div id="sidebar-div">
 
@@ -35,7 +37,7 @@ class LeftSideBar extends React.Component {
         </div>
         
         <div id="logout-button">
-          <Link className="unstyled-link" to="/login" onClick={ doLogout }>
+          <Link className="unstyled-link" to="/login" onClick={ () => logout(app) }>
             <Button
               variant="contained"
               color="primary"

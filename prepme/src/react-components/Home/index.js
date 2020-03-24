@@ -88,13 +88,13 @@ class Home extends React.Component {
   }
 
   render() {
-    const { state, doLogout, doChangePassword, adminChangePassword } = this.props
+    const { app, state, doLogout, doChangePassword, adminChangePassword } = this.props
     const { isLoggedIn, username, isAdmin, users } = state
-    if (!isLoggedIn) return <Redirect to='/login' />
 
     return (
       <div className="home-div">
         <LeftSideBar 
+          app={ app }
           username={ username }
           isAdmin={ isAdmin } 
           doLogout={ doLogout }

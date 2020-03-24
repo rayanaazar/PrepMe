@@ -1,7 +1,6 @@
 import React from 'react';
 import './Login.css';
 import logo from "./static/prepme.png"
-import Redirect from "react-router-dom/es/Redirect";
 import {Container} from "@material-ui/core";
 
 import LoginBox from '../LoginBox/index';
@@ -22,10 +21,6 @@ class Login extends React.Component {
     }
 
     render() {
-        if (this.props.isLoggedIn) {
-            return <Redirect to='/home'/>
-        }
-        console.log(this.state.isSigningUp)
 
         return (
             <Container id="login" maxWidth={"xs"}>
@@ -33,11 +28,13 @@ class Login extends React.Component {
                     <div id="app-name-text">PrepMe</div> */}
                     { this.state.isSigningUp ? (
                       <SignUpBox 
+                        app={this.props.app}
                         doSignUp={this.props.doSignUp}
                         switchToLogin={this.switchToLogin}
                       />
                     ) : (
                       <LoginBox 
+                        app={this.props.app}
                         doLogin={this.props.doLogin} 
                         isLoggedIn={this.props.isLoggedIn} 
                         users={this.props.users}

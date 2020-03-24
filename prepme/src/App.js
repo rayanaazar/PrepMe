@@ -11,6 +11,7 @@ class App extends React.Component {
     state = {
         isLoggedIn: false,
         username: "user",
+        currentUser: null,
         isAdmin: false,
         events: [
             {course:"CSC309", subject:"Midterm", username:"rayanaazar", description:"We will be reviewing all of the midterm material from Week 1 to Week 6. We will then go over the important tutorial problems and finally cover past midterm questions that were posted. ", location:"BA3200", date:"2020-02-26", time:"14:00", size:"1-5", members:[]},
@@ -85,41 +86,59 @@ class App extends React.Component {
     }
 
     routing() {
-        if (!this.state.isLoggedIn) {
-            return(
-                <Switch>
-                    <Route exact path='/login' render={() =>
-                        (<div>
+        if (!this.state.currentUser) {
+            return(<div>
                             <Login 
+                                app={this}
                                 doLogin={this.doLogin}
                                 doSignUp={this.doSignUp}
                                 isLoggedIn={this.state.isLoggedIn}
                                 users={this.state.users} 
                             />
-                        </div>)}>
-                    </Route>
-                    <Route path='/'>
-                        <Redirect to='/login'/>
-                    </Route>
-                </Switch>
-            )
+            </div>)
+            // return(
+            //     <Switch>
+            //         <Route exact path='/login' render={() =>
+            //             (<div>
+            //                 <Login 
+            //                     app={this}
+            //                     doLogin={this.doLogin}
+            //                     doSignUp={this.doSignUp}
+            //                     isLoggedIn={this.state.isLoggedIn}
+            //                     users={this.state.users} 
+            //                 />
+            //             </div>)}>
+            //         </Route>
+            //         <Route path='/'>
+            //             <Redirect to='/login'/>
+            //         </Route>
+            //     </Switch>
+            // )
         } else {
-            return(
-                <Switch>
-                    <Route path='/home' render={() =>
-                        (<Home 
+            return(<Home 
+                            app={this}
                             state={this.state} 
                             doLogout={ this.doLogout } 
                             setEvents={this.setEvents} 
                             doChangePassword={this.doChangePassword} 
                             adminChangePassword={this.adminChangePassword}
-                        />)}>
-                    </Route>
-                    <Route path='/'>
-                        <Redirect to='/home'/>
-                    </Route>
-                </Switch>
-            )
+                        />)
+            // return(
+            //     <Switch>
+            //         <Route path='/home' render={() =>
+            //             (<Home 
+            //                 state={this.state} 
+            //                 doLogout={ this.doLogout } 
+            //                 setEvents={this.setEvents} 
+            //                 doChangePassword={this.doChangePassword} 
+            //                 adminChangePassword={this.adminChangePassword}
+            //             />)}>
+            //         </Route>
+            //         <Route path='/'>
+            //             <Redirect to='/home'/>
+            //         </Route>
+            //     </Switch>
+            // )
         }
     }
     

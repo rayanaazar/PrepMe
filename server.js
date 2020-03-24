@@ -14,6 +14,13 @@ const { User } = require("./models/user");
 
 const session = require("express-session"); 
 
+// body-parser: middleware for parsing HTTP JSON body into a usable object
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+const cors = require('cors');
+app.use(cors());
+
 /*** Session handling **************************************/
 // Create a session cookie
 app.use(
@@ -69,14 +76,6 @@ app.get("/users/check-session", (req, res) => {
         res.status(401).send();
     }
 });
-
-
-// body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-
-const cors = require('cors');
-app.use(cors());
 
 app.get('/events', (req, res) => {
     Event.find().then((events) => {
