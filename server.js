@@ -12,7 +12,7 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 const { Event } = require('./models/event');
 const { User } = require("./models/user");
 
-const session = require("express-session");
+const session = require("express-session"); 
 
 /*** Session handling **************************************/
 // Create a session cookie
@@ -97,7 +97,33 @@ app.post('/events', (req, res) => {
     })
 });
 
+
+/** User routes below **/
+// Set up a POST route to *create* a user of your web app (*not* a student).
+app.post("/users", (req, res) => {
+    log(req.body);
+
+    // Create a new user
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    // Save the user
+    user.save().then(
+        user => {
+            res.send(user);
+        },
+        error => {
+            res.status(400).send(error); // 400 for bad request
+        }
+    );
+});
+
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     log(`Listening on port ${port}...`)
 });
+
+
