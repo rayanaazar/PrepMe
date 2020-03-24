@@ -23,6 +23,19 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		minlength: 4
+	},
+
+	rating: {
+		type: Number,
+		required: true,
+		default : 0,
+		maxlength: 1,
+	},
+
+	rating: {
+		type: Boolean,
+		required: true,
+		default : false,
 	}
 })
 
