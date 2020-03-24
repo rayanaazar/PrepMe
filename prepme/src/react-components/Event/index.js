@@ -59,14 +59,6 @@ class Event extends React.Component {
         });
     };
 
-    onChange = e => {
-        const { value } = e.target;
-        this.setState({
-          value: value
-        })
-    };
-
-
     render() {
       const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
         console.log(viewEvents)
@@ -217,15 +209,19 @@ class Event extends React.Component {
                         <div className="date">
                             <TextField
                                 id="date"
-                                id="outlined"
                                 label="Date"
                                 type="date"
                                 name="date"
-                                defaultValue="2020-01-01"
+                                value={this.state.date}
+                                // defaultValue="2020-01-01"
+                                onChange={this.handleInputChange}
     
                                 InputProps={{
-                                    readOnly: viewing,
+                                    readOnly: viewing
                                   }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </div>
                     </div>
@@ -238,12 +234,17 @@ class Event extends React.Component {
                                 id="time"
                                 label="Time"
                                 type="time"
-                                defaultValue="06:00"
                                 name="time"
+                                value={this.state.time}
+                                // defaultValue="06:00"
+                                onChange={this.handleInputChange}
     
                                 InputProps={{
-                                    readOnly: viewing,
+                                    readOnly: viewing
                                   }}
+                                InputLabelProps={{
+                                    shrink: true
+                                }}
                             />
                         </div>
                     </div>
