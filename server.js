@@ -49,7 +49,8 @@ app.post("/users/login", (req, res) => {
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.username = user.username;
-            res.send({ currentUser: user.username });
+            log(user)
+            res.send(user);
         })
         .catch(error => {
             res.status(400).send()
