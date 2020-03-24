@@ -43,7 +43,7 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
         members: []
     };
 
-    const url = 'localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
+    const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
