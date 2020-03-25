@@ -74,16 +74,48 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
 }
 
 function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
-    const eventsList = events;
-    console.log(eventsList)
-    
-    const indx = eventsList.indexOf(event)
-    const edited_event = eventsList[indx]
-    
-    edited_event.course = eventForm.state.course
-    edited_event.subject = eventForm.state.subject
-    edited_event.description = eventForm.state.description
-    edited_event.location = eventForm.state.location
+    const event_id = event._id;
+
+    const {course, subject, description, location, date, time, size} = eventForm.state;
+
+    const edited_event = {
+        course,
+        subject,
+        username,
+        description,
+        location,
+        date,
+        time,
+        size,
+        members: event.members
+    };
+
+    const url = `http://localhost:5000/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/events' // Switch to this line for actual build
+
+    const request = new Request(url, {
+        method: "PATCH",
+        body: JSON.stringify(edited_event),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            if (res.status === 200) {
+                // If event was added modified, go back to events page
+                viewEvents();
+            } else {
+                // TODO: handle what happens if event wasn't added successfully.
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
     viewEvents();
 }

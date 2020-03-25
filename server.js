@@ -12,6 +12,9 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 const { Event } = require('./models/event');
 const { User } = require("./models/user");
 
+// to validate object IDs
+const { ObjectID } = require('mongodb')
+
 const session = require("express-session"); 
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
@@ -88,7 +91,6 @@ app.get('/events', (req, res) => {
 
 app.post('/events', (req, res) => {
     const event = new Event(req.body);
-    log(req.body);
 
     event.save().then((result) => {
         res.send(result)
@@ -97,6 +99,26 @@ app.post('/events', (req, res) => {
     })
 });
 
+app.patch('/events/:id', (req, res) => {
+    const id = req.params.id;
+    const event = req.body;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // Update the event by its id.
+    Event.findOneAndUpdate({_id: id}, {$set: event}, {new: true}).then((updatedEvent) => {
+        if (!updatedEvent) {
+            res.status(404).send()
+        } else {
+            res.send(updatedEvent)
+        }
+    }).catch((error) => {
+        res.status(400).send() // bad request for changing the event.
+    })
+});
 
 /** User routes below **/
 // Set up a POST route to *create* a user of your web app (*not* a student).
