@@ -15,7 +15,7 @@ import { logout } from "../../actions/users";
 /* Component for the left SideBar */
 class LeftSideBar extends React.Component {
   render() {
-    const { app, username, isAdmin, doLogout, onEventsPage, setOnEventsPage } = this.props
+    const { app, username, isAdmin, onEventsPage, setOnEventsPage } = this.props
     return (
       <div id="sidebar-div">
 

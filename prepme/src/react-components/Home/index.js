@@ -88,22 +88,21 @@ class Home extends React.Component {
   }
 
   render() {
-    const { app, state, doLogout, doChangePassword, adminChangePassword } = this.props
-    const { isLoggedIn, username, isAdmin, users } = state
+    const { app, state, doChangePassword, adminChangePassword } = this.props
+    const { currentUser, isAdmin, users } = state
 
     return (
       <div className="home-div">
         <LeftSideBar 
           app={ app }
-          username={ username }
+          username={ currentUser }
           isAdmin={ isAdmin } 
-          doLogout={ doLogout }
           onEventsPage={ this.state.onEventsPage }
           setOnEventsPage={ this.setOnEventsPage }
         />
       
         <MainComponent
-          user={users.filter(user => user.username === username)[0]}
+          user={users.filter(user => user.username === currentUser)[0]}
           filteredEvents={this.state.filteredEvents}
           events={this.state.events}
           refreshEvents={this.refreshEvents}

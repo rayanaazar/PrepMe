@@ -22,22 +22,8 @@ class LoginBox extends React.Component {
         });
     };
 
-    processCredentials = users => {
-        for (let i=0; i < users.length; i++) {
-            if (this.state.username === users[i].username && this.state.password === users[i].password) {
-                this.props.doLogin(users[i].isAdmin, this.state.username)
-                console.log(this.state.username)
-                return;
-            }
-        }
-        this.setState({
-            invalidCredentials: true
-        });
-        console.log('invalid');
-    };
-
     render() {
-        const {isLoggedIn, switchToSignUp, app } = this.props
+        const {switchToSignUp, app } = this.props
 
         return (
             <Container id="loginBox" maxWidth={"xs"}>
@@ -67,7 +53,6 @@ class LoginBox extends React.Component {
                         variant="contained"
                         color="primary"
                         fullWidth
-                        // onClick={() => this.processCredentials(this.props.users)}
                         onClick={() => login(this, app)}
                     >
                         Login

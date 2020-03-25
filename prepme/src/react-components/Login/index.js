@@ -29,15 +29,11 @@ class Login extends React.Component {
                     { this.state.isSigningUp ? (
                       <SignUpBox 
                         app={this.props.app}
-                        doSignUp={this.props.doSignUp}
                         switchToLogin={this.switchToLogin}
                       />
                     ) : (
                       <LoginBox 
                         app={this.props.app}
-                        doLogin={this.props.doLogin} 
-                        isLoggedIn={this.props.isLoggedIn} 
-                        users={this.props.users}
                         switchToSignUp={ this.switchToSignUp } 
                       />
                     )}

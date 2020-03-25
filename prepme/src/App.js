@@ -18,8 +18,6 @@ class App extends React.Component {
 
     
     state = {
-        isLoggedIn: false,
-        username: "user",
         currentUser: null,
         isAdmin: false,
         events: [
@@ -68,41 +66,11 @@ class App extends React.Component {
         this.setState({ users: users })
     }
 
-    doLogout = () => {
-        this.setState({isLoggedIn: false});
-    };
-
-    doLogin = (isAdmin, username) => {
-        this.setState({
-            username: username,
-            isLoggedIn: true,
-            isAdmin: isAdmin
-        })
-    };
-
-    doSignUp = (username, password) => {
-        const users = this.state.users
-
-        const newUser = {
-            username: username,
-            password: password,
-            isAdmin: false
-        }
-
-        users.push(newUser)
-
-        this.setState({ users: users })
-    }
-
     routing() {
         if (!this.state.currentUser) {
             return(<div>
                             <Login 
                                 app={this}
-                                doLogin={this.doLogin}
-                                doSignUp={this.doSignUp}
-                                isLoggedIn={this.state.isLoggedIn}
-                                users={this.state.users} 
                             />
             </div>)
             // return(
@@ -127,7 +95,6 @@ class App extends React.Component {
             return(<Home 
                             app={this}
                             state={this.state} 
-                            doLogout={ this.doLogout } 
                             setEvents={this.setEvents} 
                             doChangePassword={this.doChangePassword} 
                             adminChangePassword={this.adminChangePassword}
@@ -152,7 +119,6 @@ class App extends React.Component {
     }
     
     render() {
-        {console.log(this.state.isLoggedIn)}
         return (
             <div>
                 <BrowserRouter>
