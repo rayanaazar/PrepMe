@@ -64,7 +64,7 @@ class Home extends React.Component {
     }
 
     if (!this.state.onEventsPage) {
-      const filtered = filterUsers(filters, this.props.state.users)
+      const filtered = filterUsers(filters, this.state.users)
       this.setState({ filteredUsers: filtered })
     } else {
       const filtered = filterEvents(filters, this.state.events)
@@ -78,7 +78,7 @@ class Home extends React.Component {
     this.setState({
       appliedFilters: [],
       filteredEvents: this.state.events,
-      filteredUsers: this.props.state.users
+      filteredUsers: this.state.users
     })
   }
 

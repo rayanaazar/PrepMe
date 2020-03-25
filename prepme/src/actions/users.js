@@ -32,8 +32,6 @@ export const getUsersNameAndRating = (homeComp) => {
             if (res.status === 200) {
                 // return a promise that resolves with the JSON body
                 return res.json();
-            } else {
-                alert("Could not get users");
             }
         })
         .then(json => {
