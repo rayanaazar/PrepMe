@@ -39,32 +39,6 @@ class App extends React.Component {
         })
     };
 
-    adminChangePassword = (username, newPsw) => {
-        const users = this.state.users
-        
-        for (let i=0; i < this.state.users.length; i++) {
-            if (username === users[i].username) {
-                users[i].password = newPsw
-                console.log("Changed Password of", users[i].username, "to", newPsw)
-            }
-        }
-    }
-
-    doChangePassword = (currPsw, newPsw, newPswConfirm) => {
-        const users = this.state.users
-
-        if (newPsw == newPswConfirm) {
-            for (let i=0; i < users.length; i++) {
-                if (this.state.username == users[i].username && currPsw == users[i].password) {
-                    users[i].password = newPsw
-                    console.log("Changed Password of", users[i].username, "to", newPsw)
-                }
-            }
-        }
-
-        this.setState({ users: users })
-    }
-
     routing() {
         if (!this.state.currentUser) {
             return(<div>
@@ -95,8 +69,6 @@ class App extends React.Component {
                             app={this}
                             state={this.state} 
                             setEvents={this.setEvents} 
-                            doChangePassword={this.doChangePassword} 
-                            adminChangePassword={this.adminChangePassword}
                         />)
             // return(
             //     <Switch>

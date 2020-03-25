@@ -10,12 +10,17 @@ import { changePassword } from '../../actions/users';
 class UserCard extends React.Component {
   state = {
     showDialog: false,
-    newPsw: ""
+    newPsw: "",
+    isValidInputs: true
   }
 
   handleInputChange = e => {
     const { value } = e.target
     this.setState({ newPsw: value })
+  }
+
+  setValidInputs = (value) => {
+    this.setState({ isValidInputs: value })
   }
 
   openDialog = () => {
@@ -54,18 +59,30 @@ class UserCard extends React.Component {
           </DialogContentText>
           <TextField
             autoFocus
-            label="New Password"
+            label="New Password (Min. 4 Characters)"
             type="password"
             value={this.state.newPsw}
             onChange={this.handleInputChange}
             fullWidth
           />
+          <DialogContentText>
+            <p id="invalid-text">{this.state.isValidInputs ? '' : 'Invalid Credentials'}</p>
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={this.closeDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => {this.closeDialog(); changePassword(username, this.state.newPsw)}} color="primary">
+          <Button onClick={() => {
+              if (this.state.newPsw.length >= 4) {
+                this.closeDialog(); 
+                changePassword(username, this.state.newPsw)
+                this.setValidInputs(true)
+              } else {
+                this.setValidInputs(false)
+              }
+              }}
+              color="primary">
             Save
           </Button>
         </DialogActions>

@@ -92,7 +92,7 @@ class RightSideBar extends React.Component {
   }
 
   render() {
-    const { isAdmin, onEventsPage, eventAction, doChangePassword, username } = this.props
+    const { isAdmin, onEventsPage, eventAction, username } = this.props
 
     let mainElement;
 
@@ -114,10 +114,7 @@ class RightSideBar extends React.Component {
             clearSelections={ this.clearSelections }
         />
       } else {
-        mainElement =  <ChangePassword 
-        doChangePassword={ doChangePassword}
-        username={ username }
-        />
+        mainElement =  <ChangePassword username={ username }/>
       }
     }
 

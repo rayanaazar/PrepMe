@@ -67,7 +67,7 @@ class ChangePassword extends React.Component {
   }
 
   checkValid = () => {
-    if (this.state.newPassword == this.state.newPasswordConfirm) {
+    if (this.state.newPassword == this.state.newPasswordConfirm && this.state.password.length >= 4) {
       this.setState({ isValidInputs: true })
       return true
     } else {
@@ -81,7 +81,7 @@ class ChangePassword extends React.Component {
   }
 
   render() {
-    const { doChangePassword, username } = this.props
+    const { username } = this.props
 
     return ( 
       <div>
@@ -96,7 +96,7 @@ class ChangePassword extends React.Component {
               onChange={ this.onCurrPswChange }
             />
             <PasswordEntry 
-              label="New Password"
+              label="New Password (Min. 4 Characters)"
               value={ this.state.newPassword }
               showPsw={ this.state.newShowPsw }
               toggleShowPsw={ this.toggleShowNewPsw }
@@ -115,9 +115,7 @@ class ChangePassword extends React.Component {
                 color="primary"
                 onClick={ () => { 
                   if (this.checkValid()) {
-                    
                     changePassword(username,this.state.newPassword)
-                    // doChangePassword(this.state.currentPassword, this.state.newPassword, this.state.newPasswordConfirm); 
                     this.clearEntries(); 
                   }
                 }}

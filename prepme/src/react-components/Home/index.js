@@ -91,7 +91,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { app, state, doChangePassword, adminChangePassword } = this.props
+    const { app, state } = this.props
     const { currentUser, isAdmin } = state
 
     return (
@@ -115,7 +115,6 @@ class Home extends React.Component {
           isAdmin={ isAdmin }
           onEventsPage={ this.state.onEventsPage }
           setEventAction={this.setEventAction}
-          adminChangePassword={adminChangePassword}
         />
 
         <RightSideBar 
@@ -123,7 +122,6 @@ class Home extends React.Component {
           isAdmin={ isAdmin } 
           onEventsPage={ this.state.onEventsPage }
           eventAction={ this.state.eventAction }
-          doChangePassword={ doChangePassword }
           addFilter={ this.addFilter }
           resetFilters={ this.resetFilters }
         />
