@@ -21,6 +21,37 @@ export const readCookie = (app) => {
       });
 };
 
+// Get a list of all user objects with just their name and rating
+export const getUsersNameAndRating = (homeComp) => {
+    const url = 'http://localhost:5000/users'; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/users' // Switch to this line for actual build
+
+    // Since this is a GET request, simply call fetch on the URL
+    fetch(url)
+        .then(res => {
+            if (res.status === 200) {
+                // return a promise that resolves with the JSON body
+                return res.json();
+            } else {
+                alert("Could not get users");
+            }
+        })
+        .then(json => {
+            // the resolved promise with the JSON body
+            homeComp.setState({
+                users: json,
+                filteredUsers: json
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            homeComp.setState({
+                users: [],
+                filteredUsers: []
+            });
+        });
+}
+
 // A function to send a POST request with the user to be logged in
 export const login = (loginComp, app) => {
   const { username, password } = loginComp.state

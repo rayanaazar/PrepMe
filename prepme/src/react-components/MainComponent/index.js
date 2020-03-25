@@ -65,6 +65,7 @@ class MainComponent extends React.Component {
 
   render() {
     const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props;
+    console.log(users)
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">

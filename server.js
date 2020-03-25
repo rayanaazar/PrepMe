@@ -85,6 +85,22 @@ app.get("/users/check-session", (req, res) => {
     }
 });
 
+app.get('/users', (req, res) => {
+    User.find().then((users) => {
+        const filteredUsers = []
+        for (let i = 0; i < users.length; i++) {
+            const filteredUser = {
+                username: users[i].username,
+                rating: users[i].rating
+            }
+            filteredUsers.push(filteredUser)
+        }
+        res.send(filteredUsers) // can wrap in object if want to add more properties
+    }, (error) => {
+        res.status(500).send(error) // server error
+    })
+});
+
 app.get('/events', (req, res) => {
     Event.find().then((events) => {
         res.send(events) // can wrap in object if want to add more properties

@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import LeftSideBar from "../LeftSideBar/index";
 import MainComponent from "../MainComponent/index";
 import RightSideBar from "../RightSideBar/index";
+import { getUsersNameAndRating } from "../../actions/users";
 import eventHelpers from "../../actions/events";
 const { filterEvents, filterUsers, getEvents } = eventHelpers;
 
@@ -13,8 +14,9 @@ const { filterEvents, filterUsers, getEvents } = eventHelpers;
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    const {  users } = this.props.state;
-    this.state.filteredUsers = users;
+    getUsersNameAndRating(this);
+    // const {  users } = this.props.state;
+    // this.state.filteredUsers = users;
   }
   
   state = {
@@ -29,6 +31,7 @@ class Home extends React.Component {
     ]
     */
     events: [],
+    users: [],
     appliedFilters: [],
     filteredEvents: [],
     filteredUsers: []
@@ -89,20 +92,21 @@ class Home extends React.Component {
 
   render() {
     const { app, state, doChangePassword, adminChangePassword } = this.props
-    const { currentUser, isAdmin, users } = state
+    const { currentUser, isAdmin } = state
 
     return (
       <div className="home-div">
         <LeftSideBar 
           app={ app }
           username={ currentUser }
-          isAdmin={ isAdmin } 
+          isAdmin={ isAdmin }
           onEventsPage={ this.state.onEventsPage }
           setOnEventsPage={ this.setOnEventsPage }
         />
       
         <MainComponent
-          user={users.filter(user => user.username === currentUser)[0]}
+          user={this.state.users.filter(user => user.username === currentUser)[0]}
+          rating
           filteredEvents={this.state.filteredEvents}
           events={this.state.events}
           refreshEvents={this.refreshEvents}
