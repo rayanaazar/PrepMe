@@ -140,6 +140,26 @@ app.patch('/events/:id', (req, res) => {
     })
 });
 
+app.delete('/events/:id', (req, res) => {
+    const id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // Delete the event by its id.
+    Event.findByIdAndDelete(id).then((event) => {
+        if (!event) {
+            res.status(404).send()
+        } else {
+            res.send(event)
+        }
+    }).catch((error) => {
+        res.status(400).send() 
+    })
+});
+
 /** User routes below **/
 // Set up a POST route to *create* a user of your web app (*not* a student).
 app.post("/users", (req, res) => {

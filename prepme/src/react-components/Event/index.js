@@ -9,6 +9,7 @@ import { throwStatement, conditionalExpression } from "@babel/types";
 import eventHelpers from "../../actions/events";
 const { addEvent } = eventHelpers;
 const { editEvent } = eventHelpers;
+const { deleteEvent } = eventHelpers;
 
 
 /* Component for the main center component */
@@ -63,6 +64,7 @@ class Event extends React.Component {
       const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
         console.log(viewEvents)
         let lastButton; 
+        
 
         let join_value = "Join"
         let to_add = true
@@ -74,11 +76,21 @@ class Event extends React.Component {
     }
 
         if (editing) {
-            lastButton = (<div className="last_button">
-                <Button fullWidth variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
-                    Save
-                </Button>
-                </div>)
+            lastButton = 
+                (
+                <div>
+                    <div className="last_button">
+                        <Button fullWidth size="small" fullWidth variant="outlined" color="primary" onClick={() => deleteEvent(viewEvents, event)}>
+                            Delete Event
+                        </Button>
+                    </div>
+                     <div className="last_button">
+                        <Button fullWidth size="small" variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
+                            Save
+                        </Button>
+                    </div>
+                </div>
+                )
         }
         else if (viewing) {
             lastButton =  (<div className="last_button">
@@ -254,7 +266,7 @@ class Event extends React.Component {
                         </div>
                         <div className="description">
                             <TextField
-                                    rows="3"
+                                    rows="2"
                                     id="outlined-full-width"
                                     multiline
                                     value={this.state.description}

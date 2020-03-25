@@ -134,7 +134,6 @@ export const signUp = (signUpComp, app) => {
       });
 };
 
-
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
   const url = "http://localhost:5000/users/logout"

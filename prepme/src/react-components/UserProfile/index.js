@@ -2,6 +2,8 @@ import React from 'react';
 import {Paper, Tabs, Tab} from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create';
 import GroupIcon from '@material-ui/icons/Group';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import './styles.css';
 import StarRateIcon from "@material-ui/icons/StarRate";
 import EventCard from "../EventCard";
