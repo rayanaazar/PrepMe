@@ -32,8 +32,6 @@ export const getUsersNameAndRating = (homeComp) => {
             if (res.status === 200) {
                 // return a promise that resolves with the JSON body
                 return res.json();
-            } else {
-                alert("Could not get users");
             }
         })
         .then(json => {
@@ -97,7 +95,7 @@ export const login = (loginComp, app) => {
 };
 
 // A function to send a POST request with the user to be created
-export const signUp = (signUpComp, app) => {
+export const signUp = (signUpComp) => {
   const { username, password } = signUpComp.state
 
   const newUser = {
@@ -117,16 +115,17 @@ export const signUp = (signUpComp, app) => {
   // Send the request with fetch()
   fetch(request)
       .then(res => {
+          console.log(res)
           if (res.status === 200) {
-            signUpComp.setState({ invalidCredentials: true })
+            signUpComp.setState({ invalidCredentials: false })
+            signUpComp.props.switchToLogin()
             return res.json();
+          } else {
+            signUpComp.setState({ invalidCredentials: true })
           }
       })
       .then(json => {
         // I don't think we need to do anything
-          // if (json.currentUser !== undefined) {
-          //     app.setState({ currentUser: json.currentUser });
-          // }
       })
       .catch(error => {
           console.log(error);

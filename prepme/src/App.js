@@ -16,7 +16,6 @@ class App extends React.Component {
         readCookie(this); // sees if a user is logged in.
     }
 
-    
     state = {
         currentUser: null,
         isAdmin: false,

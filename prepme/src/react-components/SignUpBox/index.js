@@ -23,12 +23,10 @@ class SignUpBox extends React.Component {
         });
     };
 
-    processSignUp= users => {
-        
+    processSignUp= () => {
         if (this.state.username !== "" && this.state.password === this.state.reenterPassword) {
             this.setState({ invalidCredentials: false })
-            signUp(this, this.props.app)
-            this.props.switchToLogin()
+            signUp(this)
         } else {
             this.setState({ invalidCredentials: true })
         }
@@ -51,7 +49,7 @@ class SignUpBox extends React.Component {
               />
               <TextField
                   name="password"
-                  label="Password"
+                  label="Password (Min. 4 Characters)"
                   variant="outlined"
                   value={this.state.password}
                   onChange={this.handleInputChange}
@@ -75,7 +73,17 @@ class SignUpBox extends React.Component {
               >
                   Sign Up
               </Button>
-              <h3 id="invalidText">{this.state.invalidCredentials ? 'Invalid Credentials' : ''}</h3>
+              <div id="cancel-button">
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    fullWidth
+                    onClick={this.props.switchToLogin}
+                >
+                    Cancel
+                </Button>
+              </div>
+              <h3 id="invalidText">{this.state.invalidCredentials ? 'Invalid Username and/or Password' : ''}</h3>
             </Container>
         );
     }
