@@ -119,6 +119,7 @@ class Home extends React.Component {
         />
 
         <RightSideBar 
+          username={ currentUser }
           isAdmin={ isAdmin } 
           onEventsPage={ this.state.onEventsPage }
           eventAction={ this.state.eventAction }

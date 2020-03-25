@@ -50,6 +50,36 @@ export const getUsersNameAndRating = (homeComp) => {
         });
 }
 
+export const changePassword = (username, password) => {
+    
+    const userInfo = {
+        username : username,
+        newpassword : password
+    }
+
+    console.log(userInfo)
+    const request = new Request("http://localhost:5000/users", {
+      method: "PATCH",
+      body: JSON.stringify(userInfo),
+      headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+      }
+  });
+
+  fetch(request)
+    .then(res => {
+        console.log(res)
+        if (res.status === 200) {     
+            return res.json();
+        } else {
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
 // A function to send a POST request with the user to be logged in
 export const login = (loginComp, app) => {
   const { username, password } = loginComp.state
@@ -70,6 +100,7 @@ export const login = (loginComp, app) => {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json"
       }
+      
   });
 
   // Send the request with fetch()

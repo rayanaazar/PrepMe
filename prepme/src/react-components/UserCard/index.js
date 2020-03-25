@@ -5,6 +5,7 @@ import './UserCard.css';
 import { Button, Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle, TextField } from '@material-ui/core';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import LockIcon from '@material-ui/icons/Lock';
+import { changePassword } from '../../actions/users';
 
 class UserCard extends React.Component {
   state = {
@@ -64,7 +65,7 @@ class UserCard extends React.Component {
           <Button onClick={this.closeDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={() => {this.closeDialog(); adminChangePassword(username, this.state.newPsw)}} color="primary">
+          <Button onClick={() => {this.closeDialog(); changePassword(username, this.state.newPsw)}} color="primary">
             Save
           </Button>
         </DialogActions>

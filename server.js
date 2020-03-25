@@ -22,6 +22,8 @@ app.use(bodyParser.json());
 const session = require("express-session"); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const cors = require('cors');
+app.use(cors());
 
 /*** Session handling **************************************/
 // Create a session cookie
@@ -37,8 +39,7 @@ app.use(
     })
 );
 
-const cors = require('cors');
-app.use(cors());
+
 
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
@@ -142,6 +143,24 @@ app.patch('/events/:id', (req, res) => {
         res.status(400).send() // bad request for changing the event.
     })
 });
+
+app.patch('/users', (req, res) => {
+
+    const username = req.body.username
+    const newpassword = req.body.newpassword
+
+    User.findOneAndUpdate({username : username}, {$set: {password : newpassword}}, {new: true}).then((updatedUser) => {
+        log(updatedUser)
+        if (!updatedUser) {
+            res.status(404).send()
+        } else {
+            res.send(updatedUser)
+        } 
+    }).catch((error) => {
+        log(error)
+        res.status(400).send() // bad request for changing the event.
+})
+})
 
 app.delete('/events/:id', (req, res) => {
     const id = req.params.id;

@@ -7,6 +7,8 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import PasswordEntry from './PasswordEntry/index';
 
+import { changePassword } from "../../actions/users" 
+
 /* Component to change password on user Profile page */
 class ChangePassword extends React.Component {
 
@@ -79,7 +81,7 @@ class ChangePassword extends React.Component {
   }
 
   render() {
-    const { doChangePassword } = this.props
+    const { doChangePassword, username } = this.props
 
     return ( 
       <div>
@@ -113,7 +115,9 @@ class ChangePassword extends React.Component {
                 color="primary"
                 onClick={ () => { 
                   if (this.checkValid()) {
-                    doChangePassword(this.state.currentPassword, this.state.newPassword, this.state.newPasswordConfirm); 
+                    
+                    changePassword(username,this.state.newPassword)
+                    // doChangePassword(this.state.currentPassword, this.state.newPassword, this.state.newPasswordConfirm); 
                     this.clearEntries(); 
                   }
                 }}
