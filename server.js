@@ -23,9 +23,6 @@ const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const cors = require('cors');
-app.use(cors());
-
 /*** Session handling **************************************/
 // Create a session cookie
 app.use(
@@ -40,6 +37,8 @@ app.use(
     })
 );
 
+const cors = require('cors');
+app.use(cors());
 
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
@@ -78,6 +77,10 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a use is logged in on the session cookie
 app.get("/users/check-session", (req, res) => {
+    log("hi")
+    log(req.session)
+    log(req.session.user)
+    log("hi")
     if (req.session.user) {
         res.send({ currentUser: req.session.username });
     } else {
