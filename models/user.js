@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 		maxlength: 1,
 	},
 
-	rating: {
+	iAdmin: {
 		type: Boolean,
 		required: true,
 		default : false,
