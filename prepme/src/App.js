@@ -7,7 +7,16 @@ import './App.css';
 import Login from './react-components/Login';
 import Home from './react-components/Home';
 
+import { readCookie } from "./actions/users";
+
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        readCookie(this); // sees if a user is logged in.
+    }
+
+    
     state = {
         isLoggedIn: false,
         username: "user",

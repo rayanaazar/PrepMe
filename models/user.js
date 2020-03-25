@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 		maxlength: 1,
 	},
 
-	isAdmin: {
+	rating: {
 		type: Boolean,
 		required: true,
 		default : false,
@@ -51,6 +51,7 @@ UserSchema.statics.findByUsernamePassword = function(username, password) {
 		return new Promise((resolve, reject) => {
 
             if (password === user.password) {
+				
                 resolve(user)
             } else {
                 reject()

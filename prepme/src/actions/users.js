@@ -2,11 +2,12 @@
 
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
-  const url = "/users/check-session";
+  const url = "http://localhost:5000/users/check-session";
 
   fetch(url)
       .then(res => {
           if (res.status === 200) {
+              console.log("read")
               return res.json();
           }
       })

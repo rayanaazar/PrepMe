@@ -15,11 +15,13 @@ const { User } = require("./models/user");
 // to validate object IDs
 const { ObjectID } = require('mongodb')
 
-const session = require("express-session"); 
-
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
+const session = require("express-session"); 
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const cors = require('cors');
 app.use(cors());
@@ -38,6 +40,7 @@ app.use(
     })
 );
 
+
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
     const username = req.body.username;
@@ -52,7 +55,8 @@ app.post("/users/login", (req, res) => {
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.username = user.username;
-            log(user)
+            // log(req.session)
+            // log(user)
             res.send(user);
         })
         .catch(error => {
