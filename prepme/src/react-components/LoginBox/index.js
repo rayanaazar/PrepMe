@@ -4,6 +4,8 @@ import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
 import Redirect from "react-router-dom/es/Redirect";
 
+import PasswordEntry from '../ChangePassword/PasswordEntry/index';
+
 import { login } from "../../actions/users";
 
 class LoginBox extends React.Component {
@@ -11,6 +13,7 @@ class LoginBox extends React.Component {
     state = {
         username: '',
         password: '',
+        showPsw: false,
         invalidCredentials: false,
     };
 
@@ -21,6 +24,13 @@ class LoginBox extends React.Component {
             [name]: value
         });
     };
+
+    onPswChange = e => {
+        const { value } = e.target
+        this.setState({ password: value })
+      }
+
+    toggleShowPsw = () => { this.setState({ showPsw: !this.state.showPsw }) }
 
     render() {
         const {switchToSignUp, app } = this.props
@@ -39,7 +49,7 @@ class LoginBox extends React.Component {
                         autoFocus
                         margin="normal"
                     />
-                    <TextField
+                    {/* <TextField
                         name="password"
                         label="Password"
                         variant="outlined"
@@ -47,6 +57,13 @@ class LoginBox extends React.Component {
                         onChange={this.handleInputChange}
                         fullWidth
                         margin="normal"
+                    /> */}
+                    <PasswordEntry 
+                        label="Password"
+                        value={ this.state.password }
+                        showPsw={ this.state.showPsw }
+                        toggleShowPsw={ this.toggleShowPsw }
+                        onChange={ this.onPswChange }
                     />
                     <Button
                         type='submit'
