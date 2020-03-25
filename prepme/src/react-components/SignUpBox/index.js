@@ -4,6 +4,8 @@ import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
 import Redirect from "react-router-dom/es/Redirect";
 
+import PasswordEntry from '../ChangePassword/PasswordEntry/index';
+
 import { signUp } from "../../actions/users";
 
 class SignUpBox extends React.Component {
@@ -12,6 +14,8 @@ class SignUpBox extends React.Component {
         username: '',
         password: '',
         reenterPassword: '',
+        showPsw: false,
+        showRePsw: false,
         invalidCredentials: false
     };
 
@@ -22,6 +26,19 @@ class SignUpBox extends React.Component {
             [name]: value
         });
     };
+
+    onPswChange = e => {
+        const { value } = e.target
+        this.setState({ password: value })
+    }
+
+    onRePswChange = e => {
+        const { value } = e.target
+        this.setState({ reenterPassword: value })
+    }
+
+    toggleShowPsw = () => { this.setState({ showPsw: !this.state.showPsw }) }
+    toggleShowRePsw = () => { this.setState({ showPsw: !this.state.showRePsw }) }
 
     processSignUp= () => {
         if (this.state.username !== "" && this.state.password === this.state.reenterPassword) {
@@ -47,7 +64,7 @@ class SignUpBox extends React.Component {
                   autoFocus
                   margin="normal"
               />
-              <TextField
+              {/* <TextField
                   name="password"
                   label="Password (Min. 4 Characters)"
                   variant="outlined"
@@ -55,8 +72,15 @@ class SignUpBox extends React.Component {
                   onChange={this.handleInputChange}
                   fullWidth
                   margin="normal"
+              /> */}
+              <PasswordEntry 
+                label="Password (Min. 4 Characters)"
+                value={ this.state.password }
+                showPsw={ this.state.showPsw }
+                toggleShowPsw={ this.toggleShowPsw }
+                onChange={ this.onPswChange }
               />
-              <TextField
+              {/* <TextField
                   name="reenterPassword"
                   label="Re-enter Password"
                   variant="outlined"
@@ -64,6 +88,13 @@ class SignUpBox extends React.Component {
                   onChange={this.handleInputChange}
                   fullWidth
                   margin="normal"
+              /> */}
+              <PasswordEntry 
+                label="Re-enter Password"
+                value={ this.state.reenterPassword }
+                showPsw={ this.state.showRePsw }
+                toggleShowPsw={ this.toggleShowRePsw }
+                onChange={ this.onRePswChange }
               />
               <Button
                   variant="contained"
