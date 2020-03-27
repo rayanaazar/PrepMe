@@ -3,6 +3,8 @@ import React from "react";
 import "../../index.css";
 import "./styles.css";
 
+import icon from "./static/avatar_1.png";
+
 import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
 import EventIcon from '@material-ui/icons/Event';
 
@@ -40,7 +42,7 @@ class EventCard extends React.Component {
         <div className="header" >
           <div className="event-info">
             <div className="icon">
-              <img/>
+              <img id="icon-img" src={ icon }/>
             </div>
             <div>
             <div className="course" >

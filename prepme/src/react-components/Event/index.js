@@ -69,11 +69,11 @@ class Event extends React.Component {
         let join_value = "Join"
         let to_add = true
         if (typeof(event) !== "undefined"){
-        if (event.members.includes(userName)) {
-          join_value = "Joined"
-          to_add = false
+            if (event.members.includes(userName)) {
+            join_value = "Joined"
+            to_add = false
+            }
         }
-    }
 
         if (editing) {
             lastButton = 
