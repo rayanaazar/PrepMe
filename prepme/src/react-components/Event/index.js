@@ -157,6 +157,7 @@ class Event extends React.Component {
                 </div>
                    
                 <div className="form-components">
+                    { editing ? (
                     <div className="section">
                         <div className="section-name">
                             Icon:
@@ -174,13 +175,11 @@ class Event extends React.Component {
                                             <Avatar src={ avatar } />
                                         </ListItemAvatar>
                                     </div>
-                                    
                               </ListItem>
                             ))}
                         </List>
-                        
-                    
-                    </div>
+                    </div>  
+                    ) : (<div />)}
                     <div className="section">
                         <div className="section-name">
                             Course:
