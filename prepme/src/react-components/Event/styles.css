@@ -64,5 +64,15 @@
     margin-right: 8px;
   }
 
+  #avatar-list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .avatar-div {
+    margin-left: 15px;
+    margin-top: 3px;
+  }
+
 
 
