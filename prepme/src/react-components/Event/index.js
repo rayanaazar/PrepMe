@@ -6,13 +6,25 @@ import MenuItem from '@material-ui/core/MenuItem';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Icon from '@material-ui/core/Icon';
 import { throwStatement, conditionalExpression } from "@babel/types";
-import eventHelpers from "../../actions/events";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemIcon';
+import Avatar from '@material-ui/core/Avatar';
+
+import avatar1 from '../EventCard/static/avatar_1.png';
+import avatar2 from '../EventCard/static/avatar_2.png';
+import avatar3 from '../EventCard/static/avatar_3.png';
+import avatar4 from '../EventCard/static/avatar_4.png';
+import avatar5 from '../EventCard/static/avatar_5.png';
+import avatar6 from '../EventCard/static/avatar_6.png';
+
+import eventHelpers from "../../actions/events";
+
 const { addEvent } = eventHelpers;
 const { editEvent } = eventHelpers;
 const { deleteEvent } = eventHelpers;
-
 
 
 /* Component for the main center component */
@@ -21,6 +33,7 @@ class Event extends React.Component {
     constructor(props) {
         super(props)
         if (this.props.viewing || this.props.editing) {
+            // this.state.icon = this.props.event.icon // uncomment when added to database
             this.state.course = this.props.event.course
             this.state.subject = this.props.event.subject
             this.state.username = this.props.event.username
@@ -39,7 +52,7 @@ class Event extends React.Component {
         isEdit:false,
         isCreate:true,
 
-        
+        icon:0,
         course:"",
         subject:"",
         username:"",
@@ -63,8 +76,17 @@ class Event extends React.Component {
         });
     };
 
+    setIconIndex = index => {
+        this.setState({
+            icon: index
+        })
+    }
+
     render() {
       const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
+
+      const avatarImages = [avatar1, avatar3, avatar5, avatar2, avatar4, avatar6]
+
         console.log(viewEvents)
         let lastButton; 
         
@@ -135,6 +157,30 @@ class Event extends React.Component {
                 </div>
                    
                 <div className="form-components">
+                    <div className="section">
+                        <div className="section-name">
+                            Icon:
+                        </div>
+                        <List id="avatar-list">
+                            { avatarImages.map((avatar, index) => (
+                                <ListItem
+                                    button
+                                    disableGutters
+                                    selected={this.state.icon === index}
+                                    onClick={() => this.setIconIndex(index)}
+                                >
+                                    <div className="avatar-div">
+                                        <ListItemAvatar>
+                                            <Avatar src={ avatar } />
+                                        </ListItemAvatar>
+                                    </div>
+                                    
+                              </ListItem>
+                            ))}
+                        </List>
+                        
+                    
+                    </div>
                     <div className="section">
                         <div className="section-name">
                             Course:

@@ -6,6 +6,7 @@
   .page-name {
     font-family: Raleway-SemiBold;
     font-size: 28px;
+    padding-top: 7px;
   }
 
   .header_page {
@@ -17,6 +18,17 @@
     padding-bottom: 24px;
     margin-bottom: 24px;
   
+  }
+
+  .left_header {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+  }
+
+  .right_header {
+    display: flex;
+    flex-direction: row;
   }
 
   .section {
@@ -50,6 +62,16 @@
 
   .last_button {
     margin-bottom: 8px;
+  }
+
+  #avatar-list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .avatar-div {
+    margin-left: 15px;
+    margin-top: 3px;
   }
 
 
