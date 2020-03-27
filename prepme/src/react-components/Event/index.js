@@ -157,12 +157,11 @@ class Event extends React.Component {
                 </div>
                    
                 <div className="form-components">
-                    { editing ? (
                     <div className="section">
                         <div className="section-name">
                             Icon:
                         </div>
-                        <List id="avatar-list">
+                        { editing ? ( <List id="avatar-list">
                             { avatarImages.map((avatar, index) => (
                                 <ListItem
                                     button
@@ -178,8 +177,8 @@ class Event extends React.Component {
                               </ListItem>
                             ))}
                         </List>
+                        ) : ( <Avatar src={ avatarImages[this.state.icon]} /> )}
                     </div>  
-                    ) : (<div />)}
                     <div className="section">
                         <div className="section-name">
                             Course:
@@ -188,7 +187,6 @@ class Event extends React.Component {
                         <TextField 
                             id="outlined-search"
                             value={this.state.course}
-                            label="Course"
                             name='course'
                             type="search"
                             variant="outlined"
@@ -207,7 +205,6 @@ class Event extends React.Component {
                             <TextField 
                                 id="outlined-search"
                                 value={this.state.subject}
-                                label="Subject"
                                 name='subject'
                                 type="search"
                                 variant="outlined"
@@ -227,7 +224,6 @@ class Event extends React.Component {
                                 id="outlined-full-width"
                                 value={this.state.location}
                                 fullWidth
-                                label="Location"
                                 name='location'
                                 type="search"
                                 variant="outlined"
@@ -246,7 +242,6 @@ class Event extends React.Component {
                         <TextField
                             id="outlined-select"
                             select
-                            label="Select"
                             name='size'
                             value={this.state.size}
                             onChange={this.handleInputChange}
@@ -273,7 +268,6 @@ class Event extends React.Component {
                         <div className="date">
                             <TextField
                                 id="date"
-                                label="Date"
                                 type="date"
                                 name="date"
                                 value={this.state.date}
@@ -296,7 +290,6 @@ class Event extends React.Component {
                         <div className="time">
                             <TextField
                                 id="time"
-                                label="Time"
                                 type="time"
                                 name="time"
                                 value={this.state.time}
@@ -323,7 +316,6 @@ class Event extends React.Component {
                                     multiline
                                     value={this.state.description}
                                     fullWidth
-                                    label="Description"
                                     name='description'
                                     variant="outlined"
                                     onChange={this.handleInputChange}
