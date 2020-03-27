@@ -7,9 +7,12 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Icon from '@material-ui/core/Icon';
 import { throwStatement, conditionalExpression } from "@babel/types";
 import eventHelpers from "../../actions/events";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import IconButton from '@material-ui/core/IconButton';
 const { addEvent } = eventHelpers;
 const { editEvent } = eventHelpers;
 const { deleteEvent } = eventHelpers;
+
 
 
 /* Component for the main center component */
@@ -78,14 +81,14 @@ class Event extends React.Component {
         if (editing) {
             lastButton = 
                 (
-                <div>
+                <div className="right_header">
                     <div className="last_button">
-                        <Button fullWidth size="small" fullWidth variant="outlined" color="primary" onClick={() => deleteEvent(viewEvents, event)}>
-                            Delete Event
+                        <Button  variant="outlined" color="primary" onClick={() => deleteEvent(viewEvents, event)}>
+                            Delete 
                         </Button>
                     </div>
                      <div className="last_button">
-                        <Button fullWidth size="small" variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
+                        <Button  variant="outlined" color="primary" onClick={() => editEvent(this, events, userName, setEvents, viewEvents, event)}>
                             Save
                         </Button>
                     </div>
@@ -93,8 +96,8 @@ class Event extends React.Component {
                 )
         }
         else if (viewing) {
-            lastButton =  (<div className="last_button">
-                <Button fullWidth variant="outlined" color="primary" onClick={() => {
+            lastButton =  (<div  className="right_header" className="last_button">
+                <Button  variant="outlined" color="primary" onClick={() => {
                         if (to_add){event.members.push(userName);viewEvents()}
                         else {
                             const indx = event.members.indexOf(this.props.username);
@@ -108,7 +111,7 @@ class Event extends React.Component {
             </div>)
         }
         else {
-            lastButton = (<div className="last_button">
+            lastButton = (<div className="right_header" className="last_button">
             <Button fullWidth variant="outlined" color="primary" onClick={() => addEvent(this, events, userName, setEvents, viewEvents)}>
                 Create Event
             </Button>
@@ -116,15 +119,19 @@ class Event extends React.Component {
         }
         return (
             <div className="event-div">
+                
                 <div className="header_page">
-                    <div className="page-name">
-                        Event
+                    <div className="left_header">
+                        <div className="last_button">
+                            <IconButton color="primary" onClick={viewEvents}>
+                                <ArrowBackIcon/>
+                            </IconButton>
+                        </div>
+                        <div className="page-name">
+                            Event
+                        </div>
                     </div>
-                    <div>
-                        <Button variant="outlined" color="primary" onClick={viewEvents}>
-                            Cancel
-                        </Button>
-                    </div>
+                {lastButton}  
                 </div>
                    
                 <div className="form-components">
@@ -294,7 +301,6 @@ class Event extends React.Component {
                             </Button>
                         </div>
                     </div>
-                    {lastButton}
                 </div>
                 
            
