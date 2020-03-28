@@ -113,7 +113,7 @@ class EventCard extends React.Component {
                     View
                   </Button>
                 </div>
-                { !isAdmin ? (<div className="action-button" id='join-button'>
+                { !isAdmin && username !== event.username ? (<div className="action-button" id='join-button'>
                   <Button className="cardbutton" onClick={ () => { this.addMember(event)}} variant="outlined" color="primary" size="small">
                     {join_value}
                   </Button>

@@ -24,6 +24,7 @@ import { array } from "prop-types";
 const { addEvent } = eventHelpers;
 const { editEvent } = eventHelpers;
 const { deleteEvent } = eventHelpers;
+const { addEventMember, removeEventMember } = eventHelpers;
 
 
 
@@ -94,13 +95,23 @@ class Event extends React.Component {
         this.setState({ showDialog: true})
       }
 
-    removeMember = (member) => {
+    addMember = (event) => {
+        if(event.members.includes(this.props.userName)){
+            removeEventMember(this.props.refreshEvents, event, this.props.userName);
+        }
+        else {
+            addEventMember(this.props.refreshEvents, event, this.props.userName);
+        }
+    }
+
+    removeMember = (event, member) => {
         const members = this.state.members
         const index = members.indexOf(member)
         members.splice(index, 1)
 
         this.setState({ members: members})
 
+        removeEventMember(this.props.refreshEvents, event, member);
     }
 
 
@@ -142,12 +153,14 @@ class Event extends React.Component {
         else if (viewing) {
             lastButton =  (<div  className="right_header" className="last_button">
                 <Button  variant="outlined" color="primary" onClick={() => {
-                        if (to_add){event.members.push(userName);viewEvents()}
-                        else {
-                            const indx = event.members.indexOf(this.props.username);
-                            event.members.splice(indx,1)
-                            viewEvents()
-                        }
+                        this.addMember(event)
+                        viewEvents()
+                        // if (to_add){event.members.push(userName);viewEvents()}
+                        // else {
+                        //     const indx = event.members.indexOf(this.props.username);
+                        //     event.members.splice(indx,1)
+                        //     viewEvents()
+                        // }
                         }}>
                     {join_value}
                 
@@ -378,8 +391,8 @@ class Event extends React.Component {
                                             <ListItem divider >
                                                 <ListItemText><p id="member-name">@{member}</p></ListItemText>
                                                     <div className="remove">
-                                                        <Button size="small" variant="text" color="secondary" onClick={ () => this.removeMember(member) }>
-                                                            remove    
+                                                        <Button size="small" variant="text" color="secondary" onClick={ () => this.removeMember(event, member) }>
+                                                            remove 
                                                         </Button>
                                                     </div>    
                                             </ListItem>)        
