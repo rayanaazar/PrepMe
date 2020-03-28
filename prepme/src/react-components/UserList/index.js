@@ -10,7 +10,7 @@ class UserList extends React.Component {
     const nonAdmins = users.filter(user => !user.isAdmin)
     return (<div>
       <div className="section-header" >
-        <div className="section-name">
+        <div className="page-name">
           Users
         </div>
       </div>
