@@ -42,7 +42,7 @@ class EventCard extends React.Component {
       join_value = "Joined"
     }
 
-    const icons = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
+    const icons = [avatar1, avatar3, avatar5, avatar2, avatar4, avatar6]
     return (
       <div className="event-card">
         <div className="header" >
