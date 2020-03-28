@@ -38,7 +38,7 @@ class SignUpBox extends React.Component {
     }
 
     toggleShowPsw = () => { this.setState({ showPsw: !this.state.showPsw }) }
-    toggleShowRePsw = () => { this.setState({ showPsw: !this.state.showRePsw }) }
+    toggleShowRePsw = () => { this.setState({ showRePsw: !this.state.showRePsw }) }
 
     processSignUp= () => {
         if (this.state.username !== "" && this.state.password === this.state.reenterPassword) {
