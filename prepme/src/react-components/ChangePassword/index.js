@@ -33,7 +33,10 @@ class ChangePassword extends React.Component {
   }
 
   openPasswordChange = () => {
-    this.setState({ changingPassword: true })
+    this.setState({ 
+      changingPassword: true,
+      isValidInputs: true
+    })
   }
 
   onCurrPswChange = e => {
@@ -71,7 +74,7 @@ class ChangePassword extends React.Component {
   }
 
   checkValid = () => {
-    if (this.state.newPassword == this.state.newPasswordConfirm && this.state.password.length >= 4) {
+    if (this.state.newPassword == this.state.newPasswordConfirm && this.state.newPassword.length >= 4) {
       this.setState({ isValidInputs: true })
       return true
     } else {
