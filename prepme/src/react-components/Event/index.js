@@ -151,6 +151,7 @@ class Event extends React.Component {
                 )
         }
         else if (viewing) {
+            if (userName !== this.state.username) {
             lastButton =  (<div  className="right_header" className="last_button">
                 <Button  variant="outlined" color="primary" onClick={() => {
                         this.addMember(event)
@@ -165,7 +166,9 @@ class Event extends React.Component {
                     {join_value}
                 
                 </Button>
-            </div>)
+            </div>)} else { 
+                lastButton = (<div></div>)
+            }
         }
         else {
             lastButton = (<div className="right_header" className="last_button">

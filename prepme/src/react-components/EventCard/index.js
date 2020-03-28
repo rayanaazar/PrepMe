@@ -92,7 +92,7 @@ class EventCard extends React.Component {
         </div>
         <div className="actions">
           <div>
-              { isAdmin || event.members.includes(username) ? (
+              {isAdmin || event.members.includes(username) ? (
                 <div className="action-button" id='rate-button'>
                   <Button className="cardbutton" onClick={this.openDialog}  variant="outlined" color="primary" size="small">
                     Rate Organizer
