@@ -43,6 +43,7 @@ class UserCard extends React.Component {
         <div className="card-username">@{username}</div>
         <div className="star-rating">{ stars }</div>
         <Button
+          disableElevation
           variant="contained"
           color="primary"
           onClick={ this.openDialog }

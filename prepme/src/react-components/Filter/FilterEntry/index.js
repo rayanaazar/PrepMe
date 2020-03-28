@@ -36,6 +36,7 @@ class FilterEntry extends React.Component {
               fullWidth={true}
               label="Select"
               variant="outlined"
+              color="secondary"
               size="small" 
               disabled={ eventAction }
               value={this.state.value}
@@ -55,6 +56,7 @@ class FilterEntry extends React.Component {
             <TextField 
               label="Enter"
               variant="outlined"
+              color="secondary"
               size="small" 
               disabled={ eventAction }
               onChange={this.onChange}
@@ -66,7 +68,7 @@ class FilterEntry extends React.Component {
             className="add-entry-button" 
             size="medium"
             edge="end"
-            color="primary"
+            color="secondary"
             disabled={ eventAction }
             onClick={() => (addSelection(onEventsPage, title, this.state.value))}>
             <AddCircleIcon/>

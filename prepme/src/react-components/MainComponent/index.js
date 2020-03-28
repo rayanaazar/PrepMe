@@ -9,6 +9,8 @@ import { throwStatement } from "@babel/types";
 import UserList from "../UserList";
 import UserProfile from "../UserProfile";
 
+
+
 /* Component for the main center component */
 class MainComponent extends React.Component {
 
@@ -116,6 +118,7 @@ class MainComponent extends React.Component {
           )}
         </div>
       </div>
+
     );}
   }
 }

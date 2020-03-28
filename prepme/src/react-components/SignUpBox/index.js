@@ -97,6 +97,7 @@ class SignUpBox extends React.Component {
                 onChange={ this.onRePswChange }
               />
               <Button
+                  disableElevation
                   variant="contained"
                   color="primary"
                   fullWidth

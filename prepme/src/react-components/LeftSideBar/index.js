@@ -39,6 +39,7 @@ class LeftSideBar extends React.Component {
         <div id="logout-button">
           <Link className="unstyled-link" to="/login" onClick={ () => logout(app) }>
             <Button
+              disableElevation
               variant="contained"
               color="primary"
               endIcon={<ExitToAppIcon />}

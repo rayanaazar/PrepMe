@@ -19,9 +19,10 @@ class Filter extends React.Component {
           <div id="filter-title">Filters</div>
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             size="small"
             disabled={ eventAction }
+            disableElevation
             onClick={ () => clearSelections(onEventsPage) }
             startIcon={<DeleteIcon />}
           >

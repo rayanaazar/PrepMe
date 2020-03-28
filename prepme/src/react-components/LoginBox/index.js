@@ -66,6 +66,7 @@ class LoginBox extends React.Component {
                         onChange={ this.onPswChange }
                     />
                     <Button
+                        disableElevation
                         type='submit'
                         variant="contained"
                         color="primary"
