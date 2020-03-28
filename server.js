@@ -46,7 +46,6 @@ app.post("/users/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    log(username, password);
     // Use the static method on the User model to find a user
     // by their email and password
     User.findByUsernamePassword(username, password)
@@ -78,10 +77,6 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a use is logged in on the session cookie
 app.get("/users/check-session", (req, res) => {
-    log("hi")
-    log(req.session)
-    log(req.session.user)
-    log("hi")
     if (req.session.user) {
         res.send({ currentUser: req.session.username });
     } else {
@@ -146,7 +141,7 @@ app.patch('/events/:id', (req, res) => {
 
 app.post('/events/member/:id', (req, res) => {
     const id = req.params.id;
-    const username = req.body;
+    const username = req.body.username;
 
     if (!ObjectID.isValid(id)) {
         res.status(404).send();
@@ -167,7 +162,7 @@ app.post('/events/member/:id', (req, res) => {
 
 app.delete('/events/member/:id', (req, res) => {
     const id = req.params.id;
-    const username = req.body;
+    const username = req.body.username;
 
     if (!ObjectID.isValid(id)) {
         res.status(404).send();

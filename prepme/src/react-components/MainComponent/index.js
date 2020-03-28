@@ -66,7 +66,7 @@ class MainComponent extends React.Component {
   }
 
   render() {
-    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, setEventAction, adminChangePassword } = this.props;
+    const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, refreshEvents, adminChangePassword } = this.props;
     console.log(users)
 
     if (isAdmin && !onEventsPage) {
@@ -83,7 +83,7 @@ class MainComponent extends React.Component {
 
     if (!isAdmin && !onEventsPage) {
       return <div className="main-component-div">
-        <UserProfile user={user} events={events} onEditing={this.onEditing} onViewing={this.onViewing}/>
+        <UserProfile user={user} events={events} onEditing={this.onEditing} onViewing={this.onViewing} refreshEvents={refreshEvents.bind(this, this)}/>
       </div>
     }
 
@@ -113,7 +113,8 @@ class MainComponent extends React.Component {
               isAdmin={isAdmin} 
               onEditing={this.onEditing}
               onViewing={this.onViewing}
-              event={event}/> 
+              event={event}
+              refreshEvents={refreshEvents.bind(this, this)}/>
             ))
           )}
         </div>

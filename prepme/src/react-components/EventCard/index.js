@@ -15,12 +15,14 @@ import Rating from '@material-ui/lab/Rating';
 import EventIcon from '@material-ui/icons/Event';
 
 import { updateRating } from '../../actions/users';
+import eventHelpers from '../../actions/events';
+const { addEventMember, removeEventMember } = eventHelpers;
 
 /* Component for the Home page */
 class EventCard extends React.Component {
   
   state = {
-    isJoined: false,
+    // isJoined: false,
     showDialog: false,
     showSavedDialog: false,
     ratingValue: 0
@@ -48,15 +50,10 @@ class EventCard extends React.Component {
 
   addMember = (event) => {
     if(event.members.includes(this.props.username)){
-      const indx = event.members.indexOf(this.props.username);
-      event.members.splice(indx,1)
-      console.log(event.members)
-      this.setState({ isJoined:true }); 
+      removeEventMember(this.props.refreshEvents, event, this.props.username);
     }
     else {
-      this.setState({ isJoined:false}); 
-      event.members.push(this.props.username)
-      console.log(event.members)
+      addEventMember(this.props.refreshEvents, event, this.props.username);
     }
   }
 

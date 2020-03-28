@@ -20,7 +20,7 @@ class UserProfile extends React.Component {
     };
 
     eventType() {
-        const {user, events, onEditing, onViewing} = this.props;
+        const {user, events, onEditing, onViewing, refreshEvents} = this.props;
 
         if (this.state.tab === 0) {
             const filteredEvents = events.filter(event => event.username === user.username)
@@ -31,7 +31,9 @@ class UserProfile extends React.Component {
                             username={user.username}
                             onEditing={onEditing}
                             onViewing={onViewing}
-                            event={event}/>
+                            event={event}
+                            refreshEvents={refreshEvents}
+                        />
                     ))
                 )
             } else {
@@ -47,7 +49,9 @@ class UserProfile extends React.Component {
                             username={user.username}
                             onEditing={onEditing}
                             onViewing={onViewing}
-                            event={event}/>
+                            event={event}
+                            refreshEvents={refreshEvents}
+                        />
                     ))
                 )
             } else {

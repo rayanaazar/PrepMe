@@ -149,7 +149,65 @@ function deleteEvent(viewEvents, event) {
     viewEvents();
 }
 
+function addEventMember(refreshEvents, event, username) {
+    const event_id = event._id;
 
+    const url = `http://localhost:5000/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/events' // Switch to this line for actual build
+
+    const request = new Request(url, {
+        method: "POST",
+        body: JSON.stringify({username}),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            if (res.status === 200) {
+                // If the member was added successfully, retrieve events list from database.
+                refreshEvents();
+            } else {
+                // TODO: handle what happens if event wasn't added successfully.
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+function removeEventMember(refreshEvents, event, username) {
+    const event_id = event._id;
+
+    const url = `http://localhost:5000/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/events' // Switch to this line for actual build
+
+    const request = new Request(url, {
+        method: "DELETE",
+        body: JSON.stringify({username}),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            // Handle response we get from the API.
+            if (res.status === 200) {
+                // If the member was added successfully, retrieve events list from database.
+                refreshEvents();
+            } else {
+                // TODO: handle what happens if event wasn't added successfully.
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
 function eventMatchesFilters(filters, event) {
     // Loop through all filters
@@ -228,5 +286,7 @@ export default {
     filterEvents,
     filterUsers,
     editEvent,
-    deleteEvent
+    deleteEvent,
+    addEventMember,
+    removeEventMember
 }
