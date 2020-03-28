@@ -50,6 +50,7 @@ export const getUsersNameAndRating = (homeComp) => {
         });
 }
 
+// function to update the user password
 export const changePassword = (username, password) => {
     
     const userInfo = {
@@ -163,6 +164,57 @@ export const signUp = (signUpComp) => {
           signUpComp.setState({ invalidCredentials: true })
       });
 };
+
+// A function to update a user's rating as an organizer
+export const updateRating = (eventCardComp, username, newRating) => {
+    // Get current rating
+    const getUrl = `http://localhost:5000/users/${username}`;
+
+    fetch(getUrl)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .then(json => {
+            if (json) {
+                const body = {
+                    username: username,
+                    newRating: newRating
+                }
+
+                if (json.rating != 0) { // update rating with new rating
+                    body.newRating = ~~((json.rating + newRating) / 2) // Integer division
+                }
+            
+                const request = new Request(`http://localhost:5000/users/${username}`, {
+                    method: "PATCH",
+                    body: JSON.stringify(body),
+                    headers: {
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json"
+                    }
+                });
+            
+                // Send patch request
+                fetch(request)
+                    .then(res => {
+                        console.log(res)
+                        if (res.status === 200) {   
+                            eventCardComp.closeDialog();  
+                            return res.json();
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+}
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {

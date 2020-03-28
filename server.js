@@ -159,8 +159,48 @@ app.patch('/users', (req, res) => {
     }).catch((error) => {
         log(error)
         res.status(400).send() // bad request for changing the event.
+    })
 })
+
+app.patch('/users/:username', (req, res) => {
+    const username = req.params.username
+    const newRating = req.body.newRating
+
+    User.findOneAndUpdate({username: username}, {$set: {rating: newRating}}, {new: true})
+        .then((user) => {
+            if (!user) {
+                res.status(404).send()
+            } else {
+                res.send(user)
+            }
+        })
+        .catch((error) => {
+            log(error)
+            res.status(400).send()
+        })
 })
+
+app.get('/users/:username', (req, res) => {
+    const username = req.params.username
+
+    User.findOne({username: username})
+        .then((user) => {
+            if (!user) {
+                res.status(404).send()
+            } else {
+                const filteredUser = {
+                    username: user.username,
+                    rating: user.rating
+                }
+    
+                res.send(filteredUser)
+            }
+        })
+        .catch((error) => {
+            log(error)
+            res.status(400).send(error)
+        })
+});
 
 app.delete('/events/:id', (req, res) => {
     const id = req.params.id;

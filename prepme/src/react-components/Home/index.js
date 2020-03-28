@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./styles.css";
-import { Redirect } from 'react-router-dom';
 import LeftSideBar from "../LeftSideBar/index";
 import MainComponent from "../MainComponent/index";
 import RightSideBar from "../RightSideBar/index";
@@ -15,8 +14,6 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     getUsersNameAndRating(this);
-    // const {  users } = this.props.state;
-    // this.state.filteredUsers = users;
   }
   
   state = {
@@ -82,6 +79,10 @@ class Home extends React.Component {
     })
   }
 
+  refreshUsers = () => {
+    getUsersNameAndRating(this)
+  }
+
   refreshEvents = (main) => {
     getEvents(this, main);
   };
@@ -110,6 +111,7 @@ class Home extends React.Component {
           filteredEvents={this.state.filteredEvents}
           events={this.state.events}
           refreshEvents={this.refreshEvents}
+          refreshUsers={this.refreshUsers}
           setEvents = {this.props.setEvents}
           users={ this.state.filteredUsers }
           isAdmin={ isAdmin }

@@ -69,7 +69,7 @@ class MainComponent extends React.Component {
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
-        <UserList users={users} adminChangePassword={adminChangePassword}/>
+        <UserList users={users} adminChangePassword={adminChangePassword} refreshUsers={this.props.refreshUsers}/>
       </div>
     }
 

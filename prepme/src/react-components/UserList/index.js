@@ -5,6 +5,11 @@ import './UserList.css';
 import UserCard from '../UserCard/index';
 
 class UserList extends React.Component {
+
+  componentDidMount() {
+    this.props.refreshUsers();
+  }
+
   render() {
     const { users, adminChangePassword } = this.props
     const nonAdmins = users.filter(user => !user.isAdmin)

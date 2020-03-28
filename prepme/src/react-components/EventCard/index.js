@@ -10,15 +10,33 @@ import avatar4 from '../EventCard/static/avatar_4.png';
 import avatar5 from '../EventCard/static/avatar_5.png';
 import avatar6 from '../EventCard/static/avatar_6.png';
 
-import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
+import { Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle, TextField, Button, Typography, Box} from '@material-ui/core'; 
+import Rating from '@material-ui/lab/Rating';
 import EventIcon from '@material-ui/icons/Event';
+
+import { updateRating } from '../../actions/users';
 
 /* Component for the Home page */
 class EventCard extends React.Component {
   
   state = {
-    isJoined: false
+    isJoined: false,
+    showDialog: false,
+    ratingValue: 0
   }
+
+  handleRatingChange = newValue => {
+    this.setState({ ratingValue: newValue })
+  }
+
+  openDialog = () => {
+    this.setState({ showDialog: true })
+  }
+
+  closeDialog = () => {
+    this.setState({ showDialog: false })
+  }
+
   addMember = (event) => {
     if(event.members.includes(this.props.username)){
       const indx = event.members.indexOf(this.props.username);
@@ -70,7 +88,7 @@ class EventCard extends React.Component {
           <div>
               { isAdmin || event.members.includes(username) ? (
                 <div className="action-button" id='rate-button'>
-                  <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
+                  <Button onClick={this.openDialog}  variant="outlined" color="primary" size="small">
                     Rate Organizer
                   </Button>
                 </div>
@@ -96,6 +114,34 @@ class EventCard extends React.Component {
                 </div>
             </div>
         </div>
+
+        <Dialog open={ this.state.showDialog }>
+          <DialogTitle id="form-dialog-title">Rate Organizer</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Enter the rating for organizer @{event.username}.
+            </DialogContentText>
+            <div id="rating-div">
+              <Rating 
+                name="pristine"
+                value={this.state.ratingValue}
+                onChange={(event, newValue) => this.handleRatingChange(newValue)}
+              />
+            </div> 
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.closeDialog} color="primary">
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => {
+                updateRating(this, event.username, this.state.ratingValue)
+              }}
+                color="primary">
+              Save
+            </Button>
+          </DialogActions>
+       </Dialog>
       </div>
     );
   }
