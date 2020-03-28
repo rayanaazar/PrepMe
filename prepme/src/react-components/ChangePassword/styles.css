@@ -4,8 +4,10 @@
   margin-bottom: 24px;
 }
 
-#save-button {
-  float: right;
+#buttons-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 12px;
 }
 

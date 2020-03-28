@@ -28,6 +28,10 @@ class ChangePassword extends React.Component {
     showDialog: false // show 'password saved' dialog
   }
 
+  cancelPasswordChange = () => {
+    this.setState({ changingPassword: false })
+  }
+
   openPasswordChange = () => {
     this.setState({ changingPassword: true })
   }
@@ -109,10 +113,18 @@ class ChangePassword extends React.Component {
               toggleShowPsw={ this.toggleShowConfPsw }
               onChange={ this.onConfirmPswChange }
             />
-            <div id="save-button">
+            <div id="buttons-div">
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={this.cancelPasswordChange}
+              >
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 color="primary"
+                disableElevation
                 onClick={ () => { 
                   if (this.checkValid()) {
                     changePassword(username,this.state.newPassword)
