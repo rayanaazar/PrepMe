@@ -76,8 +76,9 @@ class UserProfile extends React.Component {
                     </div>
                 </div>
 
-                <Paper>
+                <Paper variant="outlined">
                     <Tabs
+            
                         value={this.state.tab}
                         onChange={this.handleTabChange}
                         variant="fullWidth"

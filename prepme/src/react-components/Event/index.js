@@ -267,7 +267,7 @@ class Event extends React.Component {
                             name='size'
                             value={this.state.size}
                             onChange={this.handleInputChange}
-                            helperText="Please select your group size"
+                            
                             variant="outlined"
     
     
@@ -333,7 +333,7 @@ class Event extends React.Component {
                         </div>
                         <div className="description">
                             <TextField
-                                    rows="2"
+                                    rows="1"
                                     id="outlined-full-width"
                                     multiline
                                     value={this.state.description}

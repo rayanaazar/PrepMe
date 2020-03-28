@@ -140,6 +140,7 @@ class ChangePassword extends React.Component {
           </div>
         ) : (
           <Button
+            disableElevation
             variant="contained"
             color="primary"
             fullWidth={ true }
