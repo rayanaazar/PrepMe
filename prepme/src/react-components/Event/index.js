@@ -161,7 +161,7 @@ class Event extends React.Component {
                         <div className="section-name">
                             Icon:
                         </div>
-                        { editing ? ( <List id="avatar-list">
+                        { editing || (!editing && !viewing) ? ( <List id="avatar-list">
                             { avatarImages.map((avatar, index) => (
                                 <ListItem
                                     button
