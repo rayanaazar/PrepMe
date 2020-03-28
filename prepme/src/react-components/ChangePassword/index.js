@@ -100,7 +100,7 @@ class ChangePassword extends React.Component {
               onChange={ this.onCurrPswChange }
             />
             <PasswordEntry 
-              label="New Password (Min. 4 Characters)"
+              label="New Password (min. 4 chars)"
               value={ this.state.newPassword }
               showPsw={ this.state.newShowPsw }
               toggleShowPsw={ this.toggleShowNewPsw }
@@ -151,12 +151,12 @@ class ChangePassword extends React.Component {
           </Button>
         )}
 
-        {/* Dialog to say password saved successfully, could move into a higher level component that actually saves password */}
+        {/* Dialog to say password saved successfully */}
         <Dialog
           open={ this.state.showDialog }
         >
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText>
               Password Saved Successfully.
             </DialogContentText>
           </DialogContent>

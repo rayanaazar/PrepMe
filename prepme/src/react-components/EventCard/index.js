@@ -22,6 +22,7 @@ class EventCard extends React.Component {
   state = {
     isJoined: false,
     showDialog: false,
+    showSavedDialog: false,
     ratingValue: 0
   }
 
@@ -35,6 +36,14 @@ class EventCard extends React.Component {
 
   closeDialog = () => {
     this.setState({ showDialog: false })
+  }
+
+  openSavedDialog = () => {
+    this.setState({ showSavedDialog: true })
+  }
+
+  closeSavedDialog = () => {
+    this.setState({ showSavedDialog: false })
   }
 
   addMember = (event) => {
@@ -116,6 +125,7 @@ class EventCard extends React.Component {
             </div>
         </div>
 
+        {/* Dialog to allow user to give organizer rating */}
         <Dialog open={ this.state.showDialog }>
           <DialogTitle id="form-dialog-title">Rate Organizer</DialogTitle>
           <DialogContent>
@@ -143,6 +153,20 @@ class EventCard extends React.Component {
             </Button>
           </DialogActions>
        </Dialog>
+
+      {/* Dialog to tell user their rating has been saved */}
+       <Dialog open={ this.state.showSavedDialog }>
+          <DialogContent>
+            <DialogContentText>
+              Your rating has been recorded.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={ this.closeSavedDialog } color="primary" autoFocus>
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

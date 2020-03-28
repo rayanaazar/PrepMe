@@ -202,6 +202,7 @@ export const updateRating = (eventCardComp, username, newRating) => {
                         console.log(res)
                         if (res.status === 200) {   
                             eventCardComp.closeDialog();  
+                            eventCardComp.openSavedDialog();
                             return res.json();
                         }
                     })
