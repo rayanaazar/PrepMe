@@ -3,7 +3,12 @@ import React from "react";
 import "../../index.css";
 import "./styles.css";
 
-import icon from "./static/avatar_1.png";
+import avatar1 from '../EventCard/static/avatar_1.png';
+import avatar2 from '../EventCard/static/avatar_2.png';
+import avatar3 from '../EventCard/static/avatar_3.png';
+import avatar4 from '../EventCard/static/avatar_4.png';
+import avatar5 from '../EventCard/static/avatar_5.png';
+import avatar6 from '../EventCard/static/avatar_6.png';
 
 import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
 import EventIcon from '@material-ui/icons/Event';
@@ -37,12 +42,13 @@ class EventCard extends React.Component {
       join_value = "Joined"
     }
 
+    const icons = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6]
     return (
       <div className="event-card">
         <div className="header" >
           <div className="event-info">
             <div className="icon">
-              <img id="icon-img" src={ icon }/>
+              <img id="icon-img" src={ icons[event.icon]}/>
             </div>
             <div>
             <div className="course" >

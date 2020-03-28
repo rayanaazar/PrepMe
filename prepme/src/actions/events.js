@@ -29,9 +29,10 @@ function getEvents(home, main) {
 }
 
 function addEvent(eventForm, events, username, setEvents, viewEvents) {
-    const {course, subject, description, location, date, time, size} = eventForm.state;
+    const {icon, course, subject, description, location, date, time, size} = eventForm.state;
 
     const newEvent = {
+        icon,
         course,
         subject,
         username,
@@ -76,9 +77,10 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
 function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
     const event_id = event._id;
 
-    const {course, subject, description, location, date, time, size} = eventForm.state;
+    const {icon, course, subject, description, location, date, time, size} = eventForm.state;
 
     const edited_event = {
+        icon,
         course,
         subject,
         username,

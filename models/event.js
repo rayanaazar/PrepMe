@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const EventSchema = new mongoose.Schema({
+    icon: {
+        type: Number,
+        required: true,
+        trim: true
+    },
     course: {
         type: String,
         required: true,

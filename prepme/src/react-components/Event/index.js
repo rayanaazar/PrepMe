@@ -33,7 +33,7 @@ class Event extends React.Component {
     constructor(props) {
         super(props)
         if (this.props.viewing || this.props.editing) {
-            // this.state.icon = this.props.event.icon // uncomment when added to database
+            this.state.icon = this.props.event.icon 
             this.state.course = this.props.event.course
             this.state.subject = this.props.event.subject
             this.state.username = this.props.event.username
