@@ -67,23 +67,34 @@ class EventCard extends React.Component {
             {event.description}
         </div>
         <div className="actions">
-          { isAdmin || username === event.username ? (
-            <div className="action-button" id='edit-button'>
-              <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
-                Edit
-              </Button>
+          <div>
+              { isAdmin || event.members.includes(username) ? (
+                <div className="action-button" id='rate-button'>
+                  <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
+                    Rate Organizer
+                  </Button>
+                </div>
+              ) : ( <div /> )}
+          </div>
+          <div className="right_actions">
+              { isAdmin || username === event.username ? (
+                  <div className="action-button" id='edit-button'>
+                    <Button onClick={() => onEditing(event)}  variant="outlined" color="primary" size="small">
+                      Edit
+                    </Button>
+                  </div>
+                ) : ( <div /> )}
+                <div className="action-button" id='view-button'>
+                  <Button onClick={() => onViewing(event)}  variant="outlined" color="primary" size="small">
+                    View
+                  </Button>
+                </div>
+                <div className="action-button" id='join-button'>
+                  <Button onClick={ () => { this.addMember(event)}} variant="outlined" color="primary" size="small">
+                    {join_value}
+                  </Button>
+                </div>
             </div>
-          ) : ( <div /> )}
-          <div className="action-button" id='view-button'>
-            <Button onClick={() => onViewing(event)}  variant="outlined" color="primary" size="small">
-              View
-            </Button>
-          </div>
-          <div className="action-button" id='join-button'>
-            <Button onClick={ () => { this.addMember(event)}} variant="outlined" color="primary" size="small">
-              {join_value}
-            </Button>
-          </div>
         </div>
       </div>
     );
