@@ -76,9 +76,9 @@ class MainComponent extends React.Component {
     }
 
     if (this.state.creating) {
-      return (<Event events={events} userName={user.username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
+      return (<Event isAdmin={isAdmin} events={events} userName={user.username} setEvents={setEvents} viewEvents={this.viewEvents}/>)
     } else if (this.state.viewing || this.state.editing){
-      return (<Event editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={user.username} viewEvents={this.viewEvents}/>)
+      return (<Event isAdmin={isAdmin} editing={this.state.editing} viewing={this.state.viewing} event={this.state.event} events={events} userName={user.username} viewEvents={this.viewEvents}/>)
     }
 
     if (!isAdmin && !onEventsPage) {

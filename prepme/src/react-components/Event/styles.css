@@ -74,5 +74,12 @@
     margin-top: 3px;
   }
 
+  #member-name {
+    color: #FF8C19;
+  }
+
+  .remove {
+    margin-left: 80px;
+  }
 
 

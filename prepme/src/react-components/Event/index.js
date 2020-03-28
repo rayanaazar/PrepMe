@@ -1,11 +1,9 @@
 import React from "react";
 
 import "./styles.css";
-import {TextField, Button} from '@material-ui/core';
+import {ListItemSecondaryAction, ListItemText, TextField, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Icon from '@material-ui/core/Icon';
-import { throwStatement, conditionalExpression } from "@babel/types";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -21,10 +19,13 @@ import avatar5 from '../EventCard/static/avatar_5.png';
 import avatar6 from '../EventCard/static/avatar_6.png';
 
 import eventHelpers from "../../actions/events";
+import { array } from "prop-types";
 
 const { addEvent } = eventHelpers;
 const { editEvent } = eventHelpers;
 const { deleteEvent } = eventHelpers;
+
+
 
 
 /* Component for the main center component */
@@ -43,6 +44,7 @@ class Event extends React.Component {
             this.state.time = this.props.event.time
             this.state.file = this.props.event.file
             this.state.size = this.props.event.size
+            this.state.members = this.props.event.members
             }
         }
     
@@ -51,6 +53,7 @@ class Event extends React.Component {
         isView:false,
         isEdit:false,
         isCreate:true,
+        showDialog:false,
 
         icon:0,
         course:"",
@@ -82,8 +85,27 @@ class Event extends React.Component {
         })
     }
 
+
+    closeDialog = () => {
+        this.setState({ showDialog: false })
+      }
+
+    openDialog = () => {
+        this.setState({ showDialog: true})
+      }
+
+    removeMember = (member) => {
+        const members = this.state.members
+        const index = members.indexOf(member)
+        members.splice(index, 1)
+
+        this.setState({ members: members})
+
+    }
+
+
     render() {
-      const {event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
+      const {isAdmin, event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
 
       const avatarImages = [avatar1, avatar3, avatar5, avatar2, avatar4, avatar6]
 
@@ -337,8 +359,47 @@ class Event extends React.Component {
                             Upload
                             </Button>
                         </div>
-                    </div>
+                    </div>            
                 </div>
+                <Button disableElevation variant="contained" color="secondary" onClick={ this.openDialog }>
+                            View Members
+                </Button>
+                <Dialog open={ this.state.showDialog }>
+                    <DialogTitle>Joined Members</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {this.state.members.length == 0 ? (
+                                <div>No Members Yet.</div>
+                            ) : (
+                             
+                                this.state.members.map((member) => {
+                                    if (isAdmin) {
+                                        return (
+                                            <ListItem divider >
+                                                <ListItemText><p id="member-name">@{member}</p></ListItemText>
+                                                    <div className="remove">
+                                                        <Button size="small" variant="text" color="secondary" onClick={ () => this.removeMember(member) }>
+                                                            remove    
+                                                        </Button>
+                                                    </div>    
+                                            </ListItem>)        
+                                    } else {
+                                    return (
+                                    <ListItem divider dense>
+                                        <ListItemText><p id="member-name">@{member}</p></ListItemText>
+                                    </ListItem>)}
+        
+                                })
+                            )}
+                            
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={ this.closeDialog } color="primary" autoFocus>
+                        Ok
+                        </Button>
+                    </DialogActions>
+                </Dialog>
                 
            
             </div>
