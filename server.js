@@ -144,6 +144,48 @@ app.patch('/events/:id', (req, res) => {
     })
 });
 
+app.post('/events/member/:id', (req, res) => {
+    const id = req.params.id;
+    const username = req.body;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // Add member to event
+    Event.findOneAndUpdate({_id: id}, {$push: {members: username}}, {new: true}).then((updatedEvent) => {
+        if (!updatedEvent) {
+            res.status(404).send()
+        } else {
+            res.send(updatedEvent)
+        }
+    }).catch((error) => {
+        res.status(400).send() // bad request for adding member.
+    })
+});
+
+app.delete('/events/member/:id', (req, res) => {
+    const id = req.params.id;
+    const username = req.body;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+        return;
+    }
+
+    // Add member to event
+    Event.findOneAndUpdate({_id: id}, {$pullAll: {members: [username]}}, {new: true}).then((updatedEvent) => {
+        if (!updatedEvent) {
+            res.status(404).send()
+        } else {
+            res.send(updatedEvent)
+        }
+    }).catch((error) => {
+        res.status(400).send() // bad request for changing the event.
+    })
+});
+
 app.patch('/users', (req, res) => {
 
     const username = req.body.username
