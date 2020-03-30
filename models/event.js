@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+const FileSchema = new mongoose.Schema({
+    file_id: {
+        type: String,
+        required: true
+    },
+    file_url: {
+        type: String,
+        required: true
+    },
+    created_at: String
+});
+
 const EventSchema = new mongoose.Schema({
     icon: {
         type: Number,
@@ -55,8 +67,13 @@ const EventSchema = new mongoose.Schema({
     members: {
         type: [String],
         required: true,
+    },
+    files: {
+        type: [FileSchema],
+        required: true
     }
 });
 
 const Event = mongoose.model('event', EventSchema);
-module.exports = { Event };
+const EventFile = mongoose.model('eventFile', File);
+module.exports = { Event, EventFile };
