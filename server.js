@@ -9,7 +9,7 @@ const app = express();
 const { mongoose } = require('./db/mongoose');
 mongoose.set('useFindAndModify', false); // for some deprecation issues
 
-const { Event } = require('./models/event');
+const { Event, EventFile } = require('./models/event');
 const { User } = require("./models/user");
 
 // to validate object IDs
@@ -18,6 +18,18 @@ const { ObjectID } = require('mongodb')
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
+// multipart middleware: allows you to access uploaded file from req.file
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
+
+// cloudinary
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'shayankhalili',
+    api_key: '637496815379257',
+    api_secret: 'xEti_UUGTHKekrixKoOeZq7nFTI'
+});
 
 const session = require("express-session"); 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -281,6 +293,53 @@ app.post("/users", (req, res) => {
     );
 });
 
+/** File Upload Routes **/
+
+// A POST route to upload a file for an event. Note: This does not directly attach a file to the event, that will be
+// done in the /event POST or PATCH route.
+app.post("/event_files", multipartMiddleware, (req, res) => {
+    cloudinary.uploader.upload(
+        req.files.image.path,
+        function (result) {
+
+            var file = new EventFile({
+                file_id: result.public_id,
+                file_url: result.url,
+                created_at: new Date(),
+            });
+
+            file.save().then(
+                saveRes => {
+                    res.send(saveRes);
+                },
+                error => {
+                    res.status(400).send(error); // 400 for bad request
+                }
+            );
+        });
+});
+
+/// a DELETE route to remove a file by its id
+app.delete("/event_files/:file_id", (req, res) => {
+    const file_id = req.params.file_id;
+
+    // Delete a file by its id (NOT the database ID, but its id on the cloudinary server)
+    cloudinary.uploader.destroy(imageId, function (result) {
+
+        // Delete the image from the database
+        EventFile.findOneAndRemove({ file_id: file_id })
+            .then(file => {
+                if (!file) {
+                    res.status(404).send();
+                } else {
+                    res.send(file);
+                }
+            })
+            .catch(error => {
+                res.status(500).send(); // server error, could not delete.
+            });
+    });
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
