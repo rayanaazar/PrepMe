@@ -298,14 +298,14 @@ app.post("/users", (req, res) => {
 // A POST route to upload a file for an event. Note: This does not directly attach a file to the event, that will be
 // done in the /event POST or PATCH route.
 app.post("/event_files", multipartMiddleware, (req, res) => {
-    cloudinary.uploader.upload(
-        req.files.image.path,
-        function (result) {
-
+    cloudinary.v2.uploader.upload(
+        req.files.file.path,
+        { resource_type: "auto" },
+        function (error, result) {
             var file = new EventFile({
+                file_name: req.files.file.originalFilename,
                 file_id: result.public_id,
-                file_url: result.url,
-                created_at: new Date(),
+                file_url: result.url
             });
 
             file.save().then(

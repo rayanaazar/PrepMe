@@ -45,7 +45,6 @@
       width: 100%;
   }
 
-
   .section-name {
       margin-right: 10px;
       font-size: 20px;
@@ -82,4 +81,10 @@
     margin-left: 80px;
   }
 
+  #upload-button {
+      margin-left: 10px;
+  }
 
+  .file-button {
+      margin: 10px;
+  }

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./styles.css";
-import {ListItemSecondaryAction, ListItemText, TextField, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions} from '@material-ui/core';
+import {Input, ListItemText, TextField, Button, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions} from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -19,12 +19,8 @@ import avatar5 from '../EventCard/static/avatar_5.png';
 import avatar6 from '../EventCard/static/avatar_6.png';
 
 import eventHelpers from "../../actions/events";
-import { array } from "prop-types";
 
-const { addEvent } = eventHelpers;
-const { editEvent } = eventHelpers;
-const { deleteEvent } = eventHelpers;
-const { addEventMember, removeEventMember } = eventHelpers;
+const { addEvent, editEvent, deleteEvent, addEventMember, removeEventMember, addFile } = eventHelpers;
 
 
 
@@ -46,6 +42,7 @@ class Event extends React.Component {
             this.state.file = this.props.event.file
             this.state.size = this.props.event.size
             this.state.members = this.props.event.members
+            this.state.files = this.props.event.files
             }
         }
     
@@ -67,6 +64,7 @@ class Event extends React.Component {
         file: "",
         size:"",
         members:[],
+        files: [],
         
 
         sizes: ["1-5","6-10", "11-15","16-20"],
@@ -363,19 +361,50 @@ class Event extends React.Component {
                                       }}/>
                         </div>
                     </div>
+                    {viewing ? <div></div> : (
+                        <div className="section">
+                            <div className="section-name">
+                                Upload File:
+                            </div>
+
+                            <form className="file-form" onSubmit={(e) => {
+                                e.preventDefault();
+                                addFile(e.target, this);
+                            }}>
+                                <Input
+                                    name="file"
+                                    type="file"
+                                />
+                                <Button
+                                    id="upload-button"
+                                    variant="outlined"
+                                    color="default"
+                                    type="submit"
+                                    startIcon={<CloudUploadIcon />}>
+                                    Upload
+                                </Button>
+                            </form>
+                        </div>
+                    )}
+
                     <div className="section">
                         <div className="section-name">
-                            Upload File:
+                            Files:
                         </div>
-                        <div className="file">
-                            <Button
-                                variant="outlined"
-                                color="default"
-                                startIcon={<CloudUploadIcon />}>
-                            Upload
-                            </Button>
-                        </div>
-                    </div>            
+                        {this.state.files.map((file) => {
+                            return(
+                                <Button
+                                    className="file-button"
+                                    href={file.file_url}
+                                    target="_blank"
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    {file.file_name}
+                                </Button>
+                            )
+                        })}
+                    </div>
                 </div>
                 <Button disableElevation variant="contained" color="secondary" onClick={ this.openDialog }>
                             View Members

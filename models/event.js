@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const FileSchema = new mongoose.Schema({
+    file_name: {
+        type: String,
+        required: true
+    },
     file_id: {
         type: String,
         required: true
@@ -8,8 +12,7 @@ const FileSchema = new mongoose.Schema({
     file_url: {
         type: String,
         required: true
-    },
-    created_at: String
+    }
 });
 
 const EventSchema = new mongoose.Schema({
@@ -75,5 +78,5 @@ const EventSchema = new mongoose.Schema({
 });
 
 const Event = mongoose.model('event', EventSchema);
-const EventFile = mongoose.model('eventFile', File);
+const EventFile = mongoose.model('eventFile', FileSchema);
 module.exports = { Event, EventFile };

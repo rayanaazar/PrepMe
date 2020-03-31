@@ -29,7 +29,7 @@ function getEvents(home, main) {
 }
 
 function addEvent(eventForm, events, username, setEvents, viewEvents) {
-    const {icon, course, subject, description, location, date, time, size} = eventForm.state;
+    const {icon, course, subject, description, location, date, time, size, files} = eventForm.state;
 
     const newEvent = {
         icon,
@@ -41,7 +41,8 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
         date,
         time,
         size,
-        members: []
+        members: [],
+        files
     };
 
     const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
@@ -77,7 +78,7 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
 function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
     const event_id = event._id;
 
-    const {icon, course, subject, description, location, date, time, size} = eventForm.state;
+    const {icon, course, subject, description, location, date, time, size, files} = eventForm.state;
 
     const edited_event = {
         icon,
@@ -89,7 +90,8 @@ function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
         date,
         time,
         size,
-        members: event.members
+        members: event.members,
+        files
     };
 
     const url = `http://localhost:5000/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
@@ -209,6 +211,43 @@ function removeEventMember(refreshEvents, event, username) {
         });
 }
 
+function addFile (form, eventView) {
+    // the URL for the request
+    const url = `http://localhost:5000/event_files`; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/event_files' // Switch to this line for actual build
+
+    // The data we are going to send in our request
+    const fileData = new FormData(form);
+
+    // Create our request constructor with all the parameters we need
+    const request = new Request(url, {
+        method: "post",
+        body: fileData,
+        headers: {
+        Accept: "application/json, text/plain, */*"
+    }
+    });
+
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .then(function (file) {
+            const files = eventView.state.files;
+            files.push(file);
+            eventView.setState({
+                files: files
+            });
+            console.log(eventView.state);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
 function eventMatchesFilters(filters, event) {
     // Loop through all filters
     for (let i=0; i < filters.length; i++) {
@@ -288,5 +327,6 @@ export default {
     editEvent,
     deleteEvent,
     addEventMember,
-    removeEventMember
+    removeEventMember,
+    addFile
 }
