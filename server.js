@@ -322,9 +322,11 @@ app.post("/event_files", multipartMiddleware, (req, res) => {
 /// a DELETE route to remove a file by its id
 app.delete("/event_files/:file_id", (req, res) => {
     const file_id = req.params.file_id;
+    const { editing, event_id } = req.body;
+    console.log(req.body);
 
     // Delete a file by its id (NOT the database ID, but its id on the cloudinary server)
-    cloudinary.uploader.destroy(imageId, function (result) {
+    cloudinary.uploader.destroy(file_id, function (result) {
 
         // Delete the image from the database
         EventFile.findOneAndRemove({ file_id: file_id })
@@ -332,7 +334,16 @@ app.delete("/event_files/:file_id", (req, res) => {
                 if (!file) {
                     res.status(404).send();
                 } else {
-                    res.send(file);
+                    if (editing === 1) {
+                        Event.findByIdAndUpdate(event_id, {$pull: {files: file}}, {new: true})
+                            .then(event => {
+                                if (!event) {
+                                    res.status(404).send();
+                                } else {
+                                    res.send(file);
+                                }
+                            })
+                    }
                 }
             })
             .catch(error => {

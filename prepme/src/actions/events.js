@@ -241,7 +241,43 @@ function addFile (form, eventView) {
             eventView.setState({
                 files: files
             });
-            console.log(eventView.state);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+function deleteFile(eventView, file_id) {
+    // the URL for the request
+    const url = `http://localhost:5000/event_files/${file_id}`; // This is only for dev purposes when react is running on a different port than the server
+    // const url = '/event_files' // Switch to this line for actual build
+
+    // Create our request constructor with all the parameters we need
+    const request = new Request(url, {
+        method: "DELETE",
+        body: JSON.stringify({
+            editing: eventView.props.editing ? 1 : 0,
+            event_id: eventView.props.editing ? eventView.props.event._id : ""
+        }),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    // Send the request with fetch()
+    fetch(request)
+        .then(function (res) {
+            if (res.status === 200) {
+                return res.json();
+            }
+        })
+        .then(function (file) {
+            const files = eventView.state.files;
+            const modified_files = files.filter((file) => file.file_id !== file_id);
+            eventView.setState({
+                files: modified_files
+            });
         })
         .catch(error => {
             console.log(error);
@@ -328,5 +364,6 @@ export default {
     deleteEvent,
     addEventMember,
     removeEventMember,
-    addFile
+    addFile,
+    deleteFile
 }

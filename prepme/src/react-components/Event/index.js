@@ -5,6 +5,7 @@ import {Input, ListItemText, TextField, Button, Dialog, DialogContent, DialogTit
 import MenuItem from '@material-ui/core/MenuItem';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,7 +21,7 @@ import avatar6 from '../EventCard/static/avatar_6.png';
 
 import eventHelpers from "../../actions/events";
 
-const { addEvent, editEvent, deleteEvent, addEventMember, removeEventMember, addFile } = eventHelpers;
+const { addEvent, editEvent, deleteEvent, addEventMember, removeEventMember, addFile, deleteFile } = eventHelpers;
 
 
 
@@ -393,15 +394,24 @@ class Event extends React.Component {
                         </div>
                         {this.state.files.map((file) => {
                             return(
-                                <Button
-                                    className="file-button"
-                                    href={file.file_url}
-                                    target="_blank"
-                                    variant="contained"
-                                    color="primary"
-                                >
-                                    {file.file_name}
-                                </Button>
+                                <div className="file-button">
+                                    <Button
+                                        href={file.file_url}
+                                        target="_blank"
+                                        variant="contained"
+                                        color="primary"
+                                    >
+                                        {file.file_name}
+                                    </Button>
+                                    {viewing ? <div></div> : (
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            startIcon={<DeleteIcon />}
+                                            onClick={() => deleteFile(this, file.file_id)}
+                                        />
+                                    )}
+                                </div>
                             )
                         })}
                     </div>
