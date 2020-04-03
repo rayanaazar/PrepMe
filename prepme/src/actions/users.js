@@ -2,7 +2,7 @@
 
 // A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
-  const url = "http://localhost:5000/users/check-session";
+  const url = "/users/check-session";
 
   fetch(url)
       .then(res => {
@@ -23,7 +23,7 @@ export const readCookie = (app) => {
 
 // Get a list of all user objects with just their name and rating
 export const getUsersNameAndRating = (homeComp) => {
-    const url = 'http://localhost:5000/users'; // This is only for dev purposes when react is running on a different port than the server
+    const url = '/users'; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/users' // Switch to this line for actual build
 
     // Since this is a GET request, simply call fetch on the URL
@@ -59,7 +59,7 @@ export const changePassword = (username, password) => {
     }
 
     console.log(userInfo)
-    const request = new Request("http://localhost:5000/users", {
+    const request = new Request("/users", {
       method: "PATCH",
       body: JSON.stringify(userInfo),
       headers: {
@@ -94,7 +94,7 @@ export const login = (loginComp, app) => {
   console.log(JSON.stringify(newUser))
 
   // Create our request constructor with all the parameters we need
-  const request = new Request("http://localhost:5000/users/login", {
+  const request = new Request("/users/login", {
       method: "post",
       body: JSON.stringify(newUser),
       headers: {
@@ -135,7 +135,7 @@ export const signUp = (signUpComp) => {
     password
   }
   // Create our request constructor with all the parameters we need
-  const request = new Request("http://localhost:5000/users", {
+  const request = new Request("/users", {
       method: "post",
       body: JSON.stringify(newUser),
       headers: {
@@ -168,7 +168,7 @@ export const signUp = (signUpComp) => {
 // A function to update a user's rating as an organizer
 export const updateRating = (eventCardComp, username, newRating) => {
     // Get current rating
-    const getUrl = `http://localhost:5000/users/${username}`;
+    const getUrl = `/users/${username}`;
 
     fetch(getUrl)
         .then(res => {
@@ -187,7 +187,7 @@ export const updateRating = (eventCardComp, username, newRating) => {
                     body.newRating = ~~((json.rating + newRating) / 2) // Integer division
                 }
             
-                const request = new Request(`http://localhost:5000/users/${username}`, {
+                const request = new Request(`/users/${username}`, {
                     method: "PATCH",
                     body: JSON.stringify(body),
                     headers: {
@@ -219,7 +219,7 @@ export const updateRating = (eventCardComp, username, newRating) => {
 
 // A function to send a GET request to logout the current user
 export const logout = (app) => {
-  const url = "http://localhost:5000/users/logout"
+  const url = "/users/logout"
 
   fetch(url)
       .then(res => {
