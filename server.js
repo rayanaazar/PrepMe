@@ -51,10 +51,27 @@ app.use(
     })
 );
 
-
+// Middleware for authentication of resources
+// Taken from class express-authentication example
+const authenticate = (req, res, next) => {
+	if (req.session.user) {
+		User.findById(req.session.user).then((user) => {
+			if (!user) {
+				return Promise.reject()
+			} else {
+				req.user = user
+				next()
+			}
+		}).catch((error) => {
+			res.status(401).send("Unauthorized")
+		})
+	} else {
+		res.status(401).send("Unauthorized")
+	}
+}
 
 // A route to login and create a session
-app.post("/users/login", (req, res) => {
+app.post("/users/login", authenticate, (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -96,7 +113,7 @@ app.get("/users/check-session", (req, res) => {
     }
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', authenticate, (req, res) => {
     User.find().then((users) => {
         const filteredUsers = []
         for (let i = 0; i < users.length; i++) {
@@ -112,7 +129,7 @@ app.get('/users', (req, res) => {
     })
 });
 
-app.get('/events', (req, res) => {
+app.get('/events', authenticate, (req, res) => {
     Event.find().then((events) => {
         res.send(events) // can wrap in object if want to add more properties
     }, (error) => {
@@ -120,7 +137,7 @@ app.get('/events', (req, res) => {
     })
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', authenticate, (req, res) => {
     const event = new Event(req.body);
 
     event.save().then((result) => {
@@ -130,7 +147,7 @@ app.post('/events', (req, res) => {
     })
 });
 
-app.patch('/events/:id', (req, res) => {
+app.patch('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const event = req.body;
 
@@ -151,7 +168,7 @@ app.patch('/events/:id', (req, res) => {
     })
 });
 
-app.post('/events/member/:id', (req, res) => {
+app.post('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
@@ -172,7 +189,7 @@ app.post('/events/member/:id', (req, res) => {
     })
 });
 
-app.delete('/events/member/:id', (req, res) => {
+app.delete('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
@@ -193,7 +210,7 @@ app.delete('/events/member/:id', (req, res) => {
     })
 });
 
-app.patch('/users', (req, res) => {
+app.patch('/users', authenticate, (req, res) => {
 
     const username = req.body.username
     const newpassword = req.body.newpassword
@@ -211,7 +228,7 @@ app.patch('/users', (req, res) => {
     })
 })
 
-app.patch('/users/:username', (req, res) => {
+app.patch('/users/:username', authenticate, (req, res) => {
     const username = req.params.username
     const newRating = req.body.newRating
 
@@ -229,7 +246,7 @@ app.patch('/users/:username', (req, res) => {
         })
 })
 
-app.get('/users/:username', (req, res) => {
+app.get('/users/:username', authenticate, (req, res) => {
     const username = req.params.username
 
     User.findOne({username: username})
@@ -251,7 +268,7 @@ app.get('/users/:username', (req, res) => {
         })
 });
 
-app.delete('/events/:id', (req, res) => {
+app.delete('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
@@ -273,7 +290,7 @@ app.delete('/events/:id', (req, res) => {
 
 /** User routes below **/
 // Set up a POST route to *create* a user of your web app (*not* a student).
-app.post("/users", (req, res) => {
+app.post("/users", authenticate, (req, res) => {
     log(req.body);
 
     // Create a new user
@@ -320,7 +337,7 @@ app.post("/event_files", multipartMiddleware, (req, res) => {
 });
 
 /// a DELETE route to remove a file by its id
-app.delete("/event_files/:file_id", (req, res) => {
+app.delete("/event_files/:file_id", authenticate, (req, res) => {
     const file_id = req.params.file_id;
     const { editing, event_id } = req.body;
     console.log(req.body);
