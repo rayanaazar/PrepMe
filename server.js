@@ -148,7 +148,7 @@ app.post('/events', authenticate, (req, res) => {
     })
 });
 
-app.patch('/events/:id', (req, res) => {
+app.patch('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const event = req.body;
 
@@ -169,7 +169,7 @@ app.patch('/events/:id', (req, res) => {
     })
 });
 
-app.post('/events/member/:id', (req, res) => {
+app.post('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
@@ -190,7 +190,7 @@ app.post('/events/member/:id', (req, res) => {
     })
 });
 
-app.delete('/events/member/:id', (req, res) => {
+app.delete('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
