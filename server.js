@@ -229,7 +229,7 @@ app.patch('/users', (req, res) => {
     })
 })
 
-app.patch('/users/:username', (req, res) => {
+app.patch('/users/:username', authenticate, (req, res) => {
     const username = req.params.username
     const newRating = req.body.newRating
 
@@ -269,7 +269,7 @@ app.get('/users/:username', (req, res) => {
         })
 });
 
-app.delete('/events/:id', (req, res) => {
+app.delete('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
