@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 	}
 })
 
-.
+
 UserSchema.pre('save', function(next) {
 	const user = this; // binds this to User document instance
 
