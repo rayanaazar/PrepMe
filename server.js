@@ -45,7 +45,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 180000,
+            expires: 1800000,
             httpOnly: true
         }
     })
@@ -130,7 +130,7 @@ app.get('/users', (req, res) => {
     })
 });
 
-app.get('/events', (req, res) => {
+app.get('/events', authenticate, (req, res) => {
     Event.find().then((events) => {
         res.send(events) // can wrap in object if want to add more properties
     }, (error) => {
