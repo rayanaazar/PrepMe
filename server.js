@@ -71,7 +71,7 @@ const authenticate = (req, res, next) => {
 }
 
 // A route to login and create a session
-app.post("/users/login", authenticate, (req, res) => {
+app.post("/users/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -210,7 +210,7 @@ app.delete('/events/member/:id', authenticate, (req, res) => {
     })
 });
 
-app.patch('/users', authenticate, (req, res) => {
+app.patch('/users', (req, res) => {
 
     const username = req.body.username
     const newpassword = req.body.newpassword
