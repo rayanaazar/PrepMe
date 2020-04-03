@@ -354,11 +354,11 @@ app.delete("/event_files/:file_id", (req, res) => {
 
 /*** Webpage routes below **********************************/
 // Serve the build
-app.use(express.static(__dirname + "/prepme/build"));
+app.use(express.static(__dirname + '/prepme/build'));
 
 // All routes other than above will go to index.html
 app.get("*", (req, res) => {
-    res.sendFile(__dirname + "/prepme/build/index.html");
+    res.sendFile(__dirname + '/prepme/build/index.html');
 });
 
 const port = process.env.PORT || 5000;
