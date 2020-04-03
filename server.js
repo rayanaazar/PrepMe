@@ -138,7 +138,7 @@ app.get('/events', authenticate, (req, res) => {
     })
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', authenticate, (req, res) => {
     const event = new Event(req.body);
 
     event.save().then((result) => {
