@@ -70,7 +70,7 @@ On the users page, the right sidebar presents filters for filtering users by var
 On either page, viewing an event will open a new interface displaying the event's detailed
 information. Editing any event will open a similar interface where the information
 can be changed. Admins, unlike regular users, are able to edit any event, event those not
-created by them.
+created by them. Admins are also able to remove members from events also, using the View Members button.
 
 
 ## Routes 
