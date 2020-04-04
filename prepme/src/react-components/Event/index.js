@@ -383,6 +383,7 @@ class Event extends React.Component {
                             return(
                                 <div className="file-button">
                                     <Button
+                                        disableElevation
                                         href={file.file_url}
                                         target="_blank"
                                         variant="contained"
@@ -391,12 +392,13 @@ class Event extends React.Component {
                                         {file.file_name}
                                     </Button>
                                     {viewing ? <div></div> : (
-                                        <Button
+                                        <IconButton
                                             variant="contained"
                                             color="secondary"
-                                            startIcon={<DeleteIcon />}
                                             onClick={() => deleteFile(this, file.file_id)}
-                                        />
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
                                     )}
                                 </div>
                             )
