@@ -45,13 +45,31 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 180000,
+            expires: 1800000,
             httpOnly: true
         }
     })
 );
 
-
+// Middleware for authentication of resources
+// Taken from class express-authentication example
+const authenticate = (req, res, next) => {
+    log(req.session)
+	if (req.session.user) {
+		User.findById(req.session.user).then((user) => {
+			if (!user) {
+				return Promise.reject()
+			} else {
+				req.user = user
+				next()
+			}
+		}).catch((error) => {
+			res.status(401).send("Unauthorized")
+		})
+	} else {
+		res.status(401).send("Unauthorized")
+	}
+}
 
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
@@ -112,7 +130,7 @@ app.get('/users', (req, res) => {
     })
 });
 
-app.get('/events', (req, res) => {
+app.get('/events', authenticate, (req, res) => {
     Event.find().then((events) => {
         res.send(events) // can wrap in object if want to add more properties
     }, (error) => {
@@ -120,7 +138,7 @@ app.get('/events', (req, res) => {
     })
 });
 
-app.post('/events', (req, res) => {
+app.post('/events', authenticate, (req, res) => {
     const event = new Event(req.body);
 
     event.save().then((result) => {
@@ -130,7 +148,7 @@ app.post('/events', (req, res) => {
     })
 });
 
-app.patch('/events/:id', (req, res) => {
+app.patch('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const event = req.body;
 
@@ -151,7 +169,7 @@ app.patch('/events/:id', (req, res) => {
     })
 });
 
-app.post('/events/member/:id', (req, res) => {
+app.post('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
@@ -172,7 +190,7 @@ app.post('/events/member/:id', (req, res) => {
     })
 });
 
-app.delete('/events/member/:id', (req, res) => {
+app.delete('/events/member/:id', authenticate, (req, res) => {
     const id = req.params.id;
     const username = req.body.username;
 
@@ -211,7 +229,7 @@ app.patch('/users', (req, res) => {
     })
 })
 
-app.patch('/users/:username', (req, res) => {
+app.patch('/users/:username', authenticate, (req, res) => {
     const username = req.params.username
     const newRating = req.body.newRating
 
@@ -251,7 +269,7 @@ app.get('/users/:username', (req, res) => {
         })
 });
 
-app.delete('/events/:id', (req, res) => {
+app.delete('/events/:id', authenticate, (req, res) => {
     const id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
@@ -350,6 +368,15 @@ app.delete("/event_files/:file_id", (req, res) => {
                 res.status(500).send(); // server error, could not delete.
             });
     });
+});
+
+/*** Webpage routes below **********************************/
+// Serve the build
+app.use(express.static(__dirname + '/prepme/build'));
+
+// All routes other than above will go to index.html
+app.get("*", (req, res) => {
+    res.sendFile(__dirname + '/prepme/build/index.html');
 });
 
 const port = process.env.PORT || 5000;

@@ -1,6 +1,6 @@
 function getEvents(home, main) {
-    const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    // const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
+    const url = '/events' // Switch to this line for actual build
 
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
@@ -45,8 +45,8 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
         files
     };
 
-    const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    // const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
+    const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
         method: "post",
@@ -94,7 +94,7 @@ function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
         files
     };
 
-    const url = `http://localhost:5000/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
@@ -127,7 +127,7 @@ function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
 function deleteEvent(viewEvents, event) {
     const event_id = event._id;
 
-    const url = `http://localhost:5000/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
@@ -154,7 +154,7 @@ function deleteEvent(viewEvents, event) {
 function addEventMember(refreshEvents, event, username) {
     const event_id = event._id;
 
-    const url = `http://localhost:5000/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
@@ -184,7 +184,7 @@ function addEventMember(refreshEvents, event, username) {
 function removeEventMember(refreshEvents, event, username) {
     const event_id = event._id;
 
-    const url = `http://localhost:5000/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/events' // Switch to this line for actual build
 
     const request = new Request(url, {
@@ -213,7 +213,7 @@ function removeEventMember(refreshEvents, event, username) {
 
 function addFile (form, eventView) {
     // the URL for the request
-    const url = `http://localhost:5000/event_files`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/event_files`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/event_files' // Switch to this line for actual build
 
     // The data we are going to send in our request
@@ -249,7 +249,7 @@ function addFile (form, eventView) {
 
 function deleteFile(eventView, file_id) {
     // the URL for the request
-    const url = `http://localhost:5000/event_files/${file_id}`; // This is only for dev purposes when react is running on a different port than the server
+    const url = `/event_files/${file_id}`; // This is only for dev purposes when react is running on a different port than the server
     // const url = '/event_files' // Switch to this line for actual build
 
     // Create our request constructor with all the parameters we need

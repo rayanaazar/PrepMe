@@ -39,6 +39,26 @@ const UserSchema = new mongoose.Schema({
 	}
 })
 
+
+UserSchema.pre('save', function(next) {
+	const user = this; // binds this to User document instance
+
+	// checks to ensure we don't hash password more than once
+	if (user.isModified('password')) {
+		// generate salt and hash the password
+		bcrypt.genSalt(10, (err, salt) => {
+			bcrypt.hash(user.password, salt, (err, hash) => {
+				user.password = hash
+				next()
+			})
+		})
+	} else {
+		next()
+	}
+})
+
+
+
 UserSchema.statics.findByUsernamePassword = function(username, password) {
 	const User = this // binds this to the User model
 
@@ -50,19 +70,19 @@ UserSchema.statics.findByUsernamePassword = function(username, password) {
 		// if the user exists, make sure their password is correct
 		return new Promise((resolve, reject) => {
 
-            if (password === user.password) {
+            // if (password === user.password) {
 				
-                resolve(user)
-            } else {
-                reject()
-            }  
-			// bcrypt.compare(password, user.password, (err, result) => {
-			// 	if (result) {
-			// 		resolve(user)
-			// 	} else {
-			// 		reject()
-			// 	}
-			// })
+            //     resolve(user)
+            // } else {
+            //     reject()
+            // }  
+			bcrypt.compare(password, user.password, (err, result) => {
+				if (result) {
+					resolve(user)
+				} else {
+					reject()
+				}
+			})
 		})
 	})
 }
