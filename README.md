@@ -71,3 +71,57 @@ On either page, viewing an event will open a new interface displaying the event'
 information. Editing any event will open a similar interface where the information
 can be changed. Admins, unlike regular users, are able to edit any event, event those not
 created by them.
+
+
+## Routes 
+
+1- POST "/users/login": a route to login and create a session
+   body input: username, password
+   output: the user 
+
+2- GET "/users/login": a route to logout a user
+   destroys the session cookie. 
+
+3- GET /users/check-session: a route to check if a user is logged in on the session cookie
+   body input: user
+   output: user username
+
+4- GET /users: a route to get all the users
+   output : the users with their ratings and usernames. 
+   
+5- GET /events: a route to get all the events
+   output: a list of all the events. 
+
+6- POST /events: a route to create an event, add an event. 
+   output: the status of result from save. 
+
+7- PATCH /events:id/ : a route to edit an event. 
+   body input: event 
+   output: updtaded event
+   
+8- POST /events/member/:id/ : a route to add a member to an event based on the event id. 
+   body input: username of user
+   output: updated event
+
+9- DELETE /events/member/:id/ : a route to delete a member from an event based on the event id. 
+   body input: username of user
+   output: updated event
+   
+10- PATCH /users :  a route to change the password of a user.
+    body input: username and new password
+    output: updated user
+
+11- PATCH /users/:username : a route to change the rating of a user based on its username
+    body input: the rating 
+    output: the updated user
+    
+12- GET /users/:username : a route to get a user's rating and username, based on its username
+    output: the user rating and username
+
+13- DELETE /events/:id/ : a route to delete an event by it's id. 
+    output: the event deleted 
+
+14- POST /users : a route to create an user to web app. 
+    input: username and password 
+    output: the user created
+
