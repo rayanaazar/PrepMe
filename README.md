@@ -27,6 +27,24 @@ On either page, viewing an event will open a new interface displaying the event'
 information. Editing your own event will open a similar interface where the information
 can be changed.
 
+During event creation/editing, The following details about the event can be set: 
+* Event icon 
+* course
+* subject 
+* location
+* group size
+* time and date of event
+* event description.
+
+In addition. Multiple files can be uploaded to the event, and viewers of the event will be able
+to view those files. The file extensions listed [here](https://support.cloudinary.com/hc/en-us/articles/204292392-Why-does-Cloudinary-reject-the-files-I-m-uploading-)
+are not supported.
+
+On the event page, the list of members who have joined the event can also be seen using the
+"view members" button at the bottom.
+
+Finally, users who joined an event can rate that event's organizer on a scale from 1 to 5.
+
 ## Admin Interactions
 First, login using the following credentials:\
 username: admin\
