@@ -32,7 +32,7 @@ class UserCard extends React.Component {
   }
 
   render() {
-    const { username, rating, adminChangePassword } = this.props
+    const { username, rating } = this.props
     let stars = []
     for (let i=0; i < rating; i++) {
       stars.push(<StarRateIcon />)

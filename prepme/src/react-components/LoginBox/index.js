@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.css';
 import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
-import Redirect from "react-router-dom/es/Redirect";
 
 import PasswordEntry from '../ChangePassword/PasswordEntry/index';
 
@@ -49,15 +48,6 @@ class LoginBox extends React.Component {
                         autoFocus
                         margin="normal"
                     />
-                    {/* <TextField
-                        name="password"
-                        label="Password"
-                        variant="outlined"
-                        value={this.state.password}
-                        onChange={this.handleInputChange}
-                        fullWidth
-                        margin="normal"
-                    /> */}
                     <PasswordEntry 
                         label="Password"
                         value={ this.state.password }

@@ -23,8 +23,7 @@ export const readCookie = (app) => {
 
 // Get a list of all user objects with just their name and rating
 export const getUsersNameAndRating = (homeComp) => {
-    const url = '/users'; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/users' // Switch to this line for actual build
+    const url = '/users'; 
 
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
@@ -66,9 +65,9 @@ export const changePassword = (username, password) => {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json"
       }
-  });
+    });
 
-  fetch(request)
+    fetch(request)
     .then(res => {
         console.log(res)
         if (res.status === 200) {     
@@ -90,8 +89,6 @@ export const login = (loginComp, app) => {
     password
   }
 
-  console.log(newUser)
-  console.log(JSON.stringify(newUser))
 
   // Create our request constructor with all the parameters we need
   const request = new Request("/users/login", {
@@ -147,7 +144,6 @@ export const signUp = (signUpComp) => {
   // Send the request with fetch()
   fetch(request)
       .then(res => {
-          console.log(res)
           if (res.status === 200) {
             signUpComp.setState({ invalidCredentials: false })
             signUpComp.props.switchToLogin()
@@ -183,7 +179,7 @@ export const updateRating = (eventCardComp, username, newRating) => {
                     newRating: newRating
                 }
 
-                if (json.rating != 0) { // update rating with new rating
+                if (json.rating !== 0) { // update rating with new rating
                     body.newRating = ~~((json.rating + newRating) / 2) // Integer division
                 }
             
@@ -199,7 +195,6 @@ export const updateRating = (eventCardComp, username, newRating) => {
                 // Send patch request
                 fetch(request)
                     .then(res => {
-                        console.log(res)
                         if (res.status === 200) {   
                             eventCardComp.closeDialog();  
                             eventCardComp.openSavedDialog();

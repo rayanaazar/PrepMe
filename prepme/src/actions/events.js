@@ -1,6 +1,5 @@
 function getEvents(home, main) {
-    // const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
-    const url = '/events' // Switch to this line for actual build
+    const url = '/events'
 
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
@@ -45,8 +44,7 @@ function addEvent(eventForm, events, username, setEvents, viewEvents) {
         files
     };
 
-    // const url = 'http://localhost:5000/events'; // This is only for dev purposes when react is running on a different port than the server
-    const url = '/events' // Switch to this line for actual build
+    const url = '/events'
 
     const request = new Request(url, {
         method: "post",
@@ -94,8 +92,7 @@ function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
         files
     };
 
-    const url = `/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    const url = `/events/${event_id}`; 
 
     const request = new Request(url, {
         method: "PATCH",
@@ -127,8 +124,7 @@ function editEvent(eventForm, events, username, setEvents, viewEvents, event) {
 function deleteEvent(viewEvents, event) {
     const event_id = event._id;
 
-    const url = `/events/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    const url = `/events/${event_id}`; 
 
     const request = new Request(url, {
         method: "delete",
@@ -147,15 +143,13 @@ function deleteEvent(viewEvents, event) {
         .catch(error => {
             console.log(error);
         });
-    console.log(viewEvents)
     viewEvents();
 }
 
 function addEventMember(refreshEvents, event, username) {
     const event_id = event._id;
 
-    const url = `/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    const url = `/events/member/${event_id}`; 
 
     const request = new Request(url, {
         method: "POST",
@@ -184,8 +178,7 @@ function addEventMember(refreshEvents, event, username) {
 function removeEventMember(refreshEvents, event, username) {
     const event_id = event._id;
 
-    const url = `/events/member/${event_id}`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/events' // Switch to this line for actual build
+    const url = `/events/member/${event_id}`; 
 
     const request = new Request(url, {
         method: "DELETE",
@@ -213,8 +206,7 @@ function removeEventMember(refreshEvents, event, username) {
 
 function addFile (form, eventView) {
     // the URL for the request
-    const url = `/event_files`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/event_files' // Switch to this line for actual build
+    const url = `/event_files`; 
 
     // The data we are going to send in our request
     const fileData = new FormData(form);
@@ -249,8 +241,7 @@ function addFile (form, eventView) {
 
 function deleteFile(eventView, file_id) {
     // the URL for the request
-    const url = `/event_files/${file_id}`; // This is only for dev purposes when react is running on a different port than the server
-    // const url = '/event_files' // Switch to this line for actual build
+    const url = `/event_files/${file_id}`; 
 
     // Create our request constructor with all the parameters we need
     const request = new Request(url, {
@@ -284,27 +275,29 @@ function deleteFile(eventView, file_id) {
         });
 }
 
+/** Filter Functions **/
+
 function eventMatchesFilters(filters, event) {
     // Loop through all filters
     for (let i=0; i < filters.length; i++) {
-        if (filters[i].name == "Courses") {
+        if (filters[i].name === "Courses") {
             // Iterate through all filtered courses
             for (let j=0; j < filters[i].values.length; j++) {
-                if (event.course == filters[i].values[j]) {
+                if (event.course === filters[i].values[j]) {
                     return true
                 }
             }
-        } else if (filters[i].name == "Username") {
+        } else if (filters[i].name === "Username") {
             // Iterate through all filtered usernames
             for (let j=0; j < filters[i].values.length; j++) {
-                if (event.username == filters[i].values[j]) {
+                if (event.username === filters[i].values[j]) {
                     return true
                 }
             }
-        } else if (filters[i].name == "Group Size") {
+        } else if (filters[i].name === "Group Size") {
             // Iterate through all filtered Group Sizes
             for (let j=0; j < filters[i].values.length; j++) {
-                if (event.size == filters[i].values[j]) {
+                if (event.size === filters[i].values[j]) {
                     return true
                 }
             }
@@ -326,17 +319,17 @@ function filterEvents(filters, events) {
 function userMatchesFilters(filters, user) {
     // Loop through all filters
     for (let i=0; i < filters.length; i++) {
-        if (filters[i].name == "Username") {
+        if (filters[i].name === "Username") {
             // Iterate through all filtered usernames
             for (let j=0; j < filters[i].values.length; j++) {
-                if (user.username == filters[i].values[j]) {
+                if (user.username === filters[i].values[j]) {
                     return true
                 }
             }
-        } else if (filters[i].name == "Rating") {
+        } else if (filters[i].name === "Rating") {
             // Iterate through all filtered Rating
             for (let j=0; j < filters[i].values.length; j++) {
-                if (user.rating == filters[i].values[j]) {
+                if (user.rating === filters[i].values[j]) {
                     return true
                 }
             }

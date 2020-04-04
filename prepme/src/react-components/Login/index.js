@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import logo from "./static/prepme.png"
 import {Container} from "@material-ui/core";
 
 import LoginBox from '../LoginBox/index';
@@ -24,8 +23,6 @@ class Login extends React.Component {
 
         return (
             <Container id="login" maxWidth={"xs"}>
-                    {/* <img src={logo} id="prepme-logo" alt="PrepMe logo"/>
-                    <div id="app-name-text">PrepMe</div> */}
                     { this.state.isSigningUp ? (
                       <SignUpBox 
                         app={this.props.app}

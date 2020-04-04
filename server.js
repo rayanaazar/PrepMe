@@ -54,7 +54,6 @@ app.use(
 // Middleware for authentication of resources
 // Taken from class express-authentication example
 const authenticate = (req, res, next) => {
-    log(req.session)
 	if (req.session.user) {
 		User.findById(req.session.user).then((user) => {
 			if (!user) {
@@ -84,8 +83,6 @@ app.post("/users/login", (req, res) => {
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.username = user.username;
-            // log(req.session)
-            // log(user)
             res.send(user);
         })
         .catch(error => {
@@ -217,7 +214,6 @@ app.patch('/users', (req, res) => {
     const newpassword = req.body.newpassword
 
     User.findOneAndUpdate({username : username}, {$set: {password : newpassword}}, {new: true}).then((updatedUser) => {
-        log(updatedUser)
         if (!updatedUser) {
             res.status(404).send()
         } else {
@@ -292,8 +288,6 @@ app.delete('/events/:id', authenticate, (req, res) => {
 /** User routes below **/
 // Set up a POST route to *create* a user of your web app (*not* a student).
 app.post("/users", (req, res) => {
-    log(req.body);
-
     // Create a new user
     const user = new User({
         username: req.body.username,
@@ -341,7 +335,6 @@ app.post("/event_files", multipartMiddleware, (req, res) => {
 app.delete("/event_files/:file_id", (req, res) => {
     const file_id = req.params.file_id;
     const { editing, event_id } = req.body;
-    console.log(req.body);
 
     // Delete a file by its id (NOT the database ID, but its id on the cloudinary server)
     cloudinary.uploader.destroy(file_id, function (result) {

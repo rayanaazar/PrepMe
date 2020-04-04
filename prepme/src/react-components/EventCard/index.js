@@ -10,9 +10,8 @@ import avatar4 from '../EventCard/static/avatar_4.png';
 import avatar5 from '../EventCard/static/avatar_5.png';
 import avatar6 from '../EventCard/static/avatar_6.png';
 
-import { Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle, TextField, Button, Typography, Box} from '@material-ui/core'; 
+import { Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle, Button } from '@material-ui/core'; 
 import Rating from '@material-ui/lab/Rating';
-import EventIcon from '@material-ui/icons/Event';
 
 import { updateRating } from '../../actions/users';
 import eventHelpers from '../../actions/events';
@@ -22,7 +21,6 @@ const { addEventMember, removeEventMember } = eventHelpers;
 class EventCard extends React.Component {
   
   state = {
-    // isJoined: false,
     showDialog: false,
     showSavedDialog: false,
     ratingValue: 0

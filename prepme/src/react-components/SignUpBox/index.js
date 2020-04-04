@@ -2,7 +2,6 @@ import React from 'react';
 import './SignUpBox.css';
 import logo from "./static/prepme.png"
 import {Button, TextField, Container} from "@material-ui/core";
-import Redirect from "react-router-dom/es/Redirect";
 
 import PasswordEntry from '../ChangePassword/PasswordEntry/index';
 
@@ -64,15 +63,6 @@ class SignUpBox extends React.Component {
                   autoFocus
                   margin="normal"
               />
-              {/* <TextField
-                  name="password"
-                  label="Password (Min. 4 Characters)"
-                  variant="outlined"
-                  value={this.state.password}
-                  onChange={this.handleInputChange}
-                  fullWidth
-                  margin="normal"
-              /> */}
               <PasswordEntry 
                 label="Password (Min. 4 Characters)"
                 value={ this.state.password }
@@ -80,15 +70,6 @@ class SignUpBox extends React.Component {
                 toggleShowPsw={ this.toggleShowPsw }
                 onChange={ this.onPswChange }
               />
-              {/* <TextField
-                  name="reenterPassword"
-                  label="Re-enter Password"
-                  variant="outlined"
-                  value={this.state.reenterPassword}
-                  onChange={this.handleInputChange}
-                  fullWidth
-                  margin="normal"
-              /> */}
               <PasswordEntry 
                 label="Re-enter Password"
                 value={ this.state.reenterPassword }

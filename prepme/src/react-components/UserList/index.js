@@ -20,7 +20,7 @@ class UserList extends React.Component {
         </div>
       </div>
       <div className="user-list">
-        {nonAdmins.length == 0 ? (
+        {nonAdmins.length === 0 ? (
             <div className="empty-list-text">No users match the filter(s).</div>
           ) : (
             nonAdmins.map(user => (

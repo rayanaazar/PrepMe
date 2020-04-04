@@ -24,8 +24,6 @@ import eventHelpers from "../../actions/events";
 const { addEvent, editEvent, deleteEvent, addEventMember, removeEventMember, addFile, deleteFile } = eventHelpers;
 
 
-
-
 /* Component for the main center component */
 class Event extends React.Component {
     
@@ -85,7 +83,6 @@ class Event extends React.Component {
         })
     }
 
-
     closeDialog = () => {
         this.setState({ showDialog: false })
       }
@@ -115,20 +112,16 @@ class Event extends React.Component {
 
 
     render() {
-      const {isAdmin, event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
+        const {isAdmin, event, events, userName, setEvents, viewEvents, viewing, editing}  = this.props;
 
-      const avatarImages = [avatar1, avatar3, avatar5, avatar2, avatar4, avatar6]
+        const avatarImages = [avatar1, avatar3, avatar5, avatar2, avatar4, avatar6]
 
-        console.log(viewEvents)
         let lastButton; 
         
-
         let join_value = "Join"
-        let to_add = true
         if (typeof(event) !== "undefined"){
             if (event.members.includes(userName)) {
             join_value = "Joined"
-            to_add = false
             }
         }
 
@@ -155,12 +148,6 @@ class Event extends React.Component {
                 <Button  variant="outlined" color="primary" onClick={() => {
                         this.addMember(event)
                         viewEvents()
-                        // if (to_add){event.members.push(userName);viewEvents()}
-                        // else {
-                        //     const indx = event.members.indexOf(this.props.username);
-                        //     event.members.splice(indx,1)
-                        //     viewEvents()
-                        // }
                         }}>
                     {join_value}
                 
@@ -423,7 +410,7 @@ class Event extends React.Component {
                     <DialogTitle>Joined Members</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            {this.state.members.length == 0 ? (
+                            {this.state.members.length === 0 ? (
                                 <div>No Members Yet.</div>
                             ) : (
                              

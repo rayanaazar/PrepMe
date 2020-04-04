@@ -2,13 +2,10 @@ import React from "react";
 
 import "./styles.css";
 import EventCard from "../EventCard/index";
-import { List, ListItem, ListItemText, ListItemIcon, Button} from '@material-ui/core'; 
-import EventIcon from '@material-ui/icons/Event';
+import { Button} from '@material-ui/core'; 
 import Event from "../Event";
-import { throwStatement } from "@babel/types";
 import UserList from "../UserList";
 import UserProfile from "../UserProfile";
-
 
 
 /* Component for the main center component */
@@ -61,13 +58,8 @@ class MainComponent extends React.Component {
     })
   }
 
-  joined = (event) => {
-
-  }
-
   render() {
     const { user, filteredEvents, events, setEvents, users, isAdmin, onEventsPage, refreshEvents, adminChangePassword } = this.props;
-    console.log(users)
 
     if (isAdmin && !onEventsPage) {
       return <div className="main-component-div">
@@ -118,7 +110,7 @@ class MainComponent extends React.Component {
         Upcoming Events
         </div>
         <div className="event-list">
-          {filteredEvents.length == 0 ? (
+          {filteredEvents.length === 0 ? (
             <div className="empty-list-text">No events match the filter(s).</div>
           ) : (
             filteredEvents.map(event => (

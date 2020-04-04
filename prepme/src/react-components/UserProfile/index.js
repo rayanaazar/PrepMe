@@ -2,8 +2,6 @@ import React from 'react';
 import {Paper, Tabs, Tab} from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create';
 import GroupIcon from '@material-ui/icons/Group';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import './styles.css';
 import StarRateIcon from "@material-ui/icons/StarRate";
 import EventCard from "../EventCard";
@@ -24,7 +22,7 @@ class UserProfile extends React.Component {
 
         if (this.state.tab === 0) {
             const filteredEvents = events.filter(event => event.username === user.username)
-            if (filteredEvents.length != 0) {
+            if (filteredEvents.length !== 0) {
                 return (
                     filteredEvents.map(event => (
                         <EventCard
@@ -42,7 +40,7 @@ class UserProfile extends React.Component {
             
         } else {
             const filteredEvents = events.filter(event => event.members.includes(user.username))
-            if (filteredEvents != 0) {
+            if (filteredEvents !== 0) {
                 return(
                     filteredEvents.map(event => (
                         <EventCard
@@ -62,14 +60,11 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        const {user, events} = this.props;
+        const {user} = this.props;
         const stars = [];
         for (let i=0; i < user.rating; i++) {
             stars.push(<StarRateIcon fontSize='large'/>)
         }
-
-        console.log(user);
-        console.log(events);
 
         return (
             <div id='user-profile'>
@@ -82,7 +77,6 @@ class UserProfile extends React.Component {
 
                 <Paper variant="outlined">
                     <Tabs
-            
                         value={this.state.tab}
                         onChange={this.handleTabChange}
                         variant="fullWidth"
