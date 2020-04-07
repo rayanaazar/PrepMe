@@ -59,7 +59,7 @@ UserSchema.pre('save', function(next) {
 
 
 UserSchema.pre('update', function(next) {
-	const user = this; // binds this to User document instance
+	const user = this.__update; // binds this to User document instance
 
 	// checks to ensure we don't hash password more than once
 	if (user.isModified('password')) {
