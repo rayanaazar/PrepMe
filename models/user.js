@@ -59,14 +59,15 @@ UserSchema.pre('save', function(next) {
 
 
 UserSchema.pre('findOneAndUpdate', function(next) {
-	const user = this.__update; // binds this to User document instance
+	// const user = this.__update; // binds this to User document instance
 
 	// checks to ensure we don't hash password more than once
 	if (user.isModified('password')) {
 		// generate salt and hash the password
 		bcrypt.genSalt(10, (err, salt) => {
 			bcrypt.hash(user.password, salt, (err, hash) => {
-				user.password = hash
+				this.setUpdate({}, { $set: { password: hash } });
+				// this._update.password = hash
 				next()
 			})
 		})
