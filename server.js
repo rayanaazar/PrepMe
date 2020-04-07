@@ -83,6 +83,7 @@ app.post("/users/login", (req, res) => {
             // We can check later if this exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.username = user.username;
+            req.session.isAdmin = user.isAdmin;
             res.send(user);
         })
         .catch(error => {
@@ -105,7 +106,12 @@ app.get("/users/logout", (req, res) => {
 // A route to check if a use is logged in on the session cookie
 app.get("/users/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ currentUser: req.session.username });
+        const userInfo = {
+            currentuser: req.session.username,
+            isAdmin: req.session.isAdmin
+        }
+        res.send(userInfo)
+        // res.send({ currentUser: req.session.username });
     } else {
         res.status(401).send();
     }
