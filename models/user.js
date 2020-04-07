@@ -58,7 +58,7 @@ UserSchema.pre('save', function(next) {
 })
 
 
-UserSchema.pre('update', function(next) {
+UserSchema.pre('findOneAndUpdate', function(next) {
 	const user = this.__update; // binds this to User document instance
 
 	// checks to ensure we don't hash password more than once
