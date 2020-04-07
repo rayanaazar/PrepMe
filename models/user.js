@@ -61,7 +61,7 @@ UserSchema.pre('save', function(next) {
 UserSchema.pre('findOneAndUpdate', function(next) {
 	const update = this.getUpdate();
 	console.log(update)
-  if (!_.isEmpty(update.newpassword)) {
+  if (update.newpassword !== "") {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(update.newpassword, salt, (err, hash) => {
 				this.getUpdate().newpassword = hash;
