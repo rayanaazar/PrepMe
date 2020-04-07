@@ -61,13 +61,19 @@ UserSchema.pre('save', function(next) {
 UserSchema.pre('findOneAndUpdate', function(next) {
 	const update = this.getUpdate(); // binds this to User query instance
 
-	// generate salt and hash the password
-	bcrypt.genSalt(10, (err, salt) => {
-		bcrypt.hash(update.password, salt, (err, hash) => {
-			this.getUpdate().$set.password = hash;
-			next();
-		})
-	})
+	// checks to ensure we don't hash password more than once
+	if (!_.isEmpty(update.password)) {
+		// generate salt and hash the password
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(update.password, salt, (err, hash) => {
+				this.getUpdate().password = hash;
+				console.log(this.getUpdate())
+        next();
+      })
+    })
+  } else {
+    next();
+  }
 })
 
 
