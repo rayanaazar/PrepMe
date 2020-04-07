@@ -66,7 +66,7 @@ UserSchema.pre('findOneAndUpdate', function(next) {
 		// generate salt and hash the password
 		bcrypt.genSalt(10, (err, salt) => {
 			bcrypt.hash(user.password, salt, (err, hash) => {
-				this.setUpdate({}, { $set: { password: hash } });
+				this.setUpdate({ $set: { password: hash } });
 				// this._update.password = hash
 				next()
 			})
