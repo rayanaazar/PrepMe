@@ -58,6 +58,22 @@ UserSchema.pre('save', function(next) {
 })
 
 
+UserSchema.pre('findOneAndUpdate', function(next) {
+	// findOneAndUpdate sets 'this' to a query object
+	const update = this.getUpdate(); 
+
+  if (update.password !== "") {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(update.$set.password, salt, (err, hash) => {
+				this.getUpdate().$set.password = hash;
+        next();
+      })
+    })
+  } else {
+    next();
+  }
+})
+
 
 UserSchema.statics.findByUsernamePassword = function(username, password) {
 	const User = this // binds this to the User model
