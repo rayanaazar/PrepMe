@@ -62,7 +62,7 @@ UserSchema.pre('findOneAndUpdate', function(next) {
 	const update = this.getUpdate();
 	console.log(update)
 	console.log(update.newpassword)
-  if (update.newpassword !== "") {
+  // if (update.newpassword !== "") {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(update.newpassword, salt, (err, hash) => {
 				console.log(hash)
@@ -71,9 +71,9 @@ UserSchema.pre('findOneAndUpdate', function(next) {
         next();
       })
     })
-  } else {
-    next();
-  }
+  // } else {
+  //   next();
+  // }
 })
 
 
