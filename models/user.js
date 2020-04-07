@@ -64,16 +64,15 @@ UserSchema.pre('findOneAndUpdate', function(next) {
 	// checks to ensure we don't hash password more than once
 	if (!_.isEmpty(update.password)) {
 		// generate salt and hash the password
-		bcrypt.genSalt(10, (err, salt) => {
-			bcrypt.hash(update.password, salt, (err, hash) => {
-				this.getUpdate().password = hash;
-				// this._update.password = hash
-				next()
-			})
-		})
-	} else {
-		next()
-	}
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(update.password, salt, (err, hash) => {
+        this.getUpdate().$set.password = hash;
+        next();
+      })
+    })
+  } else {
+    next();
+  }
 })
 
 
