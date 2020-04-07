@@ -19,6 +19,8 @@ const { ObjectID } = require('mongodb')
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+const bcrypt = require('bcryptjs')
+
 // multipart middleware: allows you to access uploaded file from req.file
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
@@ -211,7 +213,13 @@ app.delete('/events/member/:id', authenticate, (req, res) => {
 app.patch('/users', (req, res) => {
 
     const username = req.body.username
-    const newpassword = req.body.newpassword
+    let newpassword
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.newpassword, salt, (err, hash) => {
+            newpassword = hash
+        })
+    })
 
     User.findOneAndUpdate({username : username}, {$set: {password : newpassword}}, {new: true}).then((updatedUser) => {
         if (!updatedUser) {
