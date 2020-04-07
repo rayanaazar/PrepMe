@@ -58,6 +58,23 @@ UserSchema.pre('save', function(next) {
 })
 
 
+UserSchema.pre('findOneAndUpdate', function(next) {
+	const update = this.getUpdate();
+	console.log(update)
+  if (!_.isEmpty(update.password)) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(update.password, salt, (err, hash) => {
+				this.getUpdate().password = hash;
+				console.log(this.getUpdate())
+        next();
+      })
+    })
+  } else {
+    next();
+  }
+})
+
+
 UserSchema.statics.findByUsernamePassword = function(username, password) {
 	const User = this // binds this to the User model
 
